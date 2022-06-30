@@ -2,11 +2,14 @@ package com.josebran.JBRestAPI;
 
 
 
+import com.josebran.JBRestAPI.Enumeraciones.requestCode;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
@@ -15,6 +18,8 @@ import javax.net.ssl.HttpsURLConnection;
 
 
 public class Methods {
+
+    private static requestCode codigorequest;
 
     public static String readFromStream(InputStream inputStream)  {
         StringBuilder output = new StringBuilder();
@@ -56,52 +61,89 @@ public class Methods {
     public static String Get(String url, String data,  String credenciales, String typeautentication, String contenttype){
         String respuesta=null;
         try {
-            //Log.d("Inicia la creacion del hilo de consulta Get: ", "Hilo creado");
-            //Log.d("Inicia la creacion del hilo de consulta Get: ", url);
-            //Log.d("Inicia la creacion del hilo de consulta Get: ", data);
-            //Log.d("Inicia la creacion del hilo de consulta Get: ", credenciales);
-            //Log.d("Inicia la creacion del hilo de consulta Get: ", "Se crea el objeto url");
+            //Log.d( "Hilo creado");
+            //Log.d( url);
+            //Log.d( data);
+            //Log.d( credenciales);
+            //Log.d( "Se crea el objeto url");
 
             URL endPoint = new URL(url);
-            //Log.d("Inicia la creacion del hilo de consulta Get: ", "Se crea la Conecxion");
+            //Log.d( "Se crea la Conecxion");
             HttpsURLConnection conexion = (HttpsURLConnection) endPoint.openConnection();
             conexion.setRequestMethod("GET");
-            //Log.d("Inicia la creacion del hilo de consulta Get: ", "Setea el metodo");
+            //Log.d( "Setea el metodo");
             conexion.setRequestProperty("Authorization", typeautentication+credenciales);
-            //Log.d("Inicia la creacion del hilo de consulta Get: ", "Setea el encabezado");
+            //Log.d( "Setea el encabezado");
             conexion.setRequestProperty("Content-Type", contenttype);
-            //Log.d("Inicia la creacion del hilo de consulta Get: ", "Setea el contenido");
+            //Log.d( "Setea el contenido");
             conexion.setRequestProperty("Accept", contenttype);
-            //Log.d("Inicia la creacion del hilo de consulta Get: ", "Setea lo que acepta el rest api");
-
-            if(conexion.getResponseCode()==200){
-                //Log.d("Inicia la creacion del hilo de consulta Get: ", "Se obtuvo una respuesta positiva del RestAPI");
+            //Log.d( "Setea lo que acepta el rest api");
+            
+            int responsecode=conexion.getResponseCode();
+            if(responsecode==200){
+                setCodigorequest(requestCode.OK);
+                //Log.d( "Se obtuvo una respuesta positiva del RestAPI");
                 InputStream responseBody = conexion.getInputStream();
                 String temporal = readFromStream(responseBody);
-                //Log.d("Inicia la creacion del hilo de consulta Get, resultado del metodo: ", temporal);
+                //Log.d("Solicitud aceptada");
                 respuesta=temporal;
             }
-            if(conexion.getResponseCode()==204){
-                //Log.d("Inicia la creacion del hilo de consulta Get: ", "Se ejecuto la accion, pero no hay respuesta por parte del servidor");
+            if(responsecode==201){
+                setCodigorequest(requestCode.CREATED);
+                //Log.d( "Se creo o modifico el recurso en el EndPoint del RestAPI");
+                InputStream responseBody = conexion.getInputStream();
+                String temporal = readFromStream(responseBody);
+                respuesta=temporal;
             }
-            if(conexion.getResponseCode()==403){
-                //Log.d("Inicia la creacion del hilo de consulta Get: ", "No tiene los permisos necesarios del RestAPI");
+            if(responsecode==204){
+                setCodigorequest(requestCode.NO_CONTENT);
+                respuesta=" ";
+                //Log.d( "Solicitud aceptada, no habían datos para devolver");
             }
-            if(conexion.getResponseCode()==406){
-                //Log.d("Inicia la creacion del hilo de consulta Get: ", "El formato de Devolucion de la informacion no es el del servidor");
+            if(responsecode==400){
+                setCodigorequest(requestCode.BAD_REQUEST);
+                InputStream responseBody = conexion.getInputStream();
+                String temporal = readFromStream(responseBody);
+                //Log.d("La solicitud no fue valida");
+                respuesta=temporal;
             }
+            
+            if(responsecode==401){
+                setCodigorequest(requestCode.UNAUTHORIZED);
+                //Log.d( "Falta la información de autorización en la solicitud");
 
-            if(conexion.getResponseCode()==404){
-                //Log.d("Inicia la creacion del hilo de consulta Get: ", "No encontro el recurso del RestAPI");
+
             }
-            if(conexion.getResponseCode()==401){
-                //Log.d("Inicia la creacion del hilo de consulta Get: ", "No esta autorizado para consumir el recurso del RestAPI");
+            if(responsecode==403){
+                setCodigorequest(requestCode.FORBIDEN);
+                //Log.d( "No tiene los permisos necesarios para consumir el EndPoint del RestAPI");
             }
-            if(conexion.getResponseCode()==500){
-                //Log.d("Inicia la creacion del hilo de consulta Get: ", "Error Interno del servidor del RestAPI");
+            if(responsecode==404){
+                setCodigorequest(requestCode.NOT_FOUND);
+                //Log.d( "No encontro el EndPoint del RestAPI");
             }
-            //Log.d("Inicia la creacion del hilo de consulta Get, mensaje del resultado: ", conexion.getResponseMessage());
-            //Log.d("Inicia la creacion del hilo de consulta Get: ", "Finalizo la consulta al RestAPI");
+            if(responsecode==405){
+                setCodigorequest(requestCode.METHOD_NOT_ALLOWED);
+                //Log.d( "El metodo no esta disponible para el verbo HTTP utilizado para consumir el EndPoint");
+            }
+            if(responsecode==406){
+                setCodigorequest(requestCode.NOT_ACCEPTABLE);
+                //Log.d( "El formato de de datos indicados en la cabecera accept no corresponde al tipo de dato esperado por el servidor");
+            }
+            if(responsecode==409){
+                setCodigorequest(requestCode.CONFLICT);
+                //Log.d( "Conflicto al tratar de modificar un recurso en el EndPoint");
+            }
+            if(responsecode==415){
+                setCodigorequest(requestCode.UNSUPPORTED_MEDIA_TYPE);
+                //Log.d( "El formato de content type no es soportado");
+            }
+            if(responsecode==500){
+                setCodigorequest(requestCode.INTERNAL_SERVER_ERROR);
+                //Log.d( "Error Interno del servidor del RestAPI");
+            }
+            //Log.d( "Finalizo la consulta al RestAPI");
+            conexion.disconnect();
         }catch (Exception e) {
             e.printStackTrace();
             //Log.d("Exepcion disparada en el hilo de consulta Get: ", e.toString());
@@ -140,45 +182,71 @@ public class Methods {
             out.close();
             //Log.d("Inicia la creacion del hilo de consulta Post: ", "Cierra la escritura");
 
-            if(conexion.getResponseCode()==200){
-                //Log.d("Inicia la creacion del hilo de consulta Post: ", "Se obtuvo una respuesta positiva del RestAPI");
+            int responsecode=conexion.getResponseCode();
+            if(responsecode==200){
+                setCodigorequest(requestCode.OK);
+                //Log.d( "Se obtuvo una respuesta positiva del RestAPI");
                 InputStream responseBody = conexion.getInputStream();
                 String temporal = readFromStream(responseBody);
-                //Log.d("Inicia la creacion del hilo de consulta Post, resultado del metodo: ", temporal);
+                //Log.d("Solicitud aceptada");
                 respuesta=temporal;
             }
-            if(conexion.getResponseCode()==201){
-                //Log.d("Inicia la creacion del hilo de consulta Post: ", "Se obtuvo una respuesta positiva del CREATING RestAPI");
+            if(responsecode==201){
+                setCodigorequest(requestCode.CREATED);
+                //Log.d( "Se creo o modifico el recurso en el EndPoint del RestAPI");
                 InputStream responseBody = conexion.getInputStream();
                 String temporal = readFromStream(responseBody);
-                //Log.d("Inicia la creacion del hilo de consulta Post, resultado del metodo: ", temporal);
-                //respuesta=temporal;
+                respuesta=temporal;
+            }
+            if(responsecode==204){
+                setCodigorequest(requestCode.NO_CONTENT);
+                respuesta=" ";
+                //Log.d( "Solicitud aceptada, no habían datos para devolver");
+            }
+            if(responsecode==400){
+                setCodigorequest(requestCode.BAD_REQUEST);
+                InputStream responseBody = conexion.getInputStream();
+                String temporal = readFromStream(responseBody);
+                //Log.d("La solicitud no fue valida");
+                respuesta=temporal;
             }
 
-            if(conexion.getResponseCode()==204){
-                //Log.d("Inicia la creacion del hilo de consulta Post: ", "Se ejecuto la accion, pero no hay respuesta por parte del servidor");
-            }
-            if(conexion.getResponseCode()==403){
-                //Log.d("Inicia la creacion del hilo de consulta Post: ", "No tiene los permisos necesarios del RestAPI");
-            }
-            if(conexion.getResponseCode()==406){
-                //Log.d("Inicia la creacion del hilo de consulta Post: ", "El formato de Devolucion de la informacion no es el del servidor");
-            }
+            if(responsecode==401){
+                setCodigorequest(requestCode.UNAUTHORIZED);
+                //Log.d( "Falta la información de autorización en la solicitud");
 
 
-            if(conexion.getResponseCode()==404){
-                //Log.d("Inicia la creacion del hilo de consulta Post: ", "No encontro el recurso del RestAPI");
             }
-            if(conexion.getResponseCode()==401){
-                //Log.d("Inicia la creacion del hilo de consulta Post: ", "No esta autorizado para consumir el recurso del RestAPI");
+            if(responsecode==403){
+                setCodigorequest(requestCode.FORBIDEN);
+                //Log.d( "No tiene los permisos necesarios para consumir el EndPoint del RestAPI");
             }
-            if(conexion.getResponseCode()==500){
-                //Log.d("Inicia la creacion del hilo de consulta Post: ", "Error Interno del servidor del RestAPI");
+            if(responsecode==404){
+                setCodigorequest(requestCode.NOT_FOUND);
+                //Log.d( "No encontro el EndPoint del RestAPI");
             }
-            //Log.d("Inicia la creacion del hilo de consulta Post, mensaje del resultado: ", conexion.getResponseMessage());
-
-
-            //Log.d("Inicia la creacion del hilo de consulta Post: ", "Finalizo la consulta al RestAPI");
+            if(responsecode==405){
+                setCodigorequest(requestCode.METHOD_NOT_ALLOWED);
+                //Log.d( "El metodo no esta disponible para el verbo HTTP utilizado para consumir el EndPoint");
+            }
+            if(responsecode==406){
+                setCodigorequest(requestCode.NOT_ACCEPTABLE);
+                //Log.d( "El formato de de datos indicados en la cabecera accept no corresponde al tipo de dato esperado por el servidor");
+            }
+            if(responsecode==409){
+                setCodigorequest(requestCode.CONFLICT);
+                //Log.d( "Conflicto al tratar de modificar un recurso en el EndPoint");
+            }
+            if(responsecode==415){
+                setCodigorequest(requestCode.UNSUPPORTED_MEDIA_TYPE);
+                //Log.d( "El formato de content type no es soportado");
+            }
+            if(responsecode==500){
+                setCodigorequest(requestCode.INTERNAL_SERVER_ERROR);
+                //Log.d( "Error Interno del servidor del RestAPI");
+            }
+            //Log.d( "Finalizo la consulta al RestAPI");
+            conexion.disconnect();
         }catch (Exception e) {
             e.printStackTrace();
             //Log.d("Exepcion disparada en el hilo de consulta Post: ", e.toString());
@@ -218,42 +286,71 @@ public class Methods {
             out.close();
             //Log.d("Inicia la creacion del hilo de consulta Put: ", "Cierra la escritura");
 
-            if(conexion.getResponseCode()==200){
-                //Log.d("Inicia la creacion del hilo de consulta Put: ", "Se obtuvo una respuesta positiva del RestAPI");
+            int responsecode=conexion.getResponseCode();
+            if(responsecode==200){
+                setCodigorequest(requestCode.OK);
+                //Log.d( "Se obtuvo una respuesta positiva del RestAPI");
                 InputStream responseBody = conexion.getInputStream();
                 String temporal = readFromStream(responseBody);
-                //Log.d("Inicia la creacion del hilo de consulta Put, resultado del metodo: ", temporal);
+                //Log.d("Solicitud aceptada");
                 respuesta=temporal;
             }
-            if(conexion.getResponseCode()==201){
-                //Log.d("Inicia la creacion del hilo de consulta Put: ", "Se obtuvo una respuesta positiva del CREATING RestAPI");
+            if(responsecode==201){
+                setCodigorequest(requestCode.CREATED);
+                //Log.d( "Se creo o modifico el recurso en el EndPoint del RestAPI");
                 InputStream responseBody = conexion.getInputStream();
                 String temporal = readFromStream(responseBody);
-                //Log.d("Inicia la creacion del hilo de consulta Put, resultado del metodo: ", temporal);
-                //respuesta=temporal;
+                respuesta=temporal;
             }
-            if(conexion.getResponseCode()==204){
-                //Log.d("Inicia la creacion del hilo de consulta Put: ", "Se ejecuto la accion, pero no hay respuesta por parte del servidor");
+            if(responsecode==204){
+                setCodigorequest(requestCode.NO_CONTENT);
+                respuesta=" ";
+                //Log.d( "Solicitud aceptada, no habían datos para devolver");
             }
-            if(conexion.getResponseCode()==403){
-                //Log.d("Inicia la creacion del hilo de consulta Put: ", "No tiene los permisos necesarios del RestAPI");
-            }
-            if(conexion.getResponseCode()==406){
-                //Log.d("Inicia la creacion del hilo de consulta Put: ", "El formato de Devolucion de la informacion no es el del servidor");
+            if(responsecode==400){
+                setCodigorequest(requestCode.BAD_REQUEST);
+                InputStream responseBody = conexion.getInputStream();
+                String temporal = readFromStream(responseBody);
+                //Log.d("La solicitud no fue valida");
+                respuesta=temporal;
             }
 
-            if(conexion.getResponseCode()==404){
-                //Log.d("Inicia la creacion del hilo de consulta Put: ", "No encontro el recurso del RestAPI");
-            }
-            if(conexion.getResponseCode()==401){
-                //Log.d("Inicia la creacion del hilo de consulta Put: ", "No esta autorizado para consumir el recurso del RestAPI");
-            }
-            if(conexion.getResponseCode()==500){
-                //Log.d("Inicia la creacion del hilo de consulta Put: ", "Error Interno del servidor del RestAPI");
-            }
-            //Log.d("Inicia la creacion del hilo de consulta Put, mensaje del resultado: ", conexion.getResponseMessage());
+            if(responsecode==401){
+                setCodigorequest(requestCode.UNAUTHORIZED);
+                //Log.d( "Falta la información de autorización en la solicitud");
 
-            //Log.d("Inicia la creacion del hilo de consulta Put: ", "Finalizo la consulta al RestAPI");
+
+            }
+            if(responsecode==403){
+                setCodigorequest(requestCode.FORBIDEN);
+                //Log.d( "No tiene los permisos necesarios para consumir el EndPoint del RestAPI");
+            }
+            if(responsecode==404){
+                setCodigorequest(requestCode.NOT_FOUND);
+                //Log.d( "No encontro el EndPoint del RestAPI");
+            }
+            if(responsecode==405){
+                setCodigorequest(requestCode.METHOD_NOT_ALLOWED);
+                //Log.d( "El metodo no esta disponible para el verbo HTTP utilizado para consumir el EndPoint");
+            }
+            if(responsecode==406){
+                setCodigorequest(requestCode.NOT_ACCEPTABLE);
+                //Log.d( "El formato de de datos indicados en la cabecera accept no corresponde al tipo de dato esperado por el servidor");
+            }
+            if(responsecode==409){
+                setCodigorequest(requestCode.CONFLICT);
+                //Log.d( "Conflicto al tratar de modificar un recurso en el EndPoint");
+            }
+            if(responsecode==415){
+                setCodigorequest(requestCode.UNSUPPORTED_MEDIA_TYPE);
+                //Log.d( "El formato de content type no es soportado");
+            }
+            if(responsecode==500){
+                setCodigorequest(requestCode.INTERNAL_SERVER_ERROR);
+                //Log.d( "Error Interno del servidor del RestAPI");
+            }
+            //Log.d( "Finalizo la consulta al RestAPI");
+            conexion.disconnect();
         }catch (Exception e) {
             e.printStackTrace();
             //Log.d("Exepcion disparada en el hilo de consulta Put: ", e.toString());
@@ -291,43 +388,69 @@ public class Methods {
             //Log.d("Inicia la creacion del hilo de consulta Delete: ", "Reaiza el Flush");
             out.close();
             //Log.d("Inicia la creacion del hilo de consulta Delete: ", "Cierra la escritura");
-
-            if(conexion.getResponseCode()==200){
-                //Log.d("Inicia la creacion del hilo de consulta Delete: ", "Se obtuvo una respuesta positiva del RestAPI");
+            int responsecode=conexion.getResponseCode();
+            if(responsecode==200){
+                setCodigorequest(requestCode.OK);
+                //Log.d( "Se obtuvo una respuesta positiva del RestAPI");
                 InputStream responseBody = conexion.getInputStream();
                 String temporal = readFromStream(responseBody);
-                //Log.d("Inicia la creacion del hilo de consulta Delete, resultado del metodo: ", temporal);
+                //Log.d("Solicitud aceptada");
                 respuesta=temporal;
             }
-            if(conexion.getResponseCode()==201){
-                //Log.d("Inicia la creacion del hilo de consulta Delete: ", "Se obtuvo una respuesta positiva del CREATING RestAPI");
+            if(responsecode==201){
+                setCodigorequest(requestCode.CREATED);
+                //Log.d( "Se creo o modifico el recurso en el EndPoint del RestAPI");
                 InputStream responseBody = conexion.getInputStream();
                 String temporal = readFromStream(responseBody);
-                //Log.d("Inicia la creacion del hilo de consulta Delete, resultado del metodo: ", temporal);
-                //respuesta=temporal;
+                respuesta=temporal;
             }
-            if(conexion.getResponseCode()==204){
-                //Log.d("Inicia la creacion del hilo de consulta Delete: ", "Se ejecuto la accion, pero no hay respuesta por parte del servidor");
+            if(responsecode==204){
+                setCodigorequest(requestCode.NO_CONTENT);
+                respuesta=" ";
+                //Log.d( "Solicitud aceptada, no habían datos para devolver");
             }
-            if(conexion.getResponseCode()==404){
-                //Log.d("Inicia la creacion del hilo de consulta Delete: ", "No encontro el recurso del RestAPI");
+            if(responsecode==400){
+                setCodigorequest(requestCode.BAD_REQUEST);
+                InputStream responseBody = conexion.getInputStream();
+                String temporal = readFromStream(responseBody);
+                //Log.d("La solicitud no fue valida");
+                respuesta=temporal;
             }
-            if(conexion.getResponseCode()==401){
-                //Log.d("Inicia la creacion del hilo de consulta Delete: ", "No esta autorizado para consumir el recurso del RestAPI");
-            }
-            if(conexion.getResponseCode()==403){
-                //Log.d("Inicia la creacion del hilo de consulta Delete: ", "No tiene los permisos necesarios del RestAPI");
-            }
-            if(conexion.getResponseCode()==403){
-                //Log.d("Inicia la creacion del hilo de consulta Delete: ", "El formato de Devolucion de la informacion no es el del servidor");
-            }
-            if(conexion.getResponseCode()==500){
-                //Log.d("Inicia la creacion del hilo de consulta Delete: ", "Error Interno del servidor del RestAPI");
-            }
-            //Log.d("Inicia la creacion del hilo de consulta Delete, mensaje del resultado: ", conexion.getResponseMessage());
 
-
-            //Log.d("Inicia la creacion del hilo de consulta Delete: ", "Finalizo la consulta al RestAPI");
+            if(responsecode==401){
+                setCodigorequest(requestCode.UNAUTHORIZED);
+                //Log.d( "Falta la información de autorización en la solicitud");
+            }
+            if(responsecode==403){
+                setCodigorequest(requestCode.FORBIDEN);
+                //Log.d( "No tiene los permisos necesarios para consumir el EndPoint del RestAPI");
+            }
+            if(responsecode==404){
+                setCodigorequest(requestCode.NOT_FOUND);
+                //Log.d( "No encontro el EndPoint del RestAPI");
+            }
+            if(responsecode==405){
+                setCodigorequest(requestCode.METHOD_NOT_ALLOWED);
+                //Log.d( "El metodo no esta disponible para el verbo HTTP utilizado para consumir el EndPoint");
+            }
+            if(responsecode==406){
+                setCodigorequest(requestCode.NOT_ACCEPTABLE);
+                //Log.d( "El formato de de datos indicados en la cabecera accept no corresponde al tipo de dato esperado por el servidor");
+            }
+            if(responsecode==409){
+                setCodigorequest(requestCode.CONFLICT);
+                //Log.d( "Conflicto al tratar de modificar un recurso en el EndPoint");
+            }
+            if(responsecode==415){
+                setCodigorequest(requestCode.UNSUPPORTED_MEDIA_TYPE);
+                //Log.d( "El formato de content type no es soportado");
+            }
+            if(responsecode==500){
+                setCodigorequest(requestCode.INTERNAL_SERVER_ERROR);
+                //Log.d( "Error Interno del servidor del RestAPI");
+            }
+            //Log.d( "Finalizo la consulta al RestAPI");
+            conexion.disconnect();
         }catch (Exception e) {
             //Log.d("Exepcion disparada en el hilo de consulta Delete: ", e.toString());
             return null;
@@ -336,4 +459,14 @@ public class Methods {
     }
 
 
+    public static requestCode getCodigorequest() {
+        return codigorequest;
+    }
+
+    public static void setCodigorequest(requestCode Codigorequest) throws NoSuchFieldException, IllegalAccessException {
+        Field field = Methods.class.getDeclaredField("codigorequest");
+        field.setAccessible(true);
+        field.set(null, Codigorequest);
+        //codigorequest = codigorequest;
+    }
 }

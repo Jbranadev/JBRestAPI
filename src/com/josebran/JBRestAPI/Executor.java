@@ -3,13 +3,14 @@ package com.josebran.JBRestAPI;
 
 import com.josebran.JBRestAPI.Enumeraciones.contentType;
 import com.josebran.JBRestAPI.Enumeraciones.metodo;
+import com.josebran.JBRestAPI.Enumeraciones.requestCode;
 import com.josebran.JBRestAPI.Enumeraciones.typeAutentication;
 
 import static com.josebran.JBRestAPI.Methods.*;
 
 class Executor extends Thread{
 
-
+    private requestCode codigorequest;
     private String url=null;
     private String data=null;
     private String credenciales=null;
@@ -17,6 +18,7 @@ class Executor extends Thread{
     private contentType contenttype=null;
     private metodo method=null;
     private String respuesta=null;
+
 
     public void run(){
 
@@ -45,6 +47,8 @@ class Executor extends Thread{
             setRespuesta(Delete(getUrl(), getData(), getCredenciales(),
                     getTypeautentication().getTipoAutenticacion(), getContenttype().getContentType()));
         }
+
+        setCodigorequest(Methods.getCodigorequest());
 
     }
 
@@ -108,4 +112,11 @@ class Executor extends Thread{
         this.respuesta = respuesta;
     }
 
+    public requestCode getCodigorequest() {
+        return codigorequest;
+    }
+
+    public void setCodigorequest(requestCode codigorequest) {
+        this.codigorequest = codigorequest;
+    }
 }
