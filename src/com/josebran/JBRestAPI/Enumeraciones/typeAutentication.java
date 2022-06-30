@@ -1,4 +1,4 @@
-package com.josebran.jbrestapi.Enumeraciones;
+package com.josebran.JBRestAPI.Enumeraciones;
 
 public enum typeAutentication {
     BASIC("Basic "), DIGEST("Digest "),BEARER("Bearer "), APIKEY("Apikey ");
@@ -9,6 +9,7 @@ public enum typeAutentication {
         this.tipoautenticacion=s;
 
     }
+
 
     public String getTipoAutenticacion(){
         return tipoautenticacion;

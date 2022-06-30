@@ -1,13 +1,11 @@
-package com.josebran.jbrestapi;
+package com.josebran.JBRestAPI;
 
-import static com.josebran.jbrestapi.Methods.*;
 
-import android.util.Log;
+import com.josebran.JBRestAPI.Enumeraciones.contentType;
+import com.josebran.JBRestAPI.Enumeraciones.metodo;
+import com.josebran.JBRestAPI.Enumeraciones.typeAutentication;
 
-import com.josebran.jbrestapi.Enumeraciones.contentType;
-import com.josebran.jbrestapi.Enumeraciones.metodo;
-import com.josebran.jbrestapi.Enumeraciones.typeAutentication;
-
+import static com.josebran.JBRestAPI.Methods.*;
 
 class Executor extends Thread{
 
@@ -23,7 +21,7 @@ class Executor extends Thread{
     public void run(){
 
         //Decide que tipo de metodo ejecuta
-        Log.d("Metodo que será ejecutado: ", ""+getMethod());
+        //Log.d("Metodo que será ejecutado: ", ""+getMethod());
         //Metodo Get
         if(getMethod() == metodo.GET){
             setRespuesta(Get(getUrl(), getData(), getCredenciales(),

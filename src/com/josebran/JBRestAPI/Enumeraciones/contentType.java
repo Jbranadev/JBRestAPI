@@ -1,4 +1,4 @@
-package com.josebran.jbrestapi.Enumeraciones;
+package com.josebran.JBRestAPI.Enumeraciones;
 
 public enum contentType {
     //Documentación: https://developer.mozilla.org/es/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types

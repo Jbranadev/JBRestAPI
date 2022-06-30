@@ -1,4 +1,4 @@
-package com.josebran.jbrestapi.Enumeraciones;
+package com.josebran.JBRestAPI.Enumeraciones;
 
 public enum metodo {
     GET,

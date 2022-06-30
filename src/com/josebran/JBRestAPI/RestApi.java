@@ -1,8 +1,9 @@
-package com.josebran.jbrestapi;
+package com.josebran.JBRestAPI;
 
-import com.josebran.jbrestapi.Enumeraciones.contentType;
-import com.josebran.jbrestapi.Enumeraciones.metodo;
-import com.josebran.jbrestapi.Enumeraciones.typeAutentication;
+
+import com.josebran.JBRestAPI.Enumeraciones.contentType;
+import com.josebran.JBRestAPI.Enumeraciones.metodo;
+import com.josebran.JBRestAPI.Enumeraciones.typeAutentication;
 
 public class RestApi extends  Methods{
     private int codigorespuesta;
