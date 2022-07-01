@@ -1,7 +1,10 @@
 package com.josebran.JBRestAPI;
 
 
-import com.josebran.JBRestAPI.Enumeraciones.*;
+import com.josebran.JBRestAPI.Enumeraciones.contentType;
+import com.josebran.JBRestAPI.Enumeraciones.metodo;
+import com.josebran.JBRestAPI.Enumeraciones.requestCode;
+import com.josebran.JBRestAPI.Enumeraciones.typeAutentication;
 
 public class RestApi extends  Methods{
     private requestCode codigorespuesta;
@@ -39,13 +42,28 @@ public class RestApi extends  Methods{
     }
 
 
-    public String Get(String url, String data, String credenciales){
+    /***
+     * Metodo GET que consume el RestAPI haciendo uso del Executor, el cual encapsula
+     * la logica para que este codigo corra en segundo plano.
+     * @param url Url del endpoint a consumir
+     * @param credenciales Credenciales para autenticarse y poder consumir el endPoint
+     * @return Retorna un string con la respuesta obtenida del RestAPI
+     */
+    public String Get(String url,  String credenciales){
         String respuesta=null;
-        respuesta=execute(url, data, credenciales, getTipeautentication(), getContenttype(), metodo.GET);
+        respuesta=execute(url, "", credenciales, getTipeautentication(), getContenttype(), metodo.GET);
         return respuesta;
     }
 
 
+    /****
+     * Metodo POST que consume el RestAPI haciendo uso del Executor, el cual encapsula
+     * la logica para que este codigo corra en segundo plano.
+     * @param url Url del endpoint a consumir
+     * @param data Data que se desea envíar al endPoint
+     * @param credenciales Credenciales para autenticarse y poder consumir el endPoint
+     * @return Retorna un string con la respuesta obtenida del RestAPI
+     */
     public String Post(String url, String data, String credenciales){
         String respuesta=null;
         respuesta=execute(url, data, credenciales, getTipeautentication(), getContenttype(), metodo.POST);
@@ -53,6 +71,14 @@ public class RestApi extends  Methods{
     }
 
 
+    /***
+     * Metodo PUT que consume el RestAPI haciendo uso del Executor, el cual encapsula
+     * la logica para que este codigo corra en segundo plano.
+     * @param url Url del endpoint a consumir
+     * @param data Data que se desea envíar al endPoint
+     * @param credenciales Credenciales para autenticarse y poder consumir el endPoint
+     * @return Retorna un string con la respuesta obtenida del RestAPI
+     */
     public String Put(String url, String data, String credenciales){
         String respuesta=null;
         respuesta=execute(url, data, credenciales, getTipeautentication(), getContenttype(), metodo.PUT);
@@ -60,6 +86,14 @@ public class RestApi extends  Methods{
     }
 
 
+    /***
+     * Metodo DELETE que consume el RestAPI haciendo uso del Executor, el cual encapsula
+     * la logica para que este codigo corra en segundo plano.
+     * @param url Url del endpoint a consumir
+     * @param data Data que se desea envíar al endPoint
+     * @param credenciales Credenciales para autenticarse y poder consumir el endPoint
+     * @return Retorna un string con la respuesta obtenida del RestAPI
+     */
     public String Delete(String url, String data, String credenciales){
         String respuesta=null;
         respuesta=execute(url, data, credenciales, getTipeautentication(), getContenttype(), metodo.DELETE);
@@ -68,28 +102,52 @@ public class RestApi extends  Methods{
 
 
 
-
+    /***
+     * Obtiene el codigo de respuesta de haber consumido el RestAPI
+     * @return Retorna un objeto requestCode con el codigo de respuesta del EndPoint
+     */
     public requestCode getCodigorespuesta() {
         return codigorespuesta;
     }
-
+    /**
+     * Setea el codigo de respuesta que a envíado el RestAPI
+     * @param codigorespuesta Codigorequest que respondio el RestAPI
+     */
     public void setCodigorespuesta(requestCode codigorespuesta) {
 
         this.codigorespuesta = codigorespuesta;
     }
 
+    /***
+     * Obtiene el tipo de autenticación que se indica para consumir el RestAPI
+     * @return Retorna un objeto typeAutentication con el tipo de autenticación indicada para
+     * consumir el RestAPI
+     */
     public typeAutentication getTipeautentication() {
         return tipeautentication;
     }
 
+    /***
+     * Setea el tipo de autenticación que estaremos utilizando para consumir el RestAPI
+     * @param tipeautentication Tipeautentication que acepta el RestAPI
+     */
     public void setTipeautentication(typeAutentication tipeautentication) {
         this.tipeautentication = tipeautentication;
     }
 
+    /***
+     * Obtiene el contentType que se indica para consumir el RestAPI
+     * @return Retorna un objeto contentType con el tipo de contenido indicado para
+     * consmir el RestAPI
+     */
     public contentType getContenttype() {
         return contenttype;
     }
 
+    /***
+     * Setea el contentType que acepta el RestAPI
+     * @param contenttype Content-Type que acepta el RestAPI
+     */
     public void setContenttype(contentType contenttype) {
         this.contenttype = contenttype;
     }

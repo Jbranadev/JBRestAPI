@@ -1,26 +1,26 @@
 package com.josebran.JBRestAPI;
 
 
-
 import com.josebran.JBRestAPI.Enumeraciones.requestCode;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import javax.net.ssl.HttpsURLConnection;
+import java.io.*;
 import java.lang.reflect.Field;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-
-import javax.net.ssl.HttpsURLConnection;
 
 
 public class Methods {
 
     private static requestCode codigorequest;
 
+    /****
+     * Lee la información que contiene un imputstream y la retorna en un string.
+     * es usado para leer la respuesta del EndPoit
+     * @param inputStream inputStream del cual obtendremos el contenido del string
+     * @return Retorna el contenido del inputStream en un String
+     */
     public static String readFromStream(InputStream inputStream)  {
         StringBuilder output = new StringBuilder();
         try{
@@ -39,7 +39,13 @@ public class Methods {
         }
         return output.toString();
     }
-    
+
+    /***
+     * Convierte las credenciales del usuario a base64
+     * @param usuario Usuario que desea autenticar
+     * @param contraseña Contraseña del usuario que desea autenticar
+     * @return Retorna el string de autorización base64 de las credenciales del usuario
+     */
     public static String getCredencialesToBase64(String usuario, String contraseña){
         String result=null;
         String temp=usuario+":"+contraseña;
@@ -51,6 +57,11 @@ public class Methods {
         return result;
     }
 
+    /**
+     * Convierte una cadena de base64 a lenguaje normal
+     * @param cadena Cadena de texto que deseamos convertir
+     * @return Retorna el resultado de convertir la cadena base 64
+     */
     public static String getStringFromStringBase64(String cadena){
         byte[] decodeBytes=Base64.getDecoder().decode(cadena);
         String result=new String(decodeBytes);
@@ -58,7 +69,15 @@ public class Methods {
     }
 
 
-    public static String Get(String url, String data,  String credenciales, String typeautentication, String contenttype){
+    /***
+     * Metodo GET que consume el EndPoint del RestAPI
+     * @param url Url del endpoint a consumir
+     * @param credenciales Credenciales para autenticarse y poder consumir el endPoint
+     * @param typeautentication Tipo de autenticación que utiliza el endPoint que se desea consumir
+     * @param contenttype Tipo de contenido que recibe el endPoint
+     * @return Retorna la respuesta del servidor en un String, si no obtuvo una respuesta retorna Null
+     */
+    public static String Get(String url,   String credenciales, String typeautentication, String contenttype){
         String respuesta=null;
         try {
             //Log.d( "Hilo creado");
@@ -151,6 +170,15 @@ public class Methods {
         return respuesta;
     }
 
+    /***
+     * Metodo POST que consume el EndPoint del RestAPI
+     * @param url Url del endpoint a consumir
+     * @param data Data que se desea envíar al endPoint
+     * @param credenciales Credenciales para autenticarse y poder consumir el endPoint
+     * @param typeautentication Tipo de autenticación que utiliza el endPoint que se desea consumir
+     * @param contenttype Tipo de contenido que recibe el endPoint del RestAPI
+     * @return Retorna la respuesta del servidor en un String, si no obtuvo una respuesta retorna Null
+     */
     public static String Post(String url, String data,  String credenciales, String typeautentication, String contenttype){
         String respuesta=null;
         try {
@@ -255,6 +283,15 @@ public class Methods {
         return respuesta;
     }
 
+    /***
+     * Metodo PUT que consume el EndPoint del RestAPI
+     * @param url Url del endpoint a consumir
+     * @param data Data que se desea envíar al endPoint
+     * @param credenciales Credenciales para autenticarse y poder consumir el endPoint
+     * @param typeautentication Tipo de autenticación que utiliza el endPoint que se desea consumir
+     * @param contenttype Tipo de contenido que recibe el endPoint del RestAPI
+     * @return Retorna la respuesta del servidor en un String, si no obtuvo una respuesta retorna Null
+     */
     public static String Put(String url, String data,  String credenciales, String typeautentication, String contenttype){
         String respuesta=null;
         try {
@@ -358,6 +395,15 @@ public class Methods {
         return respuesta;
     }
 
+    /***
+     * Metodo DELETE que consume el EndPoint del RestAPI
+     * @param url Url del endpoint a consumir
+     * @param data Data que se desea envíar al endPoint
+     * @param credenciales Credenciales para autenticarse y poder consumir el endPoint
+     * @param typeautentication Tipo de autenticación que utiliza el endPoint que se desea consumir
+     * @param contenttype Tipo de contenido que recibe el endPoint del RestAPI
+     * @return Retorna la respuesta del servidor en un String, si no obtuvo una respuesta retorna Null
+     */
     public static String Delete(String url, String data,  String credenciales, String typeautentication, String contenttype){
         String respuesta=null;
         try {
@@ -459,10 +505,20 @@ public class Methods {
     }
 
 
+    /***
+     * Obtiene el codigo de respuesta de haber consumido el RestAPI
+     * @return Retorna un objeto requestCode con el codigo de respuesta del EndPoint
+     */
     public static requestCode getCodigorequest() {
         return codigorequest;
     }
 
+    /***
+     * Setea el codigo de respuesta que a envíado el RestAPI
+     * @param Codigorequest Codigorequest que respondio el RestAPI
+     * @throws NoSuchFieldException
+     * @throws IllegalAccessException
+     */
     public static void setCodigorequest(requestCode Codigorequest) throws NoSuchFieldException, IllegalAccessException {
         Field field = Methods.class.getDeclaredField("codigorequest");
         field.setAccessible(true);

@@ -3,73 +3,308 @@ package com.josebran.JBRestAPI.Enumeraciones;
 public enum contentType {
     //Documentación: https://developer.mozilla.org/es/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
 
-
+    /***
+     * Archivo de audio AAC
+     */
     AUDIOAAC("audio/aac"),
-    ABIWORD("application/x-abiword"),
-    DOCUMENTODEARCHIVOSMULTIPLES("application/octet-stream"),
-    AVI("video/x-msvideo"),
-    FORMATOEBOOKAMAZONKINDLE("application/vnd.amazon.ebook"),
-    BINARIO("application/octet-stream"),
-    BZIP("application/x-bzip"),
-    BZIP2("application/x-bzip2"),
-    SCRIPTCSHELL("application/x-csh"),
-    CSS("text/css"),
-    CSV("text/csv"),
-    DOC("application/msword"),
-    EPUB("application/epub+zip"),
-    GIF("image/gif"),
-    HTM("text/html"),
-    HTML("text/html"),
-    ICO("image/x-icon"),
-    ICALENDAR("text/calendar"),
-    JAR("application/java-archive"),
-    JPEG("image/jpeg"),
-    JAVASCRIPT("application/javascript"),
-    JSON("application/json"),
-    AUDIOMIDI("audio/midi"),
-    VIDEOMPEG("video/mpeg"),
-    PAQUETEINSTALACIONAPPLE("application/vnd.apple.installer+xml"),
-    DOCUMENTOPRESENTACIONOPENDOCUMENT("application/vnd.oasis.opendocument.presentation"),
-    HOJADECALCULOOPENDOCUMENT("application/vnd.oasis.opendocument.spreadsheet"),
-    DOCUMENTODETEXTOOPENDOCUMENT("application/vnd.oasis.opendocument.text"),
-    AUDIOOGG("audio/ogg"),
-    VIDEOOGG("video/ogg"),
-    OGG("application/ogg"),
-    PDF("application/pdf"),
-    PPT("application/vnd.ms-powerpoint"),
-    RAR("application/x-rar-compressed"),
-    RTF("application/rtf"),
-    SCRIPTBOURNESHELL("application/x-sh"),
-    SVG("image/svg+xml"),
-    SMALLWEBFORMAT("application/x-shockwave-flash"),
-    TAR("application/x-tar"),
-    TIFF("image/tiff"),
-    FUENTETRUETYPE("font/ttf"),
-    MICROSOFTVISIO("application/vnd.visio"),
-    AUDIOWAV("audio/x-wav"),
-    AUDIOWEBM("audio/webm"),
-    VIDEOWEBM("video/webm"),
-    IMAGENESWEBP("image/webp"),
-    WOFF("font/woff"),
-    WOFF2("font/woff2"),
-    XHTML("application/xhtml+xml"),
-    EXCEL("application/vnd.ms-excel"),
-    XML("application/xml"),
-    XUL("application/vnd.mozilla.xul+xml"),
-    ZIP("application/zip"),
-    AUDIOYVIDEO3GPP("video/3gpp"),
-    AUDIO3GPP("audio/3gpp"),
-    AUDIO3GPP2("video/3gpp2"),
-    AUDIOYVIDEO3GPP2("video/3gpp2"),
-    SEVENZIP("application/x-7z-compressed")
 
-    ;
+    /**
+     * Documento AbiWord
+     */
+    ABIWORD("application/x-abiword"),
+
+    /**
+     * Documento de Archivo (múltiples archivos incrustados)
+     */
+    DOCUMENTODEARCHIVOSMULTIPLES("application/octet-stream"),
+
+    /**
+     * AVI: Audio Video Intercalado
+     */
+    AVI("video/x-msvideo"),
+
+    /***
+     * Formato  eBook Amazon Kindle
+     */
+    FORMATOEBOOKAMAZONKINDLE("application/vnd.amazon.ebook"),
+
+    /**
+     * Cualquier tipo de datos binarios
+     */
+    BINARIO("application/octet-stream"),
+
+    /***
+     * Archivo BZip
+     */
+    BZIP("application/x-bzip"),
+
+    /**
+     * Archivo BZip2
+     */
+    BZIP2("application/x-bzip2"),
+
+    /***
+     * Script C-Shell
+     */
+    SCRIPTCSHELL("application/x-csh"),
+
+    /***
+     * Hojas de estilo (CSS)
+     */
+    CSS("text/css"),
+
+    /***
+     * Valores separados por coma (CSV)
+     */
+    CSV("text/csv"),
+
+    /***
+     * 	Microsoft Word
+     */
+    DOC("application/msword"),
+
+    /***
+     * 	Publicación Electrónica (EPUB)
+     */
+    EPUB("application/epub+zip"),
+
+    /***
+     * Graphics Interchange Format (GIF)
+     */
+    GIF("image/gif"),
+
+    /**
+     * Hipertexto (HTML)
+     */
+    HTM("text/html"),
+
+    /**
+     * Hipertexto (HTML)
+     */
+    HTML("text/html"),
+
+    /**
+     * Formato Icon
+     */
+    ICO("image/x-icon"),
+
+    /***
+     * 	Formato iCalendar
+     */
+    ICALENDAR("text/calendar"),
+
+    /***
+     * Archivo Java (JAR)
+     */
+    JAR("application/java-archive"),
+
+    /**
+     * Imágenes JPEG
+     */
+    JPEG("image/jpeg"),
+
+    /**
+     * JavaScript (ECMAScript)
+     */
+    JAVASCRIPT("application/javascript"),
+
+    /***
+     * Formato JSON
+     */
+    JSON("application/json"),
+
+    /***
+     * Interfaz Digital de Instrumentos Musicales (MIDI)
+     */
+    AUDIOMIDI("audio/midi"),
+
+    /***
+     * Video MPEG
+     */
+    VIDEOMPEG("video/mpeg"),
+
+    /***
+     * Paquete de instalación de Apple
+     */
+    PAQUETEINSTALACIONAPPLE("application/vnd.apple.installer+xml"),
+
+    /***
+     * Documento de presentación de OpenDocument
+     */
+    DOCUMENTOPRESENTACIONOPENDOCUMENT("application/vnd.oasis.opendocument.presentation"),
+
+
+    /***
+     * Hoja de Cálculo OpenDocument
+     */
+    HOJADECALCULOOPENDOCUMENT("application/vnd.oasis.opendocument.spreadsheet"),
+
+
+    /****
+     * Documento de texto OpenDocument
+     */
+    DOCUMENTODETEXTOOPENDOCUMENT("application/vnd.oasis.opendocument.text"),
+
+    /***
+     * Audio OGG
+     */
+    AUDIOOGG("audio/ogg"),
+
+    /***
+     * Video OGG
+     */
+    VIDEOOGG("video/ogg"),
+
+    /***
+     * OGG
+     */
+    OGG("application/ogg"),
+
+    /***
+     * Adobe Portable Document Format (PDF)
+     */
+    PDF("application/pdf"),
+
+    /***
+     * Microsoft PowerPoint
+     */
+    PPT("application/vnd.ms-powerpoint"),
+
+    /***
+     * Archivo RAR
+     */
+    RAR("application/x-rar-compressed"),
+
+    /***
+     * Formato de Texto Enriquecido (RTF)
+     */
+    RTF("application/rtf"),
+
+    /***
+     * Script Bourne shell
+     */
+    SCRIPTBOURNESHELL("application/x-sh"),
+
+
+    /***
+     * Gráficos Vectoriales (SVG)
+     */
+    SVG("image/svg+xml"),
+
+    /***
+     * Small web format (SWF) o Documento Adobe Flash
+     */
+    SMALLWEBFORMAT("application/x-shockwave-flash"),
+
+    /***
+     * Aerchivo Tape (TAR)
+     */
+    TAR("application/x-tar"),
+
+    /***
+     * Formato de archivo de imagen etiquetado (TIFF)
+     */
+    TIFF("image/tiff"),
+
+    /**
+     * Fuente TrueType
+     */
+    FUENTETRUETYPE("font/ttf"),
+
+    /***
+     * Microsft Visio
+     */
+    MICROSOFTVISIO("application/vnd.visio"),
+
+    /***
+     * Formato de audio de forma de onda (WAV)
+     */
+    AUDIOWAV("audio/x-wav"),
+
+    /****
+     * 	Audio WEBM
+     */
+    AUDIOWEBM("audio/webm"),
+
+    /***
+     * Video WEBM
+     */
+    VIDEOWEBM("video/webm"),
+
+    /***
+     * Imágenes WEBP
+     */
+    IMAGENESWEBP("image/webp"),
+
+    /***
+     * Formato de fuente abierta web (WOFF)
+     */
+    WOFF("font/woff"),
+
+    /***
+     * Formato de fuente abierta web (WOFF)
+     */
+    WOFF2("font/woff2"),
+
+    /***
+     * XHTML
+     */
+    XHTML("application/xhtml+xml"),
+
+    /***
+     * 	Microsoft Excel
+     */
+    EXCEL("application/vnd.ms-excel"),
+
+    /***
+     * XML
+     */
+    XML("application/xml"),
+
+    /***
+     * 	XUL
+     */
+    XUL("application/vnd.mozilla.xul+xml"),
+
+    /**
+     * Archivo ZIP
+     */
+    ZIP("application/zip"),
+
+    /***
+     * Contenedor de audio 3GPP
+     */
+    AUDIOYVIDEO3GPP("video/3gpp"),
+
+    /***
+     * Contenedor de audio/video 3GPP
+     */
+    AUDIO3GPP("audio/3gpp"),
+
+    /***
+     * 	Contenedor de audio 3GPP2
+     */
+    AUDIO3GPP2("audio/3gpp2"),
+
+    /***
+     * 	Contenedor de audio/video 3GPP2
+     */
+    AUDIOYVIDEO3GPP2("video/3gpp2"),
+
+    /***
+     * Archivo 7-zip
+     */
+    SEVENZIP("application/x-7z-compressed");
 
     private String contenttype;
 
     private contentType(String s) {
     }
 
+    /***
+     * Obtiene el tipo de contenido que corresponde a la numeración.
+     * @return Retorna un string con el tipo de contenido que corresponde a la numeración.
+     */
     public String getContentType(){
         return contenttype;
     }
