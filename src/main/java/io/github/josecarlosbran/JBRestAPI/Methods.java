@@ -1,6 +1,7 @@
 package io.github.josecarlosbran.JBRestAPI;
 
 
+import com.josebran.LogsJB.LogsJB;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.requestCode;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -34,8 +35,11 @@ public class Methods {
                 }
             }
         }catch (IOException e){
-            e.printStackTrace();
-            //Log.d("Exepcion disparada al leer la respuesta del servidor: ", e.toString());
+            LogsJB.fatal("Excepción disparada al leer la respuesta del servidor: "+ e.toString());
+            LogsJB.fatal("Tipo de Excepción : "+e.getClass());
+            LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
         }
         return output.toString();
     }
@@ -80,36 +84,35 @@ public class Methods {
     public static String Get(String url,   String credenciales, String typeautentication, String contenttype){
         String respuesta=null;
         try {
-            //Log.d( "Hilo creado");
-            //Log.d( url);
-            //Log.d( data);
-            //Log.d( credenciales);
-            //Log.d( "Se crea el objeto url");
+            LogsJB.info("Inicia la creacion del hilo de consulta Get: "+ "Hilo creado");
+            LogsJB.debug("Inicia la creacion del hilo de consulta Get: "+ url);
+            LogsJB.debug("Inicia la creacion del hilo de consulta Get: "+ credenciales);
+            LogsJB.debug( "Se crea el objeto url");
 
             URL endPoint = new URL(url);
-            //Log.d( "Se crea la Conecxion");
+            LogsJB.info( "Se crea la Conexión");
             HttpsURLConnection conexion = (HttpsURLConnection) endPoint.openConnection();
             conexion.setRequestMethod("GET");
-            //Log.d( "Setea el metodo");
+            LogsJB.debug( "Setea el metodo");
             conexion.setRequestProperty("Authorization", typeautentication+credenciales);
-            //Log.d( "Setea el encabezado");
+            LogsJB.debug( "Setea el encabezado");
             conexion.setRequestProperty("Content-Type", contenttype);
-            //Log.d( "Setea el contenido");
+            LogsJB.debug( "Setea el contenido");
             conexion.setRequestProperty("Accept", contenttype);
-            //Log.d( "Setea lo que acepta el rest api");
+            LogsJB.debug( "Setea el contentype que acepta el rest api");
             
             int responsecode=conexion.getResponseCode();
             if(responsecode==200){
                 setCodigorequest(requestCode.OK);
-                //Log.d( "Se obtuvo una respuesta positiva del RestAPI");
+                
                 InputStream responseBody = conexion.getInputStream();
                 String temporal = readFromStream(responseBody);
-                //Log.d("Solicitud aceptada");
+                LogsJB.info("Solicitud aceptada");
                 respuesta=temporal;
             }
             if(responsecode==201){
                 setCodigorequest(requestCode.CREATED);
-                //Log.d( "Se creo o modifico el recurso en el EndPoint del RestAPI");
+                LogsJB.info( "Se creo o modifico el recurso en el EndPoint del RestAPI");
                 InputStream responseBody = conexion.getInputStream();
                 String temporal = readFromStream(responseBody);
                 respuesta=temporal;
@@ -117,55 +120,58 @@ public class Methods {
             if(responsecode==204){
                 setCodigorequest(requestCode.NO_CONTENT);
                 respuesta=" ";
-                //Log.d( "Solicitud aceptada, no habían datos para devolver");
+                LogsJB.info( "Solicitud aceptada, no habían datos para devolver");
             }
             if(responsecode==400){
                 setCodigorequest(requestCode.BAD_REQUEST);
                 InputStream responseBody = conexion.getInputStream();
                 String temporal = readFromStream(responseBody);
-                //Log.d("La solicitud no fue valida");
+                LogsJB.info("La solicitud no fue valida");
                 respuesta=temporal;
             }
             
             if(responsecode==401){
                 setCodigorequest(requestCode.UNAUTHORIZED);
-                //Log.d( "Falta la información de autorización en la solicitud");
+                LogsJB.info( "Falta la información de autorización en la solicitud");
 
 
             }
             if(responsecode==403){
                 setCodigorequest(requestCode.FORBIDEN);
-                //Log.d( "No tiene los permisos necesarios para consumir el EndPoint del RestAPI");
+                LogsJB.info( "No tiene los permisos necesarios para consumir el EndPoint del RestAPI");
             }
             if(responsecode==404){
                 setCodigorequest(requestCode.NOT_FOUND);
-                //Log.d( "No encontro el EndPoint del RestAPI");
+                LogsJB.info( "No encontro el EndPoint del RestAPI");
             }
             if(responsecode==405){
                 setCodigorequest(requestCode.METHOD_NOT_ALLOWED);
-                //Log.d( "El metodo no esta disponible para el verbo HTTP utilizado para consumir el EndPoint");
+                LogsJB.info( "El metodo no esta disponible para el verbo HTTP utilizado para consumir el EndPoint");
             }
             if(responsecode==406){
                 setCodigorequest(requestCode.NOT_ACCEPTABLE);
-                //Log.d( "El formato de de datos indicados en la cabecera accept no corresponde al tipo de dato esperado por el servidor");
+                LogsJB.info( "El formato de de datos indicados en la cabecera accept no corresponde al tipo de dato esperado por el servidor");
             }
             if(responsecode==409){
                 setCodigorequest(requestCode.CONFLICT);
-                //Log.d( "Conflicto al tratar de modificar un recurso en el EndPoint");
+                LogsJB.info( "Conflicto al tratar de modificar un recurso en el EndPoint");
             }
             if(responsecode==415){
                 setCodigorequest(requestCode.UNSUPPORTED_MEDIA_TYPE);
-                //Log.d( "El formato de content type no es soportado");
+                LogsJB.info( "El formato de content type no es soportado");
             }
             if(responsecode==500){
                 setCodigorequest(requestCode.INTERNAL_SERVER_ERROR);
-                //Log.d( "Error Interno del servidor del RestAPI");
+                LogsJB.info( "Error Interno del servidor del RestAPI");
             }
-            //Log.d( "Finalizo la consulta al RestAPI");
+            LogsJB.info( "Finalizo la consulta al RestAPI");
             conexion.disconnect();
         }catch (Exception e) {
-            e.printStackTrace();
-            //Log.d("Exepcion disparada en el hilo de consulta Get: ", e.toString());
+            LogsJB.fatal("Excepción disparada en el hilo de consulta Get: "+ e.toString());
+            LogsJB.fatal("Tipo de Excepción : "+e.getClass());
+            LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
         }
         return respuesta;
     }
@@ -182,46 +188,45 @@ public class Methods {
     public static String Post(String url, String data,  String credenciales, String typeautentication, String contenttype){
         String respuesta=null;
         try {
-            //Log.d("Inicia la creacion del hilo de consulta Post: ", "Hilo creado");
-            //Log.d("Inicia la creacion del hilo de consulta Post: ", url);
-            //Log.d("Inicia la creacion del hilo de consulta Post: ", data);
-            //Log.d("Inicia la creacion del hilo de consulta Post: ", credenciales);
-            //Log.d("Inicia la creacion del hilo de consulta Post: ", "Se crea el objeto url");
+            LogsJB.info("Inicia la creacion del hilo de consulta Post: "+ "Hilo creado");
+            LogsJB.debug("Inicia la creacion del hilo de consulta Post: "+ url);
+            LogsJB.debug("Inicia la creacion del hilo de consulta Post: "+ data);
+            LogsJB.debug("Inicia la creacion del hilo de consulta Post: "+ credenciales);
+            LogsJB.debug( "Se crea el objeto url");
             URL endPoint = new URL(url);
-            //Log.d("Inicia la creacion del hilo de consulta Post: ", "Se crea la Conecxion");
+            LogsJB.info( "Se crea la Conexión");
             HttpsURLConnection conexion = (HttpsURLConnection) endPoint.openConnection();
             conexion.setRequestMethod("POST");
             // Activar método POST
             conexion.setDoOutput(true);
-            //Log.d("Inicia la creacion del hilo de consulta Post: ", "Setea el metodo");
+            LogsJB.debug( "Setea el metodo");
             conexion.setRequestProperty("Authorization", typeautentication+credenciales);
-            //Log.d("Inicia la creacion del hilo de consulta Post: ", "Setea el encabezado");
+            LogsJB.debug( "Setea el encabezado");
             conexion.setRequestProperty("Content-Type", contenttype);
-            //Log.d("Inicia la creacion del hilo de consulta Post: ", "Setea el contenido");
+            LogsJB.debug( "Setea el contenido");
             conexion.setRequestProperty("Accept", contenttype);
-            //Log.d("Inicia la creacion del hilo de consulta Post: ", "Setea lo que acepta el rest api");
+            LogsJB.debug( "Setea el contentype que acepta el rest api");
             OutputStream out = conexion.getOutputStream();
-            //Log.d("Inicia la creacion del hilo de consulta Post: ", "Crea el OutPut Stream");
+            LogsJB.debug( "Crea el OutPut Stream");
             // Usas tu método ingeniado para convertir el archivo a bytes
             out.write(data.getBytes());
-            //Log.d("Inicia la creacion del hilo de consulta Post: ", "Escribe los Bytes");
+            LogsJB.debug( "Escribe los Bytes");
             out.flush();
-            //Log.d("Inicia la creacion del hilo de consulta Post: ", "Reaiza el Flush");
+            LogsJB.debug( "Reaiza el Flush");
             out.close();
-            //Log.d("Inicia la creacion del hilo de consulta Post: ", "Cierra la escritura");
+            LogsJB.debug( "Cierra la escritura");
 
             int responsecode=conexion.getResponseCode();
             if(responsecode==200){
                 setCodigorequest(requestCode.OK);
-                //Log.d( "Se obtuvo una respuesta positiva del RestAPI");
                 InputStream responseBody = conexion.getInputStream();
                 String temporal = readFromStream(responseBody);
-                //Log.d("Solicitud aceptada");
+                LogsJB.info("Solicitud aceptada");
                 respuesta=temporal;
             }
             if(responsecode==201){
                 setCodigorequest(requestCode.CREATED);
-                //Log.d( "Se creo o modifico el recurso en el EndPoint del RestAPI");
+                LogsJB.info( "Se creo o modifico el recurso en el EndPoint del RestAPI");
                 InputStream responseBody = conexion.getInputStream();
                 String temporal = readFromStream(responseBody);
                 respuesta=temporal;
@@ -229,57 +234,59 @@ public class Methods {
             if(responsecode==204){
                 setCodigorequest(requestCode.NO_CONTENT);
                 respuesta=" ";
-                //Log.d( "Solicitud aceptada, no habían datos para devolver");
+                LogsJB.info( "Solicitud aceptada, no habían datos para devolver");
             }
             if(responsecode==400){
                 setCodigorequest(requestCode.BAD_REQUEST);
                 InputStream responseBody = conexion.getInputStream();
                 String temporal = readFromStream(responseBody);
-                //Log.d("La solicitud no fue valida");
+                LogsJB.info("La solicitud no fue valida");
                 respuesta=temporal;
             }
 
             if(responsecode==401){
                 setCodigorequest(requestCode.UNAUTHORIZED);
-                //Log.d( "Falta la información de autorización en la solicitud");
+                LogsJB.info( "Falta la información de autorización en la solicitud");
 
 
             }
             if(responsecode==403){
                 setCodigorequest(requestCode.FORBIDEN);
-                //Log.d( "No tiene los permisos necesarios para consumir el EndPoint del RestAPI");
+                LogsJB.info( "No tiene los permisos necesarios para consumir el EndPoint del RestAPI");
             }
             if(responsecode==404){
                 setCodigorequest(requestCode.NOT_FOUND);
-                //Log.d( "No encontro el EndPoint del RestAPI");
+                LogsJB.info( "No encontro el EndPoint del RestAPI");
             }
             if(responsecode==405){
                 setCodigorequest(requestCode.METHOD_NOT_ALLOWED);
-                //Log.d( "El metodo no esta disponible para el verbo HTTP utilizado para consumir el EndPoint");
+                LogsJB.info( "El metodo no esta disponible para el verbo HTTP utilizado para consumir el EndPoint");
             }
             if(responsecode==406){
                 setCodigorequest(requestCode.NOT_ACCEPTABLE);
-                //Log.d( "El formato de de datos indicados en la cabecera accept no corresponde al tipo de dato esperado por el servidor");
+                LogsJB.info( "El formato de de datos indicados en la cabecera accept no corresponde al tipo de dato esperado por el servidor");
             }
             if(responsecode==409){
                 setCodigorequest(requestCode.CONFLICT);
-                //Log.d( "Conflicto al tratar de modificar un recurso en el EndPoint");
+                LogsJB.info( "Conflicto al tratar de modificar un recurso en el EndPoint");
             }
             if(responsecode==415){
                 setCodigorequest(requestCode.UNSUPPORTED_MEDIA_TYPE);
-                //Log.d( "El formato de content type no es soportado");
+                LogsJB.info( "El formato de content type no es soportado");
             }
             if(responsecode==500){
                 setCodigorequest(requestCode.INTERNAL_SERVER_ERROR);
-                //Log.d( "Error Interno del servidor del RestAPI");
+                LogsJB.info( "Error Interno del servidor del RestAPI");
             }
-            //Log.d( "Finalizo la consulta al RestAPI");
+            LogsJB.info( "Finalizo la consulta al RestAPI");
             conexion.disconnect();
         }catch (Exception e) {
-            e.printStackTrace();
-            //Log.d("Exepcion disparada en el hilo de consulta Post: ", e.toString());
+            LogsJB.fatal("Excepción disparada en el hilo de consulta Post: "+ e.toString());
+            LogsJB.fatal("Tipo de Excepción : "+e.getClass());
+            LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
         }
-
         return respuesta;
     }
 
@@ -295,46 +302,46 @@ public class Methods {
     public static String Put(String url, String data,  String credenciales, String typeautentication, String contenttype){
         String respuesta=null;
         try {
-            //Log.d("Inicia la creacion del hilo de consulta Put: ", "Hilo creado");
-            //Log.d("Inicia la creacion del hilo de consulta Put: ", url);
-            //Log.d("Inicia la creacion del hilo de consulta Put: ", data);
-            //Log.d("Inicia la creacion del hilo de consulta Put: ", credenciales);
-            //Log.d("Inicia la creacion del hilo de consulta Put: ", "Se crea el objeto url");
+            LogsJB.info("Inicia la creacion del hilo de consulta Put: "+ "Hilo creado");
+            LogsJB.debug("Inicia la creacion del hilo de consulta Put: "+ url);
+            LogsJB.debug("Inicia la creacion del hilo de consulta Put: "+ data);
+            LogsJB.debug("Inicia la creacion del hilo de consulta Put: "+ credenciales);
+            LogsJB.debug( "Se crea el objeto url");
             URL endPoint = new URL(url);
-            //Log.d("Inicia la creacion del hilo de consulta Put: ", "Se crea la Conecxion");
+            LogsJB.info( "Se crea la Conexión");
             HttpsURLConnection conexion = (HttpsURLConnection) endPoint.openConnection();
             conexion.setRequestMethod("PUT");
             // Activar método POST
             conexion.setDoOutput(true);
-            //Log.d("Inicia la creacion del hilo de consulta Put: ", "Setea el metodo");
+            LogsJB.debug( "Setea el metodo");
             conexion.setRequestProperty("Authorization", typeautentication+credenciales);
-            //Log.d("Inicia la creacion del hilo de consulta Put: ", "Setea el encabezado");
+            LogsJB.debug( "Setea el encabezado");
             conexion.setRequestProperty("Content-Type", contenttype);
-            //Log.d("Inicia la creacion del hilo de consulta Put: ", "Setea el contenido");
+            LogsJB.debug( "Setea el contenido");
             conexion.setRequestProperty("Accept", contenttype);
-            //Log.d("Inicia la creacion del hilo de consulta Put: ", "Setea lo que acepta el rest api");
+            LogsJB.debug( "Setea el contentype que acepta el rest api");
             OutputStream out = conexion.getOutputStream();
-            //Log.d("Inicia la creacion del hilo de consulta Put: ", "Crea el OutPut Stream");
+            LogsJB.debug( "Crea el OutPut Stream");
             // Usas tu método ingeniado para convertir el archivo a bytes
             out.write(data.getBytes());
-            //Log.d("Inicia la creacion del hilo de consulta Put: ", "Escribe los Bytes");
+            LogsJB.debug( "Escribe los Bytes");
             out.flush();
-            //Log.d("Inicia la creacion del hilo de consulta Put: ", "Reaiza el Flush");
+            LogsJB.debug( "Reaiza el Flush");
             out.close();
-            //Log.d("Inicia la creacion del hilo de consulta Put: ", "Cierra la escritura");
+            LogsJB.debug( "Cierra la escritura");
 
             int responsecode=conexion.getResponseCode();
             if(responsecode==200){
                 setCodigorequest(requestCode.OK);
-                //Log.d( "Se obtuvo una respuesta positiva del RestAPI");
+                
                 InputStream responseBody = conexion.getInputStream();
                 String temporal = readFromStream(responseBody);
-                //Log.d("Solicitud aceptada");
+                LogsJB.info("Solicitud aceptada");
                 respuesta=temporal;
             }
             if(responsecode==201){
                 setCodigorequest(requestCode.CREATED);
-                //Log.d( "Se creo o modifico el recurso en el EndPoint del RestAPI");
+                LogsJB.info( "Se creo o modifico el recurso en el EndPoint del RestAPI");
                 InputStream responseBody = conexion.getInputStream();
                 String temporal = readFromStream(responseBody);
                 respuesta=temporal;
@@ -342,55 +349,58 @@ public class Methods {
             if(responsecode==204){
                 setCodigorequest(requestCode.NO_CONTENT);
                 respuesta=" ";
-                //Log.d( "Solicitud aceptada, no habían datos para devolver");
+                LogsJB.info( "Solicitud aceptada, no habían datos para devolver");
             }
             if(responsecode==400){
                 setCodigorequest(requestCode.BAD_REQUEST);
                 InputStream responseBody = conexion.getInputStream();
                 String temporal = readFromStream(responseBody);
-                //Log.d("La solicitud no fue valida");
+                LogsJB.info("La solicitud no fue valida");
                 respuesta=temporal;
             }
 
             if(responsecode==401){
                 setCodigorequest(requestCode.UNAUTHORIZED);
-                //Log.d( "Falta la información de autorización en la solicitud");
+                LogsJB.info( "Falta la información de autorización en la solicitud");
 
 
             }
             if(responsecode==403){
                 setCodigorequest(requestCode.FORBIDEN);
-                //Log.d( "No tiene los permisos necesarios para consumir el EndPoint del RestAPI");
+                LogsJB.info( "No tiene los permisos necesarios para consumir el EndPoint del RestAPI");
             }
             if(responsecode==404){
                 setCodigorequest(requestCode.NOT_FOUND);
-                //Log.d( "No encontro el EndPoint del RestAPI");
+                LogsJB.info( "No encontro el EndPoint del RestAPI");
             }
             if(responsecode==405){
                 setCodigorequest(requestCode.METHOD_NOT_ALLOWED);
-                //Log.d( "El metodo no esta disponible para el verbo HTTP utilizado para consumir el EndPoint");
+                LogsJB.info( "El metodo no esta disponible para el verbo HTTP utilizado para consumir el EndPoint");
             }
             if(responsecode==406){
                 setCodigorequest(requestCode.NOT_ACCEPTABLE);
-                //Log.d( "El formato de de datos indicados en la cabecera accept no corresponde al tipo de dato esperado por el servidor");
+                LogsJB.info( "El formato de de datos indicados en la cabecera accept no corresponde al tipo de dato esperado por el servidor");
             }
             if(responsecode==409){
                 setCodigorequest(requestCode.CONFLICT);
-                //Log.d( "Conflicto al tratar de modificar un recurso en el EndPoint");
+                LogsJB.info( "Conflicto al tratar de modificar un recurso en el EndPoint");
             }
             if(responsecode==415){
                 setCodigorequest(requestCode.UNSUPPORTED_MEDIA_TYPE);
-                //Log.d( "El formato de content type no es soportado");
+                LogsJB.info( "El formato de content type no es soportado");
             }
             if(responsecode==500){
                 setCodigorequest(requestCode.INTERNAL_SERVER_ERROR);
-                //Log.d( "Error Interno del servidor del RestAPI");
+                LogsJB.info( "Error Interno del servidor del RestAPI");
             }
-            //Log.d( "Finalizo la consulta al RestAPI");
+            LogsJB.info( "Finalizo la consulta al RestAPI");
             conexion.disconnect();
         }catch (Exception e) {
-            e.printStackTrace();
-            //Log.d("Exepcion disparada en el hilo de consulta Put: ", e.toString());
+            LogsJB.fatal("Excepción disparada en el hilo de consulta Put: "+ e.toString());
+            LogsJB.fatal("Tipo de Excepción : "+e.getClass());
+            LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
         }
         return respuesta;
     }
@@ -407,45 +417,45 @@ public class Methods {
     public static String Delete(String url, String data,  String credenciales, String typeautentication, String contenttype){
         String respuesta=null;
         try {
-            //Log.d("Inicia la creacion del hilo de consulta Delete: ", "Hilo creado");
-            //Log.d("Inicia la creacion del hilo de consulta Delete: ", url);
-            //Log.d("Inicia la creacion del hilo de consulta Delete: ", data);
-            //Log.d("Inicia la creacion del hilo de consulta Delete: ", credenciales);
-            //Log.d("Inicia la creacion del hilo de consulta Delete: ", "Se crea el objeto url");
+            LogsJB.info("Inicia la creacion del hilo de consulta Delete: "+ "Hilo creado");
+            LogsJB.debug("Inicia la creacion del hilo de consulta Delete: "+ url);
+            LogsJB.debug("Inicia la creacion del hilo de consulta Delete: "+ data);
+            LogsJB.debug("Inicia la creacion del hilo de consulta Delete: "+ credenciales);
+            LogsJB.debug( "Se crea el objeto url");
             URL endPoint = new URL(url);
-            //Log.d("Inicia la creacion del hilo de consulta Delete: ", "Se crea la Conecxion");
+            LogsJB.info( "Se crea la Conexión");
             HttpsURLConnection conexion = (HttpsURLConnection) endPoint.openConnection();
             conexion.setRequestMethod("DELETE");
             // Activar método POST
             conexion.setDoOutput(true);
-            //Log.d("Inicia la creacion del hilo de consulta Delete: ", "Setea el metodo");
+            LogsJB.debug( "Setea el metodo");
             conexion.setRequestProperty("Authorization", typeautentication+credenciales);
-            //Log.d("Inicia la creacion del hilo de consulta Delete: ", "Setea el encabezado");
+            LogsJB.debug( "Setea el encabezado");
             conexion.setRequestProperty("Content-Type", contenttype);
-            //Log.d("Inicia la creacion del hilo de consulta Delete: ", "Setea el contenido");
+            LogsJB.debug( "Setea el contenido");
             conexion.setRequestProperty("Accept", contenttype);
-            //Log.d("Inicia la creacion del hilo de consulta Delete: ", "Setea lo que acepta el rest api");
+            LogsJB.debug( "Setea el contentype que acepta el rest api");
             OutputStream out = conexion.getOutputStream();
-            //Log.d("Inicia la creacion del hilo de consulta Delete: ", "Crea el OutPut Stream");
+            LogsJB.debug( "Crea el OutPut Stream");
             // Usas tu método ingeniado para convertir el archivo a bytes
             out.write(data.getBytes());
-            //Log.d("Inicia la creacion del hilo de consulta Delete: ", "Escribe los Bytes");
+            LogsJB.debug( "Escribe los Bytes");
             out.flush();
-            //Log.d("Inicia la creacion del hilo de consulta Delete: ", "Reaiza el Flush");
+            LogsJB.debug( "Reaiza el Flush");
             out.close();
-            //Log.d("Inicia la creacion del hilo de consulta Delete: ", "Cierra la escritura");
+            LogsJB.debug( "Cierra la escritura");
             int responsecode=conexion.getResponseCode();
             if(responsecode==200){
                 setCodigorequest(requestCode.OK);
-                //Log.d( "Se obtuvo una respuesta positiva del RestAPI");
+                
                 InputStream responseBody = conexion.getInputStream();
                 String temporal = readFromStream(responseBody);
-                //Log.d("Solicitud aceptada");
+                LogsJB.info("Solicitud aceptada");
                 respuesta=temporal;
             }
             if(responsecode==201){
                 setCodigorequest(requestCode.CREATED);
-                //Log.d( "Se creo o modifico el recurso en el EndPoint del RestAPI");
+                LogsJB.info( "Se creo o modifico el recurso en el EndPoint del RestAPI");
                 InputStream responseBody = conexion.getInputStream();
                 String temporal = readFromStream(responseBody);
                 respuesta=temporal;
@@ -453,53 +463,56 @@ public class Methods {
             if(responsecode==204){
                 setCodigorequest(requestCode.NO_CONTENT);
                 respuesta=" ";
-                //Log.d( "Solicitud aceptada, no habían datos para devolver");
+                LogsJB.info( "Solicitud aceptada, no habían datos para devolver");
             }
             if(responsecode==400){
                 setCodigorequest(requestCode.BAD_REQUEST);
                 InputStream responseBody = conexion.getInputStream();
                 String temporal = readFromStream(responseBody);
-                //Log.d("La solicitud no fue valida");
+                LogsJB.info("La solicitud no fue valida");
                 respuesta=temporal;
             }
 
             if(responsecode==401){
                 setCodigorequest(requestCode.UNAUTHORIZED);
-                //Log.d( "Falta la información de autorización en la solicitud");
+                LogsJB.info( "Falta la información de autorización en la solicitud");
             }
             if(responsecode==403){
                 setCodigorequest(requestCode.FORBIDEN);
-                //Log.d( "No tiene los permisos necesarios para consumir el EndPoint del RestAPI");
+                LogsJB.info( "No tiene los permisos necesarios para consumir el EndPoint del RestAPI");
             }
             if(responsecode==404){
                 setCodigorequest(requestCode.NOT_FOUND);
-                //Log.d( "No encontro el EndPoint del RestAPI");
+                LogsJB.info( "No encontro el EndPoint del RestAPI");
             }
             if(responsecode==405){
                 setCodigorequest(requestCode.METHOD_NOT_ALLOWED);
-                //Log.d( "El metodo no esta disponible para el verbo HTTP utilizado para consumir el EndPoint");
+                LogsJB.info( "El metodo no esta disponible para el verbo HTTP utilizado para consumir el EndPoint");
             }
             if(responsecode==406){
                 setCodigorequest(requestCode.NOT_ACCEPTABLE);
-                //Log.d( "El formato de de datos indicados en la cabecera accept no corresponde al tipo de dato esperado por el servidor");
+                LogsJB.info( "El formato de de datos indicados en la cabecera accept no corresponde al tipo de dato esperado por el servidor");
             }
             if(responsecode==409){
                 setCodigorequest(requestCode.CONFLICT);
-                //Log.d( "Conflicto al tratar de modificar un recurso en el EndPoint");
+                LogsJB.info( "Conflicto al tratar de modificar un recurso en el EndPoint");
             }
             if(responsecode==415){
                 setCodigorequest(requestCode.UNSUPPORTED_MEDIA_TYPE);
-                //Log.d( "El formato de content type no es soportado");
+                LogsJB.info( "El formato de content type no es soportado");
             }
             if(responsecode==500){
                 setCodigorequest(requestCode.INTERNAL_SERVER_ERROR);
-                //Log.d( "Error Interno del servidor del RestAPI");
+                LogsJB.info( "Error Interno del servidor del RestAPI");
             }
-            //Log.d( "Finalizo la consulta al RestAPI");
+            LogsJB.info( "Finalizo la consulta al RestAPI");
             conexion.disconnect();
         }catch (Exception e) {
-            //Log.d("Exepcion disparada en el hilo de consulta Delete: ", e.toString());
-            return null;
+            LogsJB.fatal("Excepción disparada en el hilo de consulta Delete: "+ e.toString());
+            LogsJB.fatal("Tipo de Excepción : "+e.getClass());
+            LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
         }
         return respuesta;
     }
