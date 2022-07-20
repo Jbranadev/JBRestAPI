@@ -1,12 +1,12 @@
-package com.josebran.JBRestAPI;
+package io.github.josecarlosbran.JBRestAPI;
 
 
-import com.josebran.JBRestAPI.Enumeraciones.contentType;
-import com.josebran.JBRestAPI.Enumeraciones.metodo;
-import com.josebran.JBRestAPI.Enumeraciones.requestCode;
-import com.josebran.JBRestAPI.Enumeraciones.typeAutentication;
+import io.github.josecarlosbran.JBRestAPI.Enumeraciones.contentType;
+import io.github.josecarlosbran.JBRestAPI.Enumeraciones.metodo;
+import io.github.josecarlosbran.JBRestAPI.Enumeraciones.requestCode;
+import io.github.josecarlosbran.JBRestAPI.Enumeraciones.typeAutentication;
 
-import static com.josebran.JBRestAPI.Methods.*;
+import static io.github.josecarlosbran.JBRestAPI.Methods.*;
 
 class Executor extends Thread{
 

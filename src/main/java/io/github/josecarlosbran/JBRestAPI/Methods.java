@@ -1,7 +1,7 @@
-package com.josebran.JBRestAPI;
+package io.github.josecarlosbran.JBRestAPI;
 
 
-import com.josebran.JBRestAPI.Enumeraciones.requestCode;
+import io.github.josecarlosbran.JBRestAPI.Enumeraciones.requestCode;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.*;

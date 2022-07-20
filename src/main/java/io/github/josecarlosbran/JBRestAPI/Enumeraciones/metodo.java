@@ -1,4 +1,4 @@
-package com.josebran.JBRestAPI.Enumeraciones;
+package io.github.josecarlosbran.JBRestAPI.Enumeraciones;
 
 public enum metodo {
     /***

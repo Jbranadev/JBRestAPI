@@ -1,4 +1,4 @@
-package com.josebran.JBRestAPI.Enumeraciones;
+package io.github.josecarlosbran.JBRestAPI.Enumeraciones;
 
 /***
  * Enumeración que detalla los tipos de codigo de respuesta que podemos recibir al consumir un EndPoint
