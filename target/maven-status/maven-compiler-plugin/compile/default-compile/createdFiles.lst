@@ -1,0 +1,7 @@
+com\josebran\JBRestAPI\Enumeraciones\typeAutentication.class
+com\josebran\JBRestAPI\RestApi.class
+com\josebran\JBRestAPI\Enumeraciones\requestCode.class
+com\josebran\JBRestAPI\Enumeraciones\metodo.class
+com\josebran\JBRestAPI\Methods.class
+com\josebran\JBRestAPI\Enumeraciones\contentType.class
+com\josebran\JBRestAPI\Executor.class

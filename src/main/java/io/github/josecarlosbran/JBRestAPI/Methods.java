@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 
-public class Methods {
+class Methods {
 
     private static requestCode codigorequest;
 
@@ -81,14 +81,13 @@ public class Methods {
      * @param contenttype Tipo de contenido que recibe el endPoint
      * @return Retorna la respuesta del servidor en un String, si no obtuvo una respuesta retorna Null
      */
-    public static String Get(String url,   String credenciales, String typeautentication, String contenttype){
+    protected static String Get(String url,   String credenciales, String typeautentication, String contenttype){
         String respuesta=null;
         try {
             LogsJB.info("Inicia la creacion del hilo de consulta Get: "+ "Hilo creado");
             LogsJB.debug("Inicia la creacion del hilo de consulta Get: "+ url);
             LogsJB.debug("Inicia la creacion del hilo de consulta Get: "+ credenciales);
             LogsJB.debug( "Se crea el objeto url");
-
             URL endPoint = new URL(url);
             LogsJB.info( "Se crea la Conexión");
             HttpsURLConnection conexion = (HttpsURLConnection) endPoint.openConnection();
@@ -100,70 +99,7 @@ public class Methods {
             LogsJB.debug( "Setea el contenido");
             conexion.setRequestProperty("Accept", contenttype);
             LogsJB.debug( "Setea el contentype que acepta el rest api");
-            
-            int responsecode=conexion.getResponseCode();
-            if(responsecode==200){
-                setCodigorequest(requestCode.OK);
-                
-                InputStream responseBody = conexion.getInputStream();
-                String temporal = readFromStream(responseBody);
-                LogsJB.info("Solicitud aceptada");
-                respuesta=temporal;
-            }
-            if(responsecode==201){
-                setCodigorequest(requestCode.CREATED);
-                LogsJB.info( "Se creo o modifico el recurso en el EndPoint del RestAPI");
-                InputStream responseBody = conexion.getInputStream();
-                String temporal = readFromStream(responseBody);
-                respuesta=temporal;
-            }
-            if(responsecode==204){
-                setCodigorequest(requestCode.NO_CONTENT);
-                respuesta=" ";
-                LogsJB.info( "Solicitud aceptada, no habían datos para devolver");
-            }
-            if(responsecode==400){
-                setCodigorequest(requestCode.BAD_REQUEST);
-                InputStream responseBody = conexion.getInputStream();
-                String temporal = readFromStream(responseBody);
-                LogsJB.info("La solicitud no fue valida");
-                respuesta=temporal;
-            }
-            
-            if(responsecode==401){
-                setCodigorequest(requestCode.UNAUTHORIZED);
-                LogsJB.info( "Falta la información de autorización en la solicitud");
-
-
-            }
-            if(responsecode==403){
-                setCodigorequest(requestCode.FORBIDEN);
-                LogsJB.info( "No tiene los permisos necesarios para consumir el EndPoint del RestAPI");
-            }
-            if(responsecode==404){
-                setCodigorequest(requestCode.NOT_FOUND);
-                LogsJB.info( "No encontro el EndPoint del RestAPI");
-            }
-            if(responsecode==405){
-                setCodigorequest(requestCode.METHOD_NOT_ALLOWED);
-                LogsJB.info( "El metodo no esta disponible para el verbo HTTP utilizado para consumir el EndPoint");
-            }
-            if(responsecode==406){
-                setCodigorequest(requestCode.NOT_ACCEPTABLE);
-                LogsJB.info( "El formato de de datos indicados en la cabecera accept no corresponde al tipo de dato esperado por el servidor");
-            }
-            if(responsecode==409){
-                setCodigorequest(requestCode.CONFLICT);
-                LogsJB.info( "Conflicto al tratar de modificar un recurso en el EndPoint");
-            }
-            if(responsecode==415){
-                setCodigorequest(requestCode.UNSUPPORTED_MEDIA_TYPE);
-                LogsJB.info( "El formato de content type no es soportado");
-            }
-            if(responsecode==500){
-                setCodigorequest(requestCode.INTERNAL_SERVER_ERROR);
-                LogsJB.info( "Error Interno del servidor del RestAPI");
-            }
+            respuesta=procesarRespuesta(conexion);
             LogsJB.info( "Finalizo la consulta al RestAPI");
             conexion.disconnect();
         }catch (Exception e) {
@@ -215,69 +151,7 @@ public class Methods {
             LogsJB.debug( "Reaiza el Flush");
             out.close();
             LogsJB.debug( "Cierra la escritura");
-
-            int responsecode=conexion.getResponseCode();
-            if(responsecode==200){
-                setCodigorequest(requestCode.OK);
-                InputStream responseBody = conexion.getInputStream();
-                String temporal = readFromStream(responseBody);
-                LogsJB.info("Solicitud aceptada");
-                respuesta=temporal;
-            }
-            if(responsecode==201){
-                setCodigorequest(requestCode.CREATED);
-                LogsJB.info( "Se creo o modifico el recurso en el EndPoint del RestAPI");
-                InputStream responseBody = conexion.getInputStream();
-                String temporal = readFromStream(responseBody);
-                respuesta=temporal;
-            }
-            if(responsecode==204){
-                setCodigorequest(requestCode.NO_CONTENT);
-                respuesta=" ";
-                LogsJB.info( "Solicitud aceptada, no habían datos para devolver");
-            }
-            if(responsecode==400){
-                setCodigorequest(requestCode.BAD_REQUEST);
-                InputStream responseBody = conexion.getInputStream();
-                String temporal = readFromStream(responseBody);
-                LogsJB.info("La solicitud no fue valida");
-                respuesta=temporal;
-            }
-
-            if(responsecode==401){
-                setCodigorequest(requestCode.UNAUTHORIZED);
-                LogsJB.info( "Falta la información de autorización en la solicitud");
-
-
-            }
-            if(responsecode==403){
-                setCodigorequest(requestCode.FORBIDEN);
-                LogsJB.info( "No tiene los permisos necesarios para consumir el EndPoint del RestAPI");
-            }
-            if(responsecode==404){
-                setCodigorequest(requestCode.NOT_FOUND);
-                LogsJB.info( "No encontro el EndPoint del RestAPI");
-            }
-            if(responsecode==405){
-                setCodigorequest(requestCode.METHOD_NOT_ALLOWED);
-                LogsJB.info( "El metodo no esta disponible para el verbo HTTP utilizado para consumir el EndPoint");
-            }
-            if(responsecode==406){
-                setCodigorequest(requestCode.NOT_ACCEPTABLE);
-                LogsJB.info( "El formato de de datos indicados en la cabecera accept no corresponde al tipo de dato esperado por el servidor");
-            }
-            if(responsecode==409){
-                setCodigorequest(requestCode.CONFLICT);
-                LogsJB.info( "Conflicto al tratar de modificar un recurso en el EndPoint");
-            }
-            if(responsecode==415){
-                setCodigorequest(requestCode.UNSUPPORTED_MEDIA_TYPE);
-                LogsJB.info( "El formato de content type no es soportado");
-            }
-            if(responsecode==500){
-                setCodigorequest(requestCode.INTERNAL_SERVER_ERROR);
-                LogsJB.info( "Error Interno del servidor del RestAPI");
-            }
+            respuesta=procesarRespuesta(conexion);
             LogsJB.info( "Finalizo la consulta al RestAPI");
             conexion.disconnect();
         }catch (Exception e) {
@@ -329,70 +203,7 @@ public class Methods {
             LogsJB.debug( "Reaiza el Flush");
             out.close();
             LogsJB.debug( "Cierra la escritura");
-
-            int responsecode=conexion.getResponseCode();
-            if(responsecode==200){
-                setCodigorequest(requestCode.OK);
-                
-                InputStream responseBody = conexion.getInputStream();
-                String temporal = readFromStream(responseBody);
-                LogsJB.info("Solicitud aceptada");
-                respuesta=temporal;
-            }
-            if(responsecode==201){
-                setCodigorequest(requestCode.CREATED);
-                LogsJB.info( "Se creo o modifico el recurso en el EndPoint del RestAPI");
-                InputStream responseBody = conexion.getInputStream();
-                String temporal = readFromStream(responseBody);
-                respuesta=temporal;
-            }
-            if(responsecode==204){
-                setCodigorequest(requestCode.NO_CONTENT);
-                respuesta=" ";
-                LogsJB.info( "Solicitud aceptada, no habían datos para devolver");
-            }
-            if(responsecode==400){
-                setCodigorequest(requestCode.BAD_REQUEST);
-                InputStream responseBody = conexion.getInputStream();
-                String temporal = readFromStream(responseBody);
-                LogsJB.info("La solicitud no fue valida");
-                respuesta=temporal;
-            }
-
-            if(responsecode==401){
-                setCodigorequest(requestCode.UNAUTHORIZED);
-                LogsJB.info( "Falta la información de autorización en la solicitud");
-
-
-            }
-            if(responsecode==403){
-                setCodigorequest(requestCode.FORBIDEN);
-                LogsJB.info( "No tiene los permisos necesarios para consumir el EndPoint del RestAPI");
-            }
-            if(responsecode==404){
-                setCodigorequest(requestCode.NOT_FOUND);
-                LogsJB.info( "No encontro el EndPoint del RestAPI");
-            }
-            if(responsecode==405){
-                setCodigorequest(requestCode.METHOD_NOT_ALLOWED);
-                LogsJB.info( "El metodo no esta disponible para el verbo HTTP utilizado para consumir el EndPoint");
-            }
-            if(responsecode==406){
-                setCodigorequest(requestCode.NOT_ACCEPTABLE);
-                LogsJB.info( "El formato de de datos indicados en la cabecera accept no corresponde al tipo de dato esperado por el servidor");
-            }
-            if(responsecode==409){
-                setCodigorequest(requestCode.CONFLICT);
-                LogsJB.info( "Conflicto al tratar de modificar un recurso en el EndPoint");
-            }
-            if(responsecode==415){
-                setCodigorequest(requestCode.UNSUPPORTED_MEDIA_TYPE);
-                LogsJB.info( "El formato de content type no es soportado");
-            }
-            if(responsecode==500){
-                setCodigorequest(requestCode.INTERNAL_SERVER_ERROR);
-                LogsJB.info( "Error Interno del servidor del RestAPI");
-            }
+            respuesta=procesarRespuesta(conexion);
             LogsJB.info( "Finalizo la consulta al RestAPI");
             conexion.disconnect();
         }catch (Exception e) {
@@ -444,10 +255,31 @@ public class Methods {
             LogsJB.debug( "Reaiza el Flush");
             out.close();
             LogsJB.debug( "Cierra la escritura");
+            respuesta=procesarRespuesta(conexion);
+            LogsJB.info( "Finalizo la consulta al RestAPI");
+            conexion.disconnect();
+        }catch (Exception e) {
+            LogsJB.fatal("Excepción disparada en el hilo de consulta Delete: "+ e.toString());
+            LogsJB.fatal("Tipo de Excepción : "+e.getClass());
+            LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+        }
+        return respuesta;
+    }
+
+    /***
+     * Procesa la respuesta obtenida de consumir el RestAPI
+     * @param conexion la conexción que esta consumiendo el EndPoint
+     * @return Retorna un string que representa la respuesta del servidor.
+     */
+    private static String procesarRespuesta(HttpsURLConnection conexion){
+        String respuesta=null;
+        try{
             int responsecode=conexion.getResponseCode();
             if(responsecode==200){
                 setCodigorequest(requestCode.OK);
-                
+
                 InputStream responseBody = conexion.getInputStream();
                 String temporal = readFromStream(responseBody);
                 LogsJB.info("Solicitud aceptada");
@@ -505,10 +337,8 @@ public class Methods {
                 setCodigorequest(requestCode.INTERNAL_SERVER_ERROR);
                 LogsJB.info( "Error Interno del servidor del RestAPI");
             }
-            LogsJB.info( "Finalizo la consulta al RestAPI");
-            conexion.disconnect();
         }catch (Exception e) {
-            LogsJB.fatal("Excepción disparada en el hilo de consulta Delete: "+ e.toString());
+            LogsJB.fatal("Excepción disparada al procesar la respuesta del servidor: "+ e.toString());
             LogsJB.fatal("Tipo de Excepción : "+e.getClass());
             LogsJB.fatal("Causa de la Excepción : "+e.getCause());
             LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
