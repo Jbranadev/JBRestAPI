@@ -1,3 +1,18 @@
+/***
+ * Copyright (C) 2022 El proyecto de código abierto JBRestAPI de José Bran
+ *
+ * Con licencia de Apache License, Versión 2.0 (la "Licencia");
+ * no puede usar este archivo excepto de conformidad con la Licencia.
+ * Puede obtener una copia de la Licencia en
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * A menos que lo exija la ley aplicable o se acuerde por escrito, el software
+ * distribuido bajo la Licencia se distribuye "TAL CUAL",
+ * SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ya sean expresas o implícitas.
+ * Consulte la Licencia para conocer el idioma específico que rige los permisos y
+ * limitaciones bajo la Licencia.
+ */
 package io.github.josecarlosbran.JBRestAPI;
 
 
@@ -5,6 +20,7 @@ import io.github.josecarlosbran.JBRestAPI.Enumeraciones.contentType;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.metodo;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.requestCode;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.typeAutentication;
+import io.github.josecarlosbran.LogsJB.LogsJB;
 
 public class RestApi extends  Methods{
     private requestCode codigorespuesta;
@@ -25,20 +41,29 @@ public class RestApi extends  Methods{
      */
     public String execute(String url, String data, String credenciales, typeAutentication typeautentication, contentType contenttype, metodo method){
         String respuesta=null;
-        Executor execute=new Executor();
-        execute.setUrl(url);
-        execute.setData(data);
-        execute.setCredenciales(credenciales);
-        execute.setTypeautentication(typeautentication);
-        execute.setContenttype(contenttype);
-        execute.setMethod(method);
-        execute.start();
-        while(execute.getState() !=Thread.State.TERMINATED){
-            //Thread.sleep(1000);
+        try{
+            Executor execute=new Executor();
+            execute.setUrl(url);
+            execute.setData(data);
+            execute.setCredenciales(credenciales);
+            execute.setTypeautentication(typeautentication);
+            execute.setContenttype(contenttype);
+            execute.setMethod(method);
+            execute.start();
+            while(execute.getState() !=Thread.State.TERMINATED){
+                //Thread.sleep(1000);
+            }
+            respuesta=execute.getRespuesta();
+            setCodigorespuesta(execute.getCodigorequest());
+        }catch (Exception e) {
+            LogsJB.fatal("Excepción disparada en el metodo execute, el cual llama la creación del hilo: "+ e.toString());
+            LogsJB.fatal("Tipo de Excepción : "+e.getClass());
+            LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
         }
-        respuesta=execute.getRespuesta();
-        setCodigorespuesta(execute.getCodigorequest());
         return respuesta;
+
     }
 
 

@@ -1,8 +1,23 @@
+/***
+ * Copyright (C) 2022 El proyecto de código abierto JBRestAPI de José Bran
+ *
+ * Con licencia de Apache License, Versión 2.0 (la "Licencia");
+ * no puede usar este archivo excepto de conformidad con la Licencia.
+ * Puede obtener una copia de la Licencia en
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * A menos que lo exija la ley aplicable o se acuerde por escrito, el software
+ * distribuido bajo la Licencia se distribuye "TAL CUAL",
+ * SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ya sean expresas o implícitas.
+ * Consulte la Licencia para conocer el idioma específico que rige los permisos y
+ * limitaciones bajo la Licencia.
+ */
+
 package io.github.josecarlosbran.JBRestAPI;
 
-
-import com.josebran.LogsJB.LogsJB;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.requestCode;
+import io.github.josecarlosbran.LogsJB.LogsJB;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
@@ -52,12 +67,20 @@ class Methods {
      */
     public static String getCredencialesToBase64(String usuario, String contraseña){
         String result=null;
-        String temp=usuario+":"+contraseña;
-        //Convierte la cadena de texto en un array de Bytes
-        byte[] bytes= temp.getBytes(StandardCharsets.UTF_8);
-        //Obtiene la cadena base64 resultante
-        result=Base64.getEncoder().encodeToString(bytes);
-        //result = Base64.encodeToString(bytes, Base64.DEFAULT);
+        try{
+            String temp=usuario+":"+contraseña;
+            //Convierte la cadena de texto en un array de Bytes
+            byte[] bytes= temp.getBytes(StandardCharsets.UTF_8);
+            //Obtiene la cadena base64 resultante
+            result=Base64.getEncoder().encodeToString(bytes);
+            //result = Base64.encodeToString(bytes, Base64.DEFAULT);
+        }catch (Exception e) {
+            LogsJB.fatal("Excepción capturada en el metodo que combierte las credenciales a 64Bits: "+ e.toString());
+            LogsJB.fatal("Tipo de Excepción : "+e.getClass());
+            LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+        }
         return result;
     }
 
@@ -67,8 +90,17 @@ class Methods {
      * @return Retorna el resultado de convertir la cadena base 64
      */
     public static String getStringFromStringBase64(String cadena){
-        byte[] decodeBytes=Base64.getDecoder().decode(cadena);
-        String result=new String(decodeBytes);
+        String result=null;
+        try{
+            byte[] decodeBytes=Base64.getDecoder().decode(cadena);
+            result=new String(decodeBytes);
+        }catch (Exception e) {
+            LogsJB.fatal("Excepción capturada en el método que combierte una cadena Base64 a Normal: "+ e.toString());
+            LogsJB.fatal("Tipo de Excepción : "+e.getClass());
+            LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+        }
         return result;
     }
 
@@ -363,9 +395,17 @@ class Methods {
      * @throws IllegalAccessException
      */
     public static void setCodigorequest(requestCode Codigorequest) throws NoSuchFieldException, IllegalAccessException {
-        Field field = Methods.class.getDeclaredField("codigorequest");
-        field.setAccessible(true);
-        field.set(null, Codigorequest);
-        //codigorequest = codigorequest;
+        try{
+            Field field = Methods.class.getDeclaredField("codigorequest");
+            field.setAccessible(true);
+            field.set(null, Codigorequest);
+            //codigorequest = codigorequest;
+        }catch (Exception e) {
+            LogsJB.fatal("Excepción disparada en el método que modifica el codigorequest: "+ e.toString());
+            LogsJB.fatal("Tipo de Excepción : "+e.getClass());
+            LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+        }
     }
 }
