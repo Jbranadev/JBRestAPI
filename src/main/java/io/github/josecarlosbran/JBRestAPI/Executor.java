@@ -71,7 +71,7 @@ class Executor extends Thread{
      * Obtiene la url del endpoint a consumir el RestAPI
      * @return retorna la url del EndPoint a consumir del RestAPI
      */
-    public String getUrl() {
+    protected String getUrl() {
         return url;
     }
 
@@ -79,7 +79,7 @@ class Executor extends Thread{
      * Setea la url del EndPoint del RestAPI
      * @param url URL del endpoint a consumir
      */
-    public void setUrl(String url) {
+    protected void setUrl(String url) {
         this.url = url;
     }
 
@@ -87,7 +87,7 @@ class Executor extends Thread{
      * Obtiene la data que se desea envíar al EndPoint del RestAPI
      * @return Retorna la data que se desea envíar al EndPoint del RestAPI
      */
-    public String getData() {
+    protected String getData() {
         return data;
     }
 
@@ -95,7 +95,7 @@ class Executor extends Thread{
      * Setea la data que se desea envíar al EndPoint del RestAPI
      * @param data Data que sera envíada al EndPoint del RestAPI
      */
-    public void setData(String data) {
+    protected void setData(String data) {
         this.data = data;
     }
 
@@ -103,7 +103,7 @@ class Executor extends Thread{
      * Obtiene las credenciales del usuario que consumira el RestAPI
      * @return Retorna un string con las credenciales del usuario que consumira el RestAPI
      */
-    public String getCredenciales() {
+    protected String getCredenciales() {
         return credenciales;
     }
 
@@ -111,7 +111,7 @@ class Executor extends Thread{
      * Setea las credenciales del usuario que consumira el RestAPI
      * @param credenciales credenciales que se utilizaran para consumir el RestAPI
      */
-    public void setCredenciales(String credenciales) {
+    protected void setCredenciales(String credenciales) {
         this.credenciales = credenciales;
     }
 
@@ -121,7 +121,7 @@ class Executor extends Thread{
      * @return Retorna un objeto typeAutentication con el tipo de autenticación indicada para
      * consumir el RestAPI
      */
-    public typeAutentication getTypeautentication() {
+    protected typeAutentication getTypeautentication() {
         return typeautentication;
     }
 
@@ -129,7 +129,7 @@ class Executor extends Thread{
      * Setea el tipo de autenticación que estaremos utilizando para consumir el RestAPI
      * @param typeautentication Tipeautentication que acepta el RestAPI
      */
-    public void setTypeautentication(typeAutentication typeautentication) {
+    protected void setTypeautentication(typeAutentication typeautentication) {
         this.typeautentication = typeautentication;
     }
 
@@ -138,7 +138,7 @@ class Executor extends Thread{
      * @return Retorna un objeto contentType con el tipo de contenido indicado para
      * consmir el RestAPI
      */
-    public contentType getContenttype() {
+    protected contentType getContenttype() {
         return contenttype;
     }
 
@@ -146,7 +146,7 @@ class Executor extends Thread{
      * Setea el contentType que acepta el RestAPI
      * @param contenttype Content-Type que acepta el RestAPI
      */
-    public void setContenttype(contentType contenttype) {
+    protected void setContenttype(contentType contenttype) {
         this.contenttype = contenttype;
     }
 
@@ -154,7 +154,7 @@ class Executor extends Thread{
      * Obtiene el metodo que se a indicado al executor que consuma del RestAPI
      * @return Retorna un Enum method con el tipo de metodo que se desea consumir del RestAPI
      */
-    public metodo getMethod() {
+    protected metodo getMethod() {
         return method;
     }
 
@@ -162,7 +162,7 @@ class Executor extends Thread{
      * Setea el metodo que se utilizara al consumir el RestAPI
      * @param method Enumeración del tipo metodo, el cual indica al executor que metodo se estara ejecutando
      */
-    public void setMethod(metodo method) {
+    protected void setMethod(metodo method) {
         this.method = method;
     }
 
@@ -171,7 +171,7 @@ class Executor extends Thread{
      * Obtiene la respuesta obtenida del RestAPI
      * @return Retorna la respuesta del RestAPI
      */
-    public String getRespuesta() {
+    protected String getRespuesta() {
         return respuesta;
     }
 
@@ -179,7 +179,7 @@ class Executor extends Thread{
      * Setea la respuesta del RestAPI
      * @param respuesta Respuesta obtenida de haber consumido el RestAPI
      */
-    public void setRespuesta(String respuesta) {
+    protected void setRespuesta(String respuesta) {
         this.respuesta = respuesta;
     }
 
@@ -187,7 +187,7 @@ class Executor extends Thread{
      * Obtiene el codigo de respuesta de haber consumido el RestAPI
      * @return Retorna un objeto requestCode con el codigo de respuesta del EndPoint
      */
-    public requestCode getCodigorequest() {
+    protected requestCode getCodigorequest() {
         return codigorequest;
     }
 
@@ -195,7 +195,7 @@ class Executor extends Thread{
      * Setea el codigo de respuesta que a envíado el RestAPI
      * @param codigorequest Codigorequest que respondio el RestAPI
      */
-    public void setCodigorequest(requestCode codigorequest) {
+    protected void setCodigorequest(requestCode codigorequest) {
         this.codigorequest = codigorequest;
     }
 }

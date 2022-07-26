@@ -39,7 +39,7 @@ public class RestApi extends  Methods{
      * @param method Tipo de metodo, GET, POST, PUT, DELETE, ETC..
      * @return Retorna un string con la respuesta obtenida del RestAPI
      */
-    public String execute(String url, String data, String credenciales, typeAutentication typeautentication, contentType contenttype, metodo method){
+    private String execute(String url, String data, String credenciales, typeAutentication typeautentication, contentType contenttype, metodo method){
         String respuesta=null;
         try{
             Executor execute=new Executor();

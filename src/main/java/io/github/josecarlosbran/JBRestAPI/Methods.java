@@ -153,7 +153,7 @@ class Methods {
      * @param contenttype Tipo de contenido que recibe el endPoint del RestAPI
      * @return Retorna la respuesta del servidor en un String, si no obtuvo una respuesta retorna Null
      */
-    public static String Post(String url, String data,  String credenciales, String typeautentication, String contenttype){
+    protected static String Post(String url, String data,  String credenciales, String typeautentication, String contenttype){
         String respuesta=null;
         try {
             LogsJB.info("Inicia la creacion del hilo de consulta Post: "+ "Hilo creado");
@@ -205,7 +205,7 @@ class Methods {
      * @param contenttype Tipo de contenido que recibe el endPoint del RestAPI
      * @return Retorna la respuesta del servidor en un String, si no obtuvo una respuesta retorna Null
      */
-    public static String Put(String url, String data,  String credenciales, String typeautentication, String contenttype){
+    protected static String Put(String url, String data,  String credenciales, String typeautentication, String contenttype){
         String respuesta=null;
         try {
             LogsJB.info("Inicia la creacion del hilo de consulta Put: "+ "Hilo creado");
@@ -257,7 +257,7 @@ class Methods {
      * @param contenttype Tipo de contenido que recibe el endPoint del RestAPI
      * @return Retorna la respuesta del servidor en un String, si no obtuvo una respuesta retorna Null
      */
-    public static String Delete(String url, String data,  String credenciales, String typeautentication, String contenttype){
+    protected static String Delete(String url, String data,  String credenciales, String typeautentication, String contenttype){
         String respuesta=null;
         try {
             LogsJB.info("Inicia la creacion del hilo de consulta Delete: "+ "Hilo creado");
@@ -305,7 +305,7 @@ class Methods {
      * @param conexion la conexción que esta consumiendo el EndPoint
      * @return Retorna un string que representa la respuesta del servidor.
      */
-    private static String procesarRespuesta(HttpsURLConnection conexion){
+    protected static String procesarRespuesta(HttpsURLConnection conexion){
         String respuesta=null;
         try{
             int responsecode=conexion.getResponseCode();
@@ -384,7 +384,7 @@ class Methods {
      * Obtiene el codigo de respuesta de haber consumido el RestAPI
      * @return Retorna un objeto requestCode con el codigo de respuesta del EndPoint
      */
-    public static requestCode getCodigorequest() {
+    protected static requestCode getCodigorequest() {
         return codigorequest;
     }
 
@@ -394,7 +394,7 @@ class Methods {
      * @throws NoSuchFieldException
      * @throws IllegalAccessException
      */
-    public static void setCodigorequest(requestCode Codigorequest) throws NoSuchFieldException, IllegalAccessException {
+    protected static void setCodigorequest(requestCode Codigorequest) throws NoSuchFieldException, IllegalAccessException {
         try{
             Field field = Methods.class.getDeclaredField("codigorequest");
             field.setAccessible(true);
