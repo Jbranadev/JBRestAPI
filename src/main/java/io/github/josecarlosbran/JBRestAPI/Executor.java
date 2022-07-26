@@ -39,30 +39,32 @@ class Executor extends Thread{
         //Decide que tipo de metodo ejecuta
         //Log.d("Metodo que será ejecutado: ", ""+getMethod());
         //Metodo Get
+        Methods metodos=new Methods();
+
         if(getMethod() == metodo.GET){
-            setRespuesta(Get(getUrl(),  getCredenciales(),
+            setRespuesta(metodos.Get(getUrl(),  getCredenciales(),
                     getTypeautentication().getTipoAutenticacion(), getContenttype().getContentType()));
         }
 
         //Metodo Post
         if(getMethod() == metodo.POST){
-            setRespuesta(Post(getUrl(), getData(), getCredenciales(),
+            setRespuesta(metodos.Post(getUrl(), getData(), getCredenciales(),
                     getTypeautentication().getTipoAutenticacion(), getContenttype().getContentType()));
         }
 
         //Metodo Put
         if(getMethod() == metodo.PUT){
-            setRespuesta(Put(getUrl(), getData(), getCredenciales(),
+            setRespuesta(metodos.Put(getUrl(), getData(), getCredenciales(),
                     getTypeautentication().getTipoAutenticacion(), getContenttype().getContentType()));
         }
 
         //Metodo Delete
         if(getMethod() == metodo.DELETE){
-            setRespuesta(Delete(getUrl(), getData(), getCredenciales(),
+            setRespuesta(metodos.Delete(getUrl(), getData(), getCredenciales(),
                     getTypeautentication().getTipoAutenticacion(), getContenttype().getContentType()));
         }
 
-        setCodigorequest(Methods.getCodigorequest());
+        setCodigorequest(metodos.getCodigorequest());
 
     }
 

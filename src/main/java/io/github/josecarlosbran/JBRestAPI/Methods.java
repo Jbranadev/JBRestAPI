@@ -29,7 +29,7 @@ import java.util.Base64;
 
 class Methods {
 
-    private static requestCode codigorequest;
+    private requestCode codigorequest=requestCode.OK;
 
     /****
      * Lee la información que contiene un imputstream y la retorna en un string.
@@ -113,7 +113,7 @@ class Methods {
      * @param contenttype Tipo de contenido que recibe el endPoint
      * @return Retorna la respuesta del servidor en un String, si no obtuvo una respuesta retorna Null
      */
-    protected static String Get(String url,   String credenciales, String typeautentication, String contenttype){
+    protected String Get(String url,   String credenciales, String typeautentication, String contenttype){
         String respuesta=null;
         try {
             LogsJB.info("Inicia la creacion del hilo de consulta Get: "+ "Hilo creado");
@@ -153,7 +153,7 @@ class Methods {
      * @param contenttype Tipo de contenido que recibe el endPoint del RestAPI
      * @return Retorna la respuesta del servidor en un String, si no obtuvo una respuesta retorna Null
      */
-    protected static String Post(String url, String data,  String credenciales, String typeautentication, String contenttype){
+    protected String Post(String url, String data,  String credenciales, String typeautentication, String contenttype){
         String respuesta=null;
         try {
             LogsJB.info("Inicia la creacion del hilo de consulta Post: "+ "Hilo creado");
@@ -205,7 +205,7 @@ class Methods {
      * @param contenttype Tipo de contenido que recibe el endPoint del RestAPI
      * @return Retorna la respuesta del servidor en un String, si no obtuvo una respuesta retorna Null
      */
-    protected static String Put(String url, String data,  String credenciales, String typeautentication, String contenttype){
+    protected String Put(String url, String data,  String credenciales, String typeautentication, String contenttype){
         String respuesta=null;
         try {
             LogsJB.info("Inicia la creacion del hilo de consulta Put: "+ "Hilo creado");
@@ -257,7 +257,7 @@ class Methods {
      * @param contenttype Tipo de contenido que recibe el endPoint del RestAPI
      * @return Retorna la respuesta del servidor en un String, si no obtuvo una respuesta retorna Null
      */
-    protected static String Delete(String url, String data,  String credenciales, String typeautentication, String contenttype){
+    protected String Delete(String url, String data,  String credenciales, String typeautentication, String contenttype){
         String respuesta=null;
         try {
             LogsJB.info("Inicia la creacion del hilo de consulta Delete: "+ "Hilo creado");
@@ -305,7 +305,7 @@ class Methods {
      * @param conexion la conexción que esta consumiendo el EndPoint
      * @return Retorna un string que representa la respuesta del servidor.
      */
-    protected static String procesarRespuesta(HttpsURLConnection conexion){
+    protected String procesarRespuesta(HttpsURLConnection conexion){
         String respuesta=null;
         try{
             int responsecode=conexion.getResponseCode();
@@ -384,22 +384,20 @@ class Methods {
      * Obtiene el codigo de respuesta de haber consumido el RestAPI
      * @return Retorna un objeto requestCode con el codigo de respuesta del EndPoint
      */
-    protected static requestCode getCodigorequest() {
-        return codigorequest;
+    protected requestCode getCodigorequest() {
+        return this.codigorequest;
     }
 
     /***
      * Setea el codigo de respuesta que a envíado el RestAPI
      * @param Codigorequest Codigorequest que respondio el RestAPI
-     * @throws NoSuchFieldException
-     * @throws IllegalAccessException
      */
-    protected static void setCodigorequest(requestCode Codigorequest) throws NoSuchFieldException, IllegalAccessException {
+    protected void setCodigorequest(requestCode Codigorequest){
         try{
-            Field field = Methods.class.getDeclaredField("codigorequest");
+            /*Field field = Methods.class.getDeclaredField("codigorequest");
             field.setAccessible(true);
-            field.set(null, Codigorequest);
-            //codigorequest = codigorequest;
+            field.set(null, Codigorequest);*/
+            this.codigorequest = Codigorequest;
         }catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que modifica el codigorequest: "+ e.toString());
             LogsJB.fatal("Tipo de Excepción : "+e.getClass());
