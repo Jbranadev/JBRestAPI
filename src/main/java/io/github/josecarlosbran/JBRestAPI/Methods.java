@@ -21,7 +21,6 @@ import io.github.josecarlosbran.LogsJB.LogsJB;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
-import java.lang.reflect.Field;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;

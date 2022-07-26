@@ -15,12 +15,11 @@
  */
 
 package io.github.josecarlosbran.JBRestAPI;
+
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.contentType;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.metodo;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.requestCode;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.typeAutentication;
-
-import static io.github.josecarlosbran.JBRestAPI.Methods.*;
 
 class Executor extends Thread{
 

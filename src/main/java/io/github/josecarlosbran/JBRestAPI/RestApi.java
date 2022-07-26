@@ -23,10 +23,30 @@ import io.github.josecarlosbran.JBRestAPI.Enumeraciones.typeAutentication;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 
 public class RestApi extends  Methods{
-    private requestCode codigorespuesta;
+    private requestCode codigorespuesta=null;
 
     private typeAutentication tipeautentication;
     private contentType contenttype;
+
+    /***
+     * Constructor de la clase RestApi que permite configurar las propiedades que tendra el objeto creado
+     * @param AutenticationType Tipo de autenticación que soporta el restapi que se estara consumiendo.
+     * @param ContentType Tipo de contenido que soporta el restapi que se estara consumiendo.
+     */
+    public RestApi(typeAutentication AutenticationType, contentType ContentType){
+        this.setContenttype(ContentType);
+        this.setTypeAutentication(AutenticationType);
+    }
+
+    /***
+     * Constructor por default de clase RestApi, crea un objeto de la clase, configurada su contentType como tipo
+     * JSON y el typeAutentication tipo BEARER, los cuales son los valores por default
+     */
+    public RestApi(){
+        this.setContenttype(contentType.JSON);
+        this.setTypeAutentication(typeAutentication.BEARER);
+    }
+
 
     /***
      * Metodo encargado de realizar el consumo del RestAPI llamando a la clase execute, indicandole los parametros y el tipo de
@@ -156,7 +176,7 @@ public class RestApi extends  Methods{
      * Setea el tipo de autenticación que estaremos utilizando para consumir el RestAPI
      * @param tipeautentication Tipeautentication que acepta el RestAPI
      */
-    public void setTipeautentication(typeAutentication tipeautentication) {
+    public void setTypeAutentication(typeAutentication tipeautentication) {
         this.tipeautentication = tipeautentication;
     }
 
