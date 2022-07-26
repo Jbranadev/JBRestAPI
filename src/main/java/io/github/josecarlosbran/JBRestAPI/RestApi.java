@@ -48,6 +48,16 @@ public class RestApi extends  Methods{
     }
 
 
+    void prueba(){
+
+        RestApi work=new RestApi(typeAutentication.BASIC, contentType.AUDIO3GPP);
+
+        work.setContenttype(contenttype);
+
+        work.setTypeAutentication(typeAutentication.BASIC);
+
+
+    }
     /***
      * Metodo encargado de realizar el consumo del RestAPI llamando a la clase execute, indicandole los parametros y el tipo de
      * consumo que se desea realizar
@@ -174,9 +184,9 @@ public class RestApi extends  Methods{
 
     /***
      * Setea el tipo de autenticación que estaremos utilizando para consumir el RestAPI
-     * @param tipeautentication Tipeautentication que acepta el RestAPI
+     * @param typeAutentication Tipo de autenticación que acepta el RestAPI
      */
-    public void setTypeAutentication(typeAutentication tipeautentication) {
+    public void setTypeAutentication(typeAutentication typeAutentication) {
         this.tipeautentication = tipeautentication;
     }
 
@@ -193,7 +203,7 @@ public class RestApi extends  Methods{
      * Setea el contentType que acepta el RestAPI
      * @param contenttype Content-Type que acepta el RestAPI
      */
-    public void setContenttype(contentType contenttype) {
+    protected void setContenttype(contentType contenttype) {
         this.contenttype = contenttype;
     }
 }

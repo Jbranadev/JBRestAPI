@@ -9,107 +9,63 @@ JBRestAPI actualmente está en una etapa de desarrollo continuo, por lo cual sus
 son bienvenidas para mejorar el proyecto.
 ***
 
-## Configuración :gear:
+## ¿Cómo usar JBRestAPI?
 Utilizar JBRestAPI es muy fácil.
+
+Usar JBRestAPI es tan fácil como instanciar un objeto de la clase RestApi, configurar el tipo de RestApi que consumiremos
+a travez de los métodos provistos por la clase y hacer el llamado al tipo de solicitud que queremos ejecutar.
+
+Usando el constructor por default.
+~~~
+/***
+* Constructor por default de clase RestApi, crea un objeto de la clase, configurada su contentType como tipo
+* JSON y el typeAutentication tipo BEARER, los cuales son los valores por default
+*/
+RestApi work=new RestApi();
+~~~
+
+Usando el constructor personalizado, el cual permite especificar el tipo de contenido que acepta el RestApi que vamos a consumir
+y el tipo de autenticación que está acepta.
+~~~
+/***
+* Constructor de la clase RestApi que permite configurar las propiedades que tendra el objeto creado
+* @param AutenticationType Tipo de autenticación que soporta el restapi que se estara consumiendo.
+* @param ContentType Tipo de contenido que soporta el restapi que se estara consumiendo.
+*/
+RestApi work=new RestApi(typeAutentication.BASIC, contentType.AUDIO3GPP);
+~~~
 
 ### ¿Configuración de JBRestAPI de acuerdo a las necesidades de mi implementación?
 
-LogsJB puede ser configurada de acuerdo a las necesidades de la implementación que usted esté realizando.
+JBRestAPI puede ser configurada de acuerdo a las necesidades de la implementación que usted esté realizando.
 
-- Modificar la ruta de almacenamiento de los registros.
+- Modificar el tipo de contenido que acepta el RestApi que se estará consumiendo.
 
-Usted puede modificar la ruta de almacenamiento de los registros de su implementación de la siguiente manera.
-~~~
-/**
- * Setea la ruta en la cual se desea que escriba el Log.
- * @param Ruta Ruta del archivo .Txt donde se desea escribir el Log.
- */
-LogsJB.setRuta(Ruta);
-~~~
-
-
-- Modificar el tamaño máximo que puede tener su archivo de registros.
-
-Usted puede modificar el tamaño que desea que tenga cada archivo de registros de su implementación.
+Usted puede modificar el tipo de contenido que acepta el RestApi que se estará consumiendo de la siguiente manera.
 ~~~
 /***
- * Setea el tamaño maximo para el archivo Log de la aplicación actual.
- * @param SizeLog Tamaño maximo del archivo sobre el cual se estara escribiendo el Log.
- *      * Little_Little = 125Mb,
- *      * Little = 250Mb,
- *      * Small_Medium = 500Mb,
- *      * Medium = 1,000Mb,
- *      * Small_Large = 2,000Mb,
- *      * Large = 4,000Mb.
- * El valor por defaul es Little_Little.
- */
-LogsJB.setSizeLog(SizeLog.Little_Little);
-~~~
-
-
-- Modificar el grado de registros que se estarán reportando.
-~~~
-/***
- * Setea el NivelLog desde el cual deseamos se escriba en el Log de la aplicación actual.
- * @param GradeLog Nivel Log desde el cual hacía arriba en la jerarquia de logs, deseamos se reporten
- *      * Trace = 200,
- *      * Debug = 400,
- *      * Info = 500,
- *      * Warning = 600,
- *      * Error = 800,
- *      * Fatal = 1000.
- * El valor por defaul es Info. Lo cual hace que se reporten los Logs de grado Info, Warning, Error y Fatal.
- */
-LogsJB.setGradeLog(NivelLog.INFO);
-~~~
-
-- Modificar el usuario que se graba en el registro.
-~~~
-/***
- * Setea el nombre del usuario del sistema sobre el cual corre la aplicación
- * @param Usuario Usuario actual del sistema que se desea indicar al Log.
- */
-LogsJB.setUsuario(Usuario);
-~~~
-* * *
-
-## ¿Cómo usar LogsJB?
-Usar LogsJB es más fácil que hacer un llamado a System.out.println(mensaje), ya que al llamar a los métodos de registro
-de LogsJB se escribe el mensaje en la salida de la terminal del programa y en el archivo Log.txt, con menos esfuerzo del necesario
-para hacer un System.out.println(mensaje).
-
-~~~
-/**
-* Una vez se a importado los métodos estáticos de LogsJB
-* Se puede hacer el llamado invocando al método estático de las siguientes dos maneras:
-* LogsJB.debug(Mensaje);
-* debug(Mensaje);
-* @param Mensaje es un String que indica el mensaje que queremos registrar en la salida de la terminal,
-* como en el archivo Logs.txt
+* Setea el contentType que acepta el RestAPI
+* @param contenttype Content-Type que acepta el RestAPI
 */
- 
-//Comentario grado Trace
-trace( "Primer comentario grado Trace");
-//Comentario grado Debug
-debug( "Primer comentario grado Debug");
-//Comentario grado Info
-info( "Primer comentario grado Info");
-//Comentario grado Warning
-warning( "Primer comentario grado Warning");
-//Comentario grado Error
-error( "Primer comentario grado Error");
-//Comentario grado Fatal
-fatal( "Primer comentario grado Fatal"); 
+work.setContenttype(contenttype);
 ~~~
 
-Salida en la terminal
-![](Imagenes/Terminal_output.png)
 
-Salida en Log.txt
-![](Imagenes/Txt_output.png)
+- Modificar el tipo de autenticación que acepta el RestApi que se estará consumiendo.
+
+Usted puede modificar el tipo de autenticación que acepta el RestApi que se estará consumiendo.
+~~~
+/***
+* Setea el tipo de autenticación que estaremos utilizando para consumir el RestAPI
+* @param typeAutentication Tipo de autenticación que acepta el RestAPI
+*/
+work.setTypeAutentication(typeAutentication.BASIC);
+~~~
+
 
 
 * * *
+
 ## ¿Cómo Obtener JBRestAPI para usarlo en mi proyecto?
 Puedes obtener la librería JBRestAPI de la siguiente manera
 
