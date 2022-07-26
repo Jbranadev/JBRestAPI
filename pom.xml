@@ -11,7 +11,7 @@
 
     <name>${project.groupId}:${project.artifactId}</name>
     <description>JBRestAPI es una librería java que permite el consumo de un RestAPI en segundo plano, lo cual evita la interrupción del hilo principal,
-        lo cual la hace una libreria util para aplicaciónes android como para programas que desean tener un mejor rendimiento de manera fácil. Para mayor
+        lo cual la hace una librería útil para aplicaciones android como para programas que desean tener un mejor rendimiento de manera fácil. Para mayor
         información, consultar el siguiente enlace https://github.com/JoseCarlosBran/JBRestAPI/blob/master/Readme.md</description>
     <!-- FIXME change it to the project's website -->
     <url>https://github.com/JoseCarlosBran/JBRestAPI/blob/master/Readme.md</url>
