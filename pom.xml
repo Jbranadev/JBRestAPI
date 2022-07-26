@@ -6,14 +6,15 @@
 
     <groupId>io.github.josecarlosbran</groupId>
     <artifactId>JBRestAPI</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.1</version>
 
 
     <name>${project.groupId}:${project.artifactId}</name>
-    <description>JBRestAPI es una librería java que permite el consumo de un RestAPI de manera fácil. Para mayor
-        información, consultar el siguiente enlace https://github.com/JoseCarlosBran/LogsJB/blob/master/Readme.md</description>
+    <description>JBRestAPI es una librería java que permite el consumo de un RestAPI en segundo plano, lo cual evita la interrupción del hilo principal,
+        lo cual la hace una libreria util para aplicaciónes android como para programas que desean tener un mejor rendimiento de manera fácil. Para mayor
+        información, consultar el siguiente enlace https://github.com/JoseCarlosBran/JBRestAPI/blob/master/Readme.md</description>
     <!-- FIXME change it to the project's website -->
-    <url>https://github.com/JoseCarlosBran/LogsJB/blob/master/Readme.md</url>
+    <url>https://github.com/JoseCarlosBran/JBRestAPI/blob/master/Readme.md</url>
 
 
     <licenses>
@@ -32,9 +33,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:git://github.com/JoseCarlosBran/LogsJB.git</connection>
-        <developerConnection>scm:git:ssh://github.com/JoseCarlosBran/LogsJB.git</developerConnection>
-        <url>https://github.com/JoseCarlosBran/LogsJB/tree/master</url>
+        <connection>scm:git:git://github.com/JoseCarlosBran/JBRestAPI.git</connection>
+        <developerConnection>scm:git:ssh://github.com/JoseCarlosBran/JBRestAPI.git</developerConnection>
+        <url>https://github.com/JoseCarlosBran/JBRestAPI/tree/master</url>
     </scm>
 
 
