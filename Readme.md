@@ -35,50 +35,63 @@ y el tipo de autenticación que está acepta.
 RestApi work=new RestApi(typeAutentication.BASIC, contentType.AUDIO3GPP);
 ~~~
 
+Si necesita conocer más acerca de los Tipos de contenido disponibles en JBRestAPI haga click en este enlace.
+
+Si necesita conocer más acerca de los Tipos de autenticación disponibles en JBRestAPI haga click en este enlace.
+
 
 Para realizar una solicitud al RestApi, puedes hacerlo de la siguiente manera.
+Tener en consideración que la respuesta obtenida del EndPoint es retornada por medio de un String.
 ~~~
 /***
- * Metodo GET que consume el RestAPI haciendo uso del Executor, el cual encapsula
- * la logica para que este codigo corra en segundo plano.
- * @param url Url del endpoint a consumir
- * @param credenciales Credenciales para autenticarse y poder consumir el endPoint
- * @return Retorna un string con la respuesta obtenida del RestAPI
- */
-work.Get(url, credenciales);
+* Metodo GET que consume el RestAPI haciendo uso del Executor, el cual encapsula
+* la logica para que este codigo corra en segundo plano.
+* @param url Url del endpoint a consumir
+* @param credenciales Credenciales para autenticarse y poder consumir el endPoint
+* @return Retorna un string con la respuesta obtenida del RestAPI
+*/
+respuesta=work.Get(url, credenciales);
 
 /****
- * Metodo POST que consume el RestAPI haciendo uso del Executor, el cual encapsula
- * la logica para que este codigo corra en segundo plano.
- * @param url Url del endpoint a consumir
- * @param data Data que se desea envíar al endPoint
- * @param credenciales Credenciales para autenticarse y poder consumir el endPoint
- * @return Retorna un string con la respuesta obtenida del RestAPI
- */
-work.Post(url, data, credenciales);
+* Metodo POST que consume el RestAPI haciendo uso del Executor, el cual encapsula
+* la logica para que este codigo corra en segundo plano.
+* @param url Url del endpoint a consumir
+* @param data Data que se desea envíar al endPoint
+* @param credenciales Credenciales para autenticarse y poder consumir el endPoint
+* @return Retorna un string con la respuesta obtenida del RestAPI
+*/
+respuesta=work.Post(url, data, credenciales);
 
 /***
- * Metodo PUT que consume el RestAPI haciendo uso del Executor, el cual encapsula
- * la logica para que este codigo corra en segundo plano.
- * @param url Url del endpoint a consumir
- * @param data Data que se desea envíar al endPoint
- * @param credenciales Credenciales para autenticarse y poder consumir el endPoint
- * @return Retorna un string con la respuesta obtenida del RestAPI
- */
-work.Put(url, data, credenciales);
+* Metodo PUT que consume el RestAPI haciendo uso del Executor, el cual encapsula
+* la logica para que este codigo corra en segundo plano.
+* @param url Url del endpoint a consumir
+* @param data Data que se desea envíar al endPoint
+* @param credenciales Credenciales para autenticarse y poder consumir el endPoint
+* @return Retorna un string con la respuesta obtenida del RestAPI
+*/
+respuesta=work.Put(url, data, credenciales);
 
 /***
- * Metodo DELETE que consume el RestAPI haciendo uso del Executor, el cual encapsula
- * la logica para que este codigo corra en segundo plano.
- * @param url Url del endpoint a consumir
- * @param data Data que se desea envíar al endPoint
- * @param credenciales Credenciales para autenticarse y poder consumir el endPoint
- * @return Retorna un string con la respuesta obtenida del RestAPI
- */
-work.Delete(url, data, credenciales);
+* Metodo DELETE que consume el RestAPI haciendo uso del Executor, el cual encapsula
+* la logica para que este codigo corra en segundo plano.
+* @param url Url del endpoint a consumir
+* @param data Data que se desea envíar al endPoint
+* @param credenciales Credenciales para autenticarse y poder consumir el endPoint
+* @return Retorna un string con la respuesta obtenida del RestAPI
+*/
+respuesta=work.Delete(url, data, credenciales);
 ~~~
 
-
+Adicional a obtener la respuesta del servidor, también podemos revisar el código HTTP con el que respondió
+el servidor a nuestra petición de la siguiente manera.
+~~~
+/***
+* Obtiene el codigo de respuesta de haber consumido el RestAPI
+* @return Retorna un objeto requestCode con el código de respuesta del EndPoint
+*/
+requestCode responseCode=work.getCodigorespuesta();
+~~~
 
 ### ¿Configuración de JBRestAPI de acuerdo a las necesidades de mi implementación?
 

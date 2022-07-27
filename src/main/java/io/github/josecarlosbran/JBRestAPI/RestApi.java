@@ -52,6 +52,7 @@ public class RestApi{
         String url="";
         String data="";
         String credenciales="";
+        String respuesta="";
 
 
         RestApi work=new RestApi(typeAutentication.BASIC, contentType.AUDIO3GPP);
@@ -60,13 +61,15 @@ public class RestApi{
 
         work.setTypeAutentication(typeAutentication.BASIC);
 
-        work.Get(url, credenciales);
+        respuesta=work.Get(url, credenciales);
 
-        work.Post(url, data, credenciales);
+        respuesta=work.Post(url, data, credenciales);
 
-        work.Put(url, data, credenciales);
+        respuesta=work.Put(url, data, credenciales);
 
-        work.Delete(url, data, credenciales);
+        respuesta=work.Delete(url, data, credenciales);
+
+        requestCode responseCode=work.getCodigorespuesta();
 
 
 
@@ -173,7 +176,7 @@ public class RestApi{
 
     /***
      * Obtiene el codigo de respuesta de haber consumido el RestAPI
-     * @return Retorna un objeto requestCode con el codigo de respuesta del EndPoint
+     * @return Retorna un objeto requestCode con el código de respuesta del EndPoint
      */
     public requestCode getCodigorespuesta() {
         return codigorespuesta;
