@@ -148,8 +148,8 @@ administradores de paquetes, puedes ir al siguiente Link
 ***
 
 ## Licencia :balance_scale:
-JBRestAPI es una librería open source desarrollada por José Bran, para la administración
-de los registros de un programa, con licencia de Apache License, Versión 2.0;
+JBRestAPI es una librería open source desarrollada por José Bran, para poder consumir un EndPoint
+de un ApiRest de una manera fácil y óptima, con licencia de Apache License, Versión 2.0;
 
 No puede usar esta librería excepto de conformidad con la Licencia.
 Puede obtener una copia de la Licencia en http://www.apache.org/licenses/LICENSE-2.0
