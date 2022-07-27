@@ -35,6 +35,51 @@ y el tipo de autenticación que está acepta.
 RestApi work=new RestApi(typeAutentication.BASIC, contentType.AUDIO3GPP);
 ~~~
 
+
+Para realizar una solicitud al RestApi, puedes hacerlo de la siguiente manera.
+~~~
+/***
+ * Metodo GET que consume el RestAPI haciendo uso del Executor, el cual encapsula
+ * la logica para que este codigo corra en segundo plano.
+ * @param url Url del endpoint a consumir
+ * @param credenciales Credenciales para autenticarse y poder consumir el endPoint
+ * @return Retorna un string con la respuesta obtenida del RestAPI
+ */
+work.Get(url, credenciales);
+
+/****
+ * Metodo POST que consume el RestAPI haciendo uso del Executor, el cual encapsula
+ * la logica para que este codigo corra en segundo plano.
+ * @param url Url del endpoint a consumir
+ * @param data Data que se desea envíar al endPoint
+ * @param credenciales Credenciales para autenticarse y poder consumir el endPoint
+ * @return Retorna un string con la respuesta obtenida del RestAPI
+ */
+work.Post(url, data, credenciales);
+
+/***
+ * Metodo PUT que consume el RestAPI haciendo uso del Executor, el cual encapsula
+ * la logica para que este codigo corra en segundo plano.
+ * @param url Url del endpoint a consumir
+ * @param data Data que se desea envíar al endPoint
+ * @param credenciales Credenciales para autenticarse y poder consumir el endPoint
+ * @return Retorna un string con la respuesta obtenida del RestAPI
+ */
+work.Put(url, data, credenciales);
+
+/***
+ * Metodo DELETE que consume el RestAPI haciendo uso del Executor, el cual encapsula
+ * la logica para que este codigo corra en segundo plano.
+ * @param url Url del endpoint a consumir
+ * @param data Data que se desea envíar al endPoint
+ * @param credenciales Credenciales para autenticarse y poder consumir el endPoint
+ * @return Retorna un string con la respuesta obtenida del RestAPI
+ */
+work.Delete(url, data, credenciales);
+~~~
+
+
+
 ### ¿Configuración de JBRestAPI de acuerdo a las necesidades de mi implementación?
 
 JBRestAPI puede ser configurada de acuerdo a las necesidades de la implementación que usted esté realizando.

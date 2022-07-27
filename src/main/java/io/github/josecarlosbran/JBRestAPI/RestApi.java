@@ -22,7 +22,7 @@ import io.github.josecarlosbran.JBRestAPI.Enumeraciones.requestCode;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.typeAutentication;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 
-public class RestApi extends  Methods{
+public class RestApi{
     private requestCode codigorespuesta=null;
 
     private typeAutentication tipeautentication;
@@ -49,12 +49,26 @@ public class RestApi extends  Methods{
 
 
     void prueba(){
+        String url="";
+        String data="";
+        String credenciales="";
+
 
         RestApi work=new RestApi(typeAutentication.BASIC, contentType.AUDIO3GPP);
 
         work.setContenttype(contenttype);
 
         work.setTypeAutentication(typeAutentication.BASIC);
+
+        work.Get(url, credenciales);
+
+        work.Post(url, data, credenciales);
+
+        work.Put(url, data, credenciales);
+
+        work.Delete(url, data, credenciales);
+
+
 
 
     }
