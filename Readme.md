@@ -34,10 +34,10 @@ y el tipo de autenticación que está acepta.
 */
 RestApi work=new RestApi(typeAutentication.BASIC, contentType.AUDIO3GPP);
 ~~~
+[Si necesita conocer más acerca de los Tipos de contenido disponibles en JBRestAPI haga click en este enlace.](/resources/ContentType.md)
 
-Si necesita conocer más acerca de los Tipos de contenido disponibles en JBRestAPI haga click en este enlace.
+[Si necesita conocer más acerca de los Tipos de autenticación disponibles en JBRestAPI haga click en este enlace.](/resources/TypeAutentication.md)
 
-Si necesita conocer más acerca de los Tipos de autenticación disponibles en JBRestAPI haga click en este enlace.
 
 
 Para realizar una solicitud al RestApi, puedes hacerlo de la siguiente manera.
