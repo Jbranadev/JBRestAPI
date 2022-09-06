@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"io.github.josecarlosbran.JBRestAPI"},{"l":"io.github.josecarlosbran.JBRestAPI.Enumeraciones"}];updateSearchResults();

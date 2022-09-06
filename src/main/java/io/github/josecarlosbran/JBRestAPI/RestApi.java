@@ -47,7 +47,7 @@ public class RestApi{
         this.setTypeAutentication(typeAutentication.BEARER);
     }
 
-
+/*
     void prueba(){
         String url="";
         String data="";
@@ -75,6 +75,8 @@ public class RestApi{
 
 
     }
+    */
+
     /***
      * Metodo encargado de realizar el consumo del RestAPI llamando a la clase execute, indicandole los parametros y el tipo de
      * consumo que se desea realizar
