@@ -314,6 +314,7 @@ public enum contentType {
     private String contenttype;
 
     private contentType(String s) {
+        this.contenttype=s;
     }
 
     /***

@@ -16,14 +16,14 @@
 package io.github.josecarlosbran.JBRestAPI;
 
 
+import com.josebran.LogsJB.LogsJB;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.contentType;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.metodo;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.requestCode;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.typeAutentication;
-import io.github.josecarlosbran.LogsJB.LogsJB;
 
 public class RestApi{
-    private requestCode codigorespuesta=null;
+    private requestCode codigorespuesta;
 
     private typeAutentication tipeautentication;
     private contentType contenttype;
@@ -123,7 +123,7 @@ public class RestApi{
      */
     public String Get(String url,  String credenciales){
         String respuesta=null;
-        respuesta=execute(url, "", credenciales, getTipeautentication(), getContenttype(), metodo.GET);
+        respuesta=execute(url, "", credenciales, this.getTipeautentication(), this.getContenttype(), metodo.GET);
         return respuesta;
     }
 
@@ -138,7 +138,7 @@ public class RestApi{
      */
     public String Post(String url, String data, String credenciales){
         String respuesta=null;
-        respuesta=execute(url, data, credenciales, getTipeautentication(), getContenttype(), metodo.POST);
+        respuesta=execute(url, data, credenciales, this.getTipeautentication(), this.getContenttype(), metodo.POST);
         return respuesta;
     }
 
@@ -153,7 +153,7 @@ public class RestApi{
      */
     public String Put(String url, String data, String credenciales){
         String respuesta=null;
-        respuesta=execute(url, data, credenciales, getTipeautentication(), getContenttype(), metodo.PUT);
+        respuesta=execute(url, data, credenciales, this.getTipeautentication(), this.getContenttype(), metodo.PUT);
         return respuesta;
     }
 
@@ -168,7 +168,7 @@ public class RestApi{
      */
     public String Delete(String url, String data, String credenciales){
         String respuesta=null;
-        respuesta=execute(url, data, credenciales, getTipeautentication(), getContenttype(), metodo.DELETE);
+        respuesta=execute(url, data, credenciales, this.getTipeautentication(), this.getContenttype(), metodo.DELETE);
         return respuesta;
     }
 
@@ -196,7 +196,7 @@ public class RestApi{
      * consumir el RestAPI
      */
     public typeAutentication getTipeautentication() {
-        return tipeautentication;
+        return this.tipeautentication;
     }
 
     /***
@@ -204,7 +204,7 @@ public class RestApi{
      * @param typeAutentication Tipo de autenticación que acepta el RestAPI
      */
     public void setTypeAutentication(typeAutentication typeAutentication) {
-        this.tipeautentication = tipeautentication;
+        this.tipeautentication = typeAutentication;
     }
 
     /***

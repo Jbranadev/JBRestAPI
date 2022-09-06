@@ -6,7 +6,7 @@
 
     <groupId>io.github.josecarlosbran</groupId>
     <artifactId>JBRestAPI</artifactId>
-    <version>0.1</version>
+    <version>0.2</version>
 
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -48,10 +48,12 @@
     </properties>
 
     <dependencies>
+        <!-- Dependencia Log Interno -->
         <dependency>
             <groupId>io.github.josecarlosbran</groupId>
-            <artifactId>LogsJB</artifactId>
-            <version>0.5.5</version>
+            <artifactId>LogsJBSupport</artifactId>
+            <version>0.1</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

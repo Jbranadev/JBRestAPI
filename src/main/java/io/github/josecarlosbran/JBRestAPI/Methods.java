@@ -16,11 +16,11 @@
 
 package io.github.josecarlosbran.JBRestAPI;
 
+import com.josebran.LogsJB.LogsJB;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.requestCode;
-import io.github.josecarlosbran.LogsJB.LogsJB;
 
-import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
@@ -28,7 +28,7 @@ import java.util.Base64;
 
 class Methods {
 
-    private requestCode codigorequest=requestCode.OK;
+    private requestCode codigorequest=requestCode.NOT_FOUND;
 
     /****
      * Lee la información que contiene un imputstream y la retorna en un string.
@@ -121,7 +121,7 @@ class Methods {
             LogsJB.debug( "Se crea el objeto url");
             URL endPoint = new URL(url);
             LogsJB.info( "Se crea la Conexión");
-            HttpsURLConnection conexion = (HttpsURLConnection) endPoint.openConnection();
+            HttpURLConnection conexion = (HttpURLConnection) endPoint.openConnection();
             conexion.setRequestMethod("GET");
             LogsJB.debug( "Setea el metodo");
             conexion.setRequestProperty("Authorization", typeautentication+credenciales);
@@ -159,10 +159,11 @@ class Methods {
             LogsJB.debug("Inicia la creacion del hilo de consulta Post: "+ url);
             LogsJB.debug("Inicia la creacion del hilo de consulta Post: "+ data);
             LogsJB.debug("Inicia la creacion del hilo de consulta Post: "+ credenciales);
+            LogsJB.debug("Inicia la creacion del hilo de consulta Post: "+ contenttype);
             LogsJB.debug( "Se crea el objeto url");
             URL endPoint = new URL(url);
             LogsJB.info( "Se crea la Conexión");
-            HttpsURLConnection conexion = (HttpsURLConnection) endPoint.openConnection();
+            HttpURLConnection conexion = (HttpURLConnection) endPoint.openConnection();
             conexion.setRequestMethod("POST");
             // Activar método POST
             conexion.setDoOutput(true);
@@ -214,7 +215,7 @@ class Methods {
             LogsJB.debug( "Se crea el objeto url");
             URL endPoint = new URL(url);
             LogsJB.info( "Se crea la Conexión");
-            HttpsURLConnection conexion = (HttpsURLConnection) endPoint.openConnection();
+            HttpURLConnection conexion = (HttpURLConnection) endPoint.openConnection();
             conexion.setRequestMethod("PUT");
             // Activar método POST
             conexion.setDoOutput(true);
@@ -266,7 +267,7 @@ class Methods {
             LogsJB.debug( "Se crea el objeto url");
             URL endPoint = new URL(url);
             LogsJB.info( "Se crea la Conexión");
-            HttpsURLConnection conexion = (HttpsURLConnection) endPoint.openConnection();
+            HttpURLConnection conexion = (HttpURLConnection) endPoint.openConnection();
             conexion.setRequestMethod("DELETE");
             // Activar método POST
             conexion.setDoOutput(true);
@@ -304,7 +305,7 @@ class Methods {
      * @param conexion la conexción que esta consumiendo el EndPoint
      * @return Retorna un string que representa la respuesta del servidor.
      */
-    protected String procesarRespuesta(HttpsURLConnection conexion){
+    protected String procesarRespuesta(HttpURLConnection conexion){
         String respuesta=null;
         try{
             int responsecode=conexion.getResponseCode();

@@ -24,13 +24,13 @@ import io.github.josecarlosbran.JBRestAPI.Enumeraciones.typeAutentication;
 class Executor extends Thread{
 
     private requestCode codigorequest;
-    private String url=null;
-    private String data=null;
-    private String credenciales=null;
-    private typeAutentication typeautentication=null;
-    private contentType contenttype=null;
-    private metodo method=null;
-    private String respuesta=null;
+    private String url;
+    private String data;
+    private String credenciales;
+    private typeAutentication typeautentication;
+    private contentType contenttype;
+    private metodo method;
+    private String respuesta;
 
 
     public void run(){
@@ -40,30 +40,30 @@ class Executor extends Thread{
         //Metodo Get
         Methods metodos=new Methods();
 
-        if(getMethod() == metodo.GET){
-            setRespuesta(metodos.Get(getUrl(),  getCredenciales(),
-                    getTypeautentication().getTipoAutenticacion(), getContenttype().getContentType()));
+        if(this.getMethod() == metodo.GET){
+            setRespuesta(metodos.Get(this.getUrl(),  this.getCredenciales(),
+                    this.getTypeautentication().getTipoAutenticacion(), this.getContenttype().getContentType()));
         }
 
         //Metodo Post
-        if(getMethod() == metodo.POST){
-            setRespuesta(metodos.Post(getUrl(), getData(), getCredenciales(),
-                    getTypeautentication().getTipoAutenticacion(), getContenttype().getContentType()));
+        if(this.getMethod() == metodo.POST){
+            setRespuesta(metodos.Post(this.getUrl(), this.getData(), this.getCredenciales(),
+                    this.getTypeautentication().getTipoAutenticacion(), this.getContenttype().getContentType()));
         }
 
         //Metodo Put
-        if(getMethod() == metodo.PUT){
-            setRespuesta(metodos.Put(getUrl(), getData(), getCredenciales(),
-                    getTypeautentication().getTipoAutenticacion(), getContenttype().getContentType()));
+        if(this.getMethod() == metodo.PUT){
+            setRespuesta(metodos.Put(this.getUrl(), this.getData(), this.getCredenciales(),
+                    this.getTypeautentication().getTipoAutenticacion(), this.getContenttype().getContentType()));
         }
 
         //Metodo Delete
-        if(getMethod() == metodo.DELETE){
-            setRespuesta(metodos.Delete(getUrl(), getData(), getCredenciales(),
-                    getTypeautentication().getTipoAutenticacion(), getContenttype().getContentType()));
+        if(this.getMethod() == metodo.DELETE){
+            setRespuesta(metodos.Delete(this.getUrl(), this.getData(), this.getCredenciales(),
+                    this.getTypeautentication().getTipoAutenticacion(), this.getContenttype().getContentType()));
         }
 
-        setCodigorequest(metodos.getCodigorequest());
+        this.setCodigorequest(metodos.getCodigorequest());
 
     }
 
@@ -140,7 +140,7 @@ class Executor extends Thread{
      * consmir el RestAPI
      */
     protected contentType getContenttype() {
-        return contenttype;
+        return this.contenttype;
     }
 
     /***
