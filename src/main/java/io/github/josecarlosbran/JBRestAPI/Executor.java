@@ -17,7 +17,7 @@
 package io.github.josecarlosbran.JBRestAPI;
 
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.contentType;
-import io.github.josecarlosbran.JBRestAPI.Enumeraciones.metodo;
+import io.github.josecarlosbran.JBRestAPI.Enumeraciones.Metodo;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.requestCode;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.typeAutentication;
 
@@ -29,7 +29,7 @@ class Executor extends Thread{
     private String credenciales;
     private typeAutentication typeautentication;
     private contentType contenttype;
-    private metodo method;
+    private Metodo method;
     private String respuesta;
 
 
@@ -40,25 +40,25 @@ class Executor extends Thread{
         //Metodo Get
         Methods metodos=new Methods();
 
-        if(this.getMethod() == metodo.GET){
+        if(this.getMethod() == Metodo.GET){
             setRespuesta(metodos.Get(this.getUrl(),  this.getCredenciales(),
                     this.getTypeautentication().getTipoAutenticacion(), this.getContenttype().getContentType()));
         }
 
         //Metodo Post
-        if(this.getMethod() == metodo.POST){
+        if(this.getMethod() == Metodo.POST){
             setRespuesta(metodos.Post(this.getUrl(), this.getData(), this.getCredenciales(),
                     this.getTypeautentication().getTipoAutenticacion(), this.getContenttype().getContentType()));
         }
 
         //Metodo Put
-        if(this.getMethod() == metodo.PUT){
+        if(this.getMethod() == Metodo.PUT){
             setRespuesta(metodos.Put(this.getUrl(), this.getData(), this.getCredenciales(),
                     this.getTypeautentication().getTipoAutenticacion(), this.getContenttype().getContentType()));
         }
 
         //Metodo Delete
-        if(this.getMethod() == metodo.DELETE){
+        if(this.getMethod() == Metodo.DELETE){
             setRespuesta(metodos.Delete(this.getUrl(), this.getData(), this.getCredenciales(),
                     this.getTypeautentication().getTipoAutenticacion(), this.getContenttype().getContentType()));
         }
@@ -155,7 +155,7 @@ class Executor extends Thread{
      * Obtiene el metodo que se a indicado al executor que consuma del RestAPI
      * @return Retorna un Enum method con el tipo de metodo que se desea consumir del RestAPI
      */
-    protected metodo getMethod() {
+    protected Metodo getMethod() {
         return method;
     }
 
@@ -163,7 +163,7 @@ class Executor extends Thread{
      * Setea el metodo que se utilizara al consumir el RestAPI
      * @param method Enumeración del tipo metodo, el cual indica al executor que metodo se estara ejecutando
      */
-    protected void setMethod(metodo method) {
+    protected void setMethod(Metodo method) {
         this.method = method;
     }
 

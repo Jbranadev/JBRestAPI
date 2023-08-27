@@ -15,7 +15,7 @@
  */
 package io.github.josecarlosbran.JBRestAPI.Enumeraciones;
 
-public enum metodo {
+public enum Metodo {
     /***
      * Recupera un recurso.
      * Es utilizado únicamente para consultar información al servidor,

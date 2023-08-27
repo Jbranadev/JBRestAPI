@@ -18,11 +18,13 @@ package io.github.josecarlosbran.JBRestAPI;
 
 import com.josebran.LogsJB.LogsJB;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.contentType;
-import io.github.josecarlosbran.JBRestAPI.Enumeraciones.metodo;
+import io.github.josecarlosbran.JBRestAPI.Enumeraciones.Metodo;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.requestCode;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.typeAutentication;
 
 public class RestApi{
+
+
     private requestCode codigorespuesta;
 
     private typeAutentication tipeautentication;
@@ -47,35 +49,7 @@ public class RestApi{
         this.setTypeAutentication(typeAutentication.BEARER);
     }
 
-/*
-    void prueba(){
-        String url="";
-        String data="";
-        String credenciales="";
-        String respuesta="";
 
-
-        RestApi work=new RestApi(typeAutentication.BASIC, contentType.AUDIO3GPP);
-
-        work.setContenttype(contenttype);
-
-        work.setTypeAutentication(typeAutentication.BASIC);
-
-        respuesta=work.Get(url, credenciales);
-
-        respuesta=work.Post(url, data, credenciales);
-
-        respuesta=work.Put(url, data, credenciales);
-
-        respuesta=work.Delete(url, data, credenciales);
-
-        requestCode responseCode=work.getCodigorespuesta();
-
-
-
-
-    }
-    */
 
     /***
      * Metodo encargado de realizar el consumo del RestAPI llamando a la clase execute, indicandole los parametros y el tipo de
@@ -88,7 +62,7 @@ public class RestApi{
      * @param method Tipo de metodo, GET, POST, PUT, DELETE, ETC..
      * @return Retorna un string con la respuesta obtenida del RestAPI
      */
-    private String execute(String url, String data, String credenciales, typeAutentication typeautentication, contentType contenttype, metodo method){
+    private String execute(String url, String data, String credenciales, typeAutentication typeautentication, contentType contenttype, Metodo method){
         String respuesta=null;
         try{
             Executor execute=new Executor();
@@ -125,7 +99,7 @@ public class RestApi{
      */
     public String Get(String url,  String credenciales){
         String respuesta=null;
-        respuesta=execute(url, "", credenciales, this.getTipeautentication(), this.getContenttype(), metodo.GET);
+        respuesta=execute(url, "", credenciales, this.getTipeautentication(), this.getContenttype(), Metodo.GET);
         return respuesta;
     }
 
@@ -140,7 +114,7 @@ public class RestApi{
      */
     public String Post(String url, String data, String credenciales){
         String respuesta=null;
-        respuesta=execute(url, data, credenciales, this.getTipeautentication(), this.getContenttype(), metodo.POST);
+        respuesta=execute(url, data, credenciales, this.getTipeautentication(), this.getContenttype(), Metodo.POST);
         return respuesta;
     }
 
@@ -155,7 +129,7 @@ public class RestApi{
      */
     public String Put(String url, String data, String credenciales){
         String respuesta=null;
-        respuesta=execute(url, data, credenciales, this.getTipeautentication(), this.getContenttype(), metodo.PUT);
+        respuesta=execute(url, data, credenciales, this.getTipeautentication(), this.getContenttype(), Metodo.PUT);
         return respuesta;
     }
 
@@ -170,7 +144,7 @@ public class RestApi{
      */
     public String Delete(String url, String data, String credenciales){
         String respuesta=null;
-        respuesta=execute(url, data, credenciales, this.getTipeautentication(), this.getContenttype(), metodo.DELETE);
+        respuesta=execute(url, data, credenciales, this.getTipeautentication(), this.getContenttype(), Metodo.DELETE);
         return respuesta;
     }
 
