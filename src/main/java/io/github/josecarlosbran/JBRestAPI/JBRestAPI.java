@@ -1,17 +1,17 @@
 package io.github.josecarlosbran.JBRestAPI;
 
-import jakarta.ws.rs.client.Client;
-import jakarta.ws.rs.client.ClientBuilder;
-import jakarta.ws.rs.client.Invocation;
-import jakarta.ws.rs.client.WebTarget;
-import jakarta.ws.rs.core.Cookie;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.MultivaluedMap;
+import jakarta.ws.rs.ProcessingException;
+import jakarta.ws.rs.WebApplicationException;
+import jakarta.ws.rs.client.*;
+import jakarta.ws.rs.core.*;
+import jakarta.ws.rs.sse.SseEvent;
+import jakarta.ws.rs.sse.SseEventSource;
 import lombok.Getter;
 import lombok.ToString;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ScheduledExecutorService;
 
 import static io.github.josecarlosbran.JBRestAPI.Methods.stringIsNullOrEmpty;
 
@@ -74,7 +74,17 @@ public class JBRestAPI {
     public void Filter(Class filtroRegistro) throws ValorUndefined {
         if (!Objects.isNull(filtroRegistro)) {
             this.cliente = ClientBuilder.newClient().register(filtroRegistro);
+            if(!stringIsNullOrEmpty(this.getUrl())){
+                this.Url(this.getUrl());
+            }
+            this.ParametrosDeRuta(this.parametrosDeRuta);
+            this.QueryParams(this.queryParams);
+            this.MediaType(this.mediaType);
+            this.TypeResultIsColeccion(this.getTypeResultIsColeccion());
+            this.Headers(this.headers);
+            this.Cookies(this.cookies);
         }
+
     }
 
     /**
@@ -93,6 +103,12 @@ public class JBRestAPI {
         } else {
             this.myResource = ClientBuilder.newClient().target(url);
         }
+        this.ParametrosDeRuta(this.parametrosDeRuta);
+        this.QueryParams(this.queryParams);
+        this.MediaType(this.mediaType);
+        this.TypeResultIsColeccion(this.getTypeResultIsColeccion());
+        this.Headers(this.headers);
+        this.Cookies(this.cookies);
     }
 
     /**
@@ -104,7 +120,13 @@ public class JBRestAPI {
         if (!Objects.isNull(parametrosDeRuta)) {
             this.parametrosDeRuta = parametrosDeRuta;
             parametrosDeRuta.forEach(parametroOfRoute -> this.myResource.resolveTemplate(parametroOfRoute.getName(), parametroOfRoute.getValue()));
+            this.QueryParams(this.queryParams);
+            this.MediaType(this.mediaType);
+            this.TypeResultIsColeccion(this.getTypeResultIsColeccion());
+            this.Headers(this.headers);
+            this.Cookies(this.cookies);
         }
+
     }
 
     /**
@@ -116,6 +138,11 @@ public class JBRestAPI {
         if (!Objects.isNull(queryParams)) {
             this.queryParams = queryParams;
             queryParams.forEach(queryParam -> this.myResource.queryParam(queryParam.getName(), queryParam.getValue()));
+            this.ParametrosDeRuta(this.parametrosDeRuta);
+            this.MediaType(this.mediaType);
+            this.TypeResultIsColeccion(this.getTypeResultIsColeccion());
+            this.Headers(this.headers);
+            this.Cookies(this.cookies);
         }
     }
 
@@ -128,8 +155,10 @@ public class JBRestAPI {
         if (!Objects.isNull(mediaType)) {
             this.mediaType = mediaType;
             this.request = this.myResource.request(mediaType);
+            this.TypeResultIsColeccion(this.getTypeResultIsColeccion());
+            this.Headers(this.headers);
+            this.Cookies(this.cookies);
         }
-
     }
 
     /**
@@ -151,7 +180,9 @@ public class JBRestAPI {
         if (!Objects.isNull(headers)) {
             this.headers = headers;
             this.request.headers(headers);
+            this.Cookies(this.cookies);
         }
+
     }
 
     /**
@@ -163,6 +194,8 @@ public class JBRestAPI {
         if (!Objects.isNull(cookies)) {
             this.cookies = cookies;
             cookies.forEach(cookie -> this.request.cookie(cookie));
+            this.Headers(this.headers);
+            this.request.get(String.class);
         }
     }
 
@@ -172,6 +205,327 @@ public class JBRestAPI {
      */
     public static JBRestAPIBuilder builder(){
         return new JBRestAPIBuilder();
+    }
+
+
+    /**
+     * Invoke HTTP GET method for the current request synchronously.
+     *
+     * @return invocation response.
+     * @throws jakarta.ws.rs.ProcessingException in case the invocation processing has failed.
+     */
+    public Response get(){
+        return this.request.get();
+    }
+
+    /**
+     * Invoke HTTP GET method for the current request synchronously.
+     *
+     * @param <T> response entity type.
+     * @param responseType Java type the response entity will be converted to.
+     * @return invocation response.
+     * @throws ResponseProcessingException in case processing of a received HTTP response fails (e.g. in a filter or during
+     * conversion of the response entity data to an instance of a particular Java type).
+     * @throws ProcessingException in case the request processing or subsequent I/O operation fails.
+     * @throws WebApplicationException in case the response status code of the response returned by the server is not
+     * {@link jakarta.ws.rs.core.Response.Status.Family#SUCCESSFUL successful} and the specified response type is not
+     * {@link jakarta.ws.rs.core.Response}.
+     */
+    public <T> T get(Class<T> responseType){
+        return this.request.get(responseType);
+    }
+
+    /**
+     * Invoke HTTP GET method for the current request synchronously.
+     *
+     * @param <T> generic response entity type.
+     * @param responseType representation of a generic Java type the response entity will be converted to.
+     * @return invocation response.
+     * @throws ResponseProcessingException in case processing of a received HTTP response fails (e.g. in a filter or during
+     * conversion of the response entity data to an instance of a particular Java type).
+     * @throws ProcessingException in case the request processing or subsequent I/O operation fails.
+     * @throws WebApplicationException in case the response status code of the response returned by the server is not
+     * {@link jakarta.ws.rs.core.Response.Status.Family#SUCCESSFUL successful} and the specified generic response type does
+     * not represent {@link jakarta.ws.rs.core.Response}
+     */
+    public <T> T get(GenericType<T> responseType){
+        return this.request.get(responseType);
+    }
+
+    /**
+     * Invoke HTTP PUT method for the current request synchronously.
+     *
+     * @param entity request entity, including it's full {@link jakarta.ws.rs.core.Variant} information. Any variant-related
+     * HTTP headers previously set (namely {@code Content-Type}, {@code Content-Language} and {@code Content-Encoding}) will
+     * be overwritten using the entity variant information.
+     * @return invocation response.
+     * @throws ResponseProcessingException in case processing of a received HTTP response fails (e.g. in a filter or during
+     * conversion of the response entity data to an instance of a particular Java type).
+     * @throws ProcessingException in case the request processing or subsequent I/O operation fails.
+     */
+    public Response put(Entity<?> entity){
+        return this.request.put(entity);
+    }
+
+    /**
+     * Invoke HTTP PUT method for the current request synchronously.
+     *
+     * @param <T> response entity type.
+     * @param entity request entity, including it's full {@link jakarta.ws.rs.core.Variant} information. Any variant-related
+     * HTTP headers previously set (namely {@code Content-Type}, {@code Content-Language} and {@code Content-Encoding}) will
+     * be overwritten using the entity variant information.
+     * @param responseType Java type the response entity will be converted to.
+     * @return invocation response.
+     * @throws ResponseProcessingException in case processing of a received HTTP response fails (e.g. in a filter or during
+     * conversion of the response entity data to an instance of a particular Java type).
+     * @throws ProcessingException in case the request processing or subsequent I/O operation fails.
+     * @throws WebApplicationException in case the response status code of the response returned by the server is not
+     * {@link jakarta.ws.rs.core.Response.Status.Family#SUCCESSFUL successful} and the specified response type is not
+     * {@link jakarta.ws.rs.core.Response}.
+     */
+    public <T> T put(Entity<?> entity, Class<T> responseType){
+        return this.request.put(entity, responseType);
+    }
+
+    /**
+     * Invoke HTTP PUT method for the current request synchronously.
+     *
+     * @param <T> generic response entity type.
+     * @param entity request entity, including it's full {@link jakarta.ws.rs.core.Variant} information. Any variant-related
+     * HTTP headers previously set (namely {@code Content-Type}, {@code Content-Language} and {@code Content-Encoding}) will
+     * be overwritten using the entity variant information.
+     * @param responseType representation of a generic Java type the response entity will be converted to.
+     * @return invocation response.
+     * @throws ResponseProcessingException in case processing of a received HTTP response fails (e.g. in a filter or during
+     * conversion of the response entity data to an instance of a particular Java type).
+     * @throws ProcessingException in case the request processing or subsequent I/O operation fails.
+     * @throws WebApplicationException in case the response status code of the response returned by the server is not
+     * {@link jakarta.ws.rs.core.Response.Status.Family#SUCCESSFUL successful} and the specified generic response type does
+     * not represent {@link jakarta.ws.rs.core.Response}.
+     */
+    public <T> T put(Entity<?> entity, GenericType<T> responseType){
+        return this.request.put(entity, responseType);
+    }
+
+    /**
+     * Invoke HTTP POST method for the current request synchronously.
+     *
+     * @param entity request entity, including it's full {@link jakarta.ws.rs.core.Variant} information. Any variant-related
+     * HTTP headers previously set (namely {@code Content-Type}, {@code Content-Language} and {@code Content-Encoding}) will
+     * be overwritten using the entity variant information.
+     * @return invocation response.
+     * @throws ResponseProcessingException in case processing of a received HTTP response fails (e.g. in a filter or during
+     * conversion of the response entity data to an instance of a particular Java type).
+     * @throws ProcessingException in case the request processing or subsequent I/O operation fails.
+     */
+    public Response post(Entity<?> entity){
+        return this.request.post(entity);
+    }
+
+    /**
+     * Invoke HTTP POST method for the current request synchronously.
+     *
+     * @param <T> response entity type.
+     * @param entity request entity, including it's full {@link jakarta.ws.rs.core.Variant} information. Any variant-related
+     * HTTP headers previously set (namely {@code Content-Type}, {@code Content-Language} and {@code Content-Encoding}) will
+     * be overwritten using the entity variant information.
+     * @param responseType Java type the response entity will be converted to.
+     * @return invocation response.
+     * @throws ResponseProcessingException in case processing of a received HTTP response fails (e.g. in a filter or during
+     * conversion of the response entity data to an instance of a particular Java type).
+     * @throws ProcessingException in case the request processing or subsequent I/O operation fails.
+     * @throws WebApplicationException in case the response status code of the response returned by the server is not
+     * {@link jakarta.ws.rs.core.Response.Status.Family#SUCCESSFUL successful} and the specified response type is not
+     * {@link jakarta.ws.rs.core.Response}.
+     */
+    public <T> T post(Entity<?> entity, Class<T> responseType){
+        return this.request.post(entity, responseType);
+    }
+
+    /**
+     * Invoke HTTP POST method for the current request synchronously.
+     *
+     * @param <T> generic response entity type.
+     * @param entity request entity, including it's full {@link jakarta.ws.rs.core.Variant} information. Any variant-related
+     * HTTP headers previously set (namely {@code Content-Type}, {@code Content-Language} and {@code Content-Encoding}) will
+     * be overwritten using the entity variant information.
+     * @param responseType representation of a generic Java type the response entity will be converted to.
+     * @return invocation response.
+     * @throws ResponseProcessingException in case processing of a received HTTP response fails (e.g. in a filter or during
+     * conversion of the response entity data to an instance of a particular Java type).
+     * @throws ProcessingException in case the request processing or subsequent I/O operation fails.
+     * @throws WebApplicationException in case the response status code of the response returned by the server is not
+     * {@link jakarta.ws.rs.core.Response.Status.Family#SUCCESSFUL successful} and the specified generic response type does
+     * not represent {@link jakarta.ws.rs.core.Response}.
+     */
+    public <T> T post(Entity<?> entity, GenericType<T> responseType){
+        return this.request.post(entity, responseType);
+    }
+
+    /**
+     * Invoke HTTP DELETE method for the current request synchronously.
+     *
+     * @return invocation response.
+     * @throws ResponseProcessingException in case processing of a received HTTP response fails (e.g. in a filter or during
+     * conversion of the response entity data to an instance of a particular Java type).
+     * @throws ProcessingException in case the request processing or subsequent I/O operation fails.
+     */
+    public Response delete(){
+        return this.request.delete();
+    }
+
+    /**
+     * Invoke HTTP DELETE method for the current request synchronously.
+     *
+     * @param <T> response entity type.
+     * @param responseType Java type the response entity will be converted to.
+     * @return invocation response.
+     * @throws ResponseProcessingException in case processing of a received HTTP response fails (e.g. in a filter or during
+     * conversion of the response entity data to an instance of a particular Java type).
+     * @throws ProcessingException in case the request processing or subsequent I/O operation fails.
+     * @throws WebApplicationException in case the response status code of the response returned by the server is not
+     * {@link jakarta.ws.rs.core.Response.Status.Family#SUCCESSFUL successful} and the specified response type is not
+     * {@link jakarta.ws.rs.core.Response}.
+     */
+    public <T> T delete(Class<T> responseType){
+        return this.request.delete(responseType);
+    }
+
+    /**
+     * Invoke HTTP DELETE method for the current request synchronously.
+     *
+     * @param <T> generic response entity type.
+     * @param responseType representation of a generic Java type the response entity will be converted to.
+     * @return invocation response.
+     * @throws ResponseProcessingException in case processing of a received HTTP response fails (e.g. in a filter or during
+     * conversion of the response entity data to an instance of a particular Java type).
+     * @throws ProcessingException in case the request processing or subsequent I/O operation fails.
+     * @throws WebApplicationException in case the response status code of the response returned by the server is not
+     * {@link jakarta.ws.rs.core.Response.Status.Family#SUCCESSFUL successful} and the specified generic response type does
+     * not represent {@link jakarta.ws.rs.core.Response}.
+     */
+    public <T> T delete(GenericType<T> responseType){
+        return this.request.delete(responseType);
+    }
+
+    // HEAD
+
+    /**
+     * Invoke HTTP HEAD method for the current request synchronously.
+     *
+     * @return invocation response.
+     * @throws ResponseProcessingException in case processing of a received HTTP response fails (e.g. in a filter or during
+     * conversion of the response entity data to an instance of a particular Java type).
+     * @throws ProcessingException in case the request processing or subsequent I/O operation fails.
+     */
+    public Response head(){
+        return this.request.head();
+    }
+
+    // OPTIONS
+
+    /**
+     * Invoke HTTP OPTIONS method for the current request synchronously.
+     *
+     * @return invocation response.
+     * @throws ResponseProcessingException in case processing of a received HTTP response fails (e.g. in a filter or during
+     * conversion of the response entity data to an instance of a particular Java type).
+     * @throws ProcessingException in case the request processing or subsequent I/O operation fails.
+     */
+    public Response options(){
+        return this.request.options();
+    }
+
+    /**
+     * Invoke HTTP OPTIONS method for the current request synchronously.
+     *
+     * @param <T> response entity type.
+     * @param responseType Java type the response entity will be converted to.
+     * @return invocation response.
+     * @throws ResponseProcessingException in case processing of a received HTTP response fails (e.g. in a filter or during
+     * conversion of the response entity data to an instance of a particular Java type).
+     * @throws ProcessingException in case the request processing or subsequent I/O operation fails.
+     * @throws WebApplicationException in case the response status code of the response returned by the server is not
+     * {@link jakarta.ws.rs.core.Response.Status.Family#SUCCESSFUL successful} and the specified response type is not
+     * {@link jakarta.ws.rs.core.Response}.
+     */
+    public <T> T options(Class<T> responseType){
+        return this.request.options(responseType);
+    }
+
+    /**
+     * Invoke HTTP OPTIONS method for the current request synchronously.
+     *
+     * @param <T> generic response entity type.
+     * @param responseType representation of a generic Java type the response entity will be converted to.
+     * @return invocation response.
+     * @throws ResponseProcessingException in case processing of a received HTTP response fails (e.g. in a filter or during
+     * conversion of the response entity data to an instance of a particular Java type).
+     * @throws ProcessingException in case the request processing or subsequent I/O operation fails.
+     * @throws WebApplicationException in case the response status code of the response returned by the server is not
+     * {@link jakarta.ws.rs.core.Response.Status.Family#SUCCESSFUL successful} and the specified generic response type does
+     * not represent {@link jakarta.ws.rs.core.Response}.
+     */
+    public <T> T options(GenericType<T> responseType){
+
+        return this.request.options(responseType);
+    }
+
+    /**
+     * Build new SSE event source pointing at a SSE streaming {@link WebTarget web target}.
+     * <p>
+     * The returned event source is ready, but not {@link SseEventSource#open() connected} to the SSE endpoint. It is
+     * expected that you will manually invoke its method once you are ready to start receiving SSE events.
+     * In case you want to build an event source instance that is already connected to the SSE endpoint, use the event
+     * source builder  method instead.
+     * <p>
+     * Once the event source is open, the incoming events are processed by the event source in an asynchronous task that
+     * runs in an internal single-threaded {@link ScheduledExecutorService scheduled executor service}.
+     *
+     * @return new event source instance, ready to be connected to the SSE endpoint.
+     */
+    public SseEventSource suscribeEventSource(){
+        return SseEventSource.target(this.myResource).build();
+    }
+
+
+    /**
+     * Access the asynchronous uniform request invocation interface to asynchronously invoke the built request.
+     *
+     * @return asynchronous uniform request invocation interface.
+     */
+    public AsyncInvoker async(){
+        this.request.rx();
+        return this.request.async();
+    }
+
+    /**
+     * Access the default reactive invoker based on {@link java.util.concurrent.CompletionStage}.
+     *
+     * @return default reactive invoker instance.
+     * @since 2.1
+     * @see jakarta.ws.rs.client.Invocation.Builder#rx(Class)
+     */
+    public CompletionStageRxInvoker rx(){
+        return this.request.rx();
+    }
+
+    /**
+     * Access a reactive invoker based on a {@link RxInvoker} subclass provider. Note that corresponding
+     * {@link RxInvokerProvider} must be registered in the client runtime.
+     * <p>
+     * This method is an extension point for JAX-RS implementations to support other types representing asynchronous
+     * computations.
+     *
+     * @param <T> generic invoker type.
+     * @param clazz {@link RxInvoker} subclass.
+     * @return reactive invoker instance.
+     * @throws IllegalStateException when provider for given class is not registered.
+     * @see jakarta.ws.rs.client.Client#register(Class)
+     * @since 2.1
+     */
+    public <T extends RxInvoker> T rx(Class<T> clazz){
+        return this.request.rx(clazz);
     }
 
 

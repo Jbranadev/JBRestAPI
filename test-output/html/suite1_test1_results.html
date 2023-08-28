@@ -68,13 +68,13 @@
 	    		<span class="tooltiptextCustom">Copy Suite file name</span>
 			</div>
 	    </th> 
-	  	<th id="suiteXMLId">C:\Users\josec\AppData\Local\JetBrains\IntelliJIdea2023.1\temp-testng-customsuite.xml</th>
+	  	<th id="suiteXMLId">C:\Users\jobran\AppData\Local\JetBrains\IdeaIC2022.2\temp-testng-customsuite.xml</th>
 	  	<th id="suiteXMLNameId" hidden="true">temp-testng-customsuite.xml</th>
 	  </tr>
 	  	  <tr>
 	    <th>Total Time : </th>
 	    <th></th>
-	    <th>00:00:28</th> 
+	    <th>00:00:00</th> 
 	  </tr>
 	  <tr>
 	    <th>Total Steps : </th>
@@ -84,7 +84,7 @@
 	  <tr>
 	    <th>Status : </th>
 	    <th></th>
-	    <th><font color="green">PASS</font></th> 
+	    <th><font color="red">FAIL</font></th> 
 	  </tr>
 	</table>
 </div>
@@ -109,47 +109,319 @@
 				
 				
 				
-				
-				
-												<tr>
-			<td class="time">1693197276777</td>
-			<td class="header passed" colspan="4" onClick="toggleElement('c3d2ac46-6028-4c1d-8fc1-c50a7e6571c0','block');changeSingleIcon('span-c3d2ac46-6028-4c1d-8fc1-c50a7e6571c0');" title="Click to expand/collapse" style="cursor: pointer;">
-			<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBRestAPI.JBRestAPITest</div>
-			<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-c3d2ac46-6028-4c1d-8fc1-c50a7e6571c0' class="glyphicon glyphicon-menu-down"></span></div>
-			</td>
-			</tr>
-			<tr>
-	<td class="time">1693197276777</td>
-	<td class="methodTest">
-		<span class="description"><b>Method: </b>testWorkAPI</span><br>
-			<span class="description"><b>Description: </b></span><br>
-							<span class="duration"><b>Duration: </b>18.813s</span><br>
+											<tr>
+	<td class="time">1693234983177</td>
+	<td class="header failed" colspan="4" onClick="toggleElement('536fb2e3-5253-4779-a463-c8dd39e8bc68','block');changeSingleIcon('span-536fb2e3-5253-4779-a463-c8dd39e8bc68');" title="Click to expand/collapse" style="cursor: pointer;">
+	<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBRestAPI.JBRestAPITest</div>
+	<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-536fb2e3-5253-4779-a463-c8dd39e8bc68' class="glyphicon glyphicon-menu-down"></span></div>
 	</td>
-	<td class="result">
-						<div class="stackTrace" id="c3d2ac46-6028-4c1d-8fc1-c50a7e6571c0" style="display: block;">
-					</td>
-	</div>
-</tr>
-						<tr>
-			<td class="time">1693197267284</td>
-			<td class="header passed" colspan="4" onClick="toggleElement('b5a0955a-8558-4e72-8195-56826215ba23','block');changeSingleIcon('span-b5a0955a-8558-4e72-8195-56826215ba23');" title="Click to expand/collapse" style="cursor: pointer;">
-			<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBRestAPI.JBRestAPITest</div>
-			<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-b5a0955a-8558-4e72-8195-56826215ba23' class="glyphicon glyphicon-menu-down"></span></div>
-			</td>
-			</tr>
-			<tr>
-	<td class="time">1693197267284</td>
+	</tr>
+<tr>
+	<td class="time">1693234983177</td>
 	<td class="methodTest">
 		<span class="description"><b>Method: </b>testJakartaClient</span><br>
 			<span class="description"><b>Description: </b></span><br>
-							<span class="duration"><b>Duration: </b>9.486s</span><br>
+							<span class="duration"><b>Duration: </b>0.782s</span><br>
 	</td>
 	<td class="result">
-						<div class="stackTrace" id="b5a0955a-8558-4e72-8195-56826215ba23" style="display: block;">
-					</td>
+						<div class="noCollapse" id="536fb2e3-5253-4779-a463-c8dd39e8bc68" style="display: block;">
+						<a href="javascript:toggleElement('exception-536fb2e3-5253-4779-a463-c8dd39e8bc68','block')" title="Click to expand/collapse"><b>jakarta.ws.rs.ProcessingException: javax.net.ssl.SSLHandshakeException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target</b></a><br/>
+		<div class="stackTrace" id="exception-536fb2e3-5253-4779-a463-c8dd39e8bc68">
+					org.glassfish.jersey.client.internal.HttpUrlConnector.apply(HttpUrlConnector.java:275)<br/>
+					org.glassfish.jersey.client.ClientRuntime.invoke(ClientRuntime.java:300)<br/>
+					org.glassfish.jersey.client.JerseyInvocation.lambda$invoke$1(JerseyInvocation.java:675)<br/>
+					org.glassfish.jersey.client.JerseyInvocation.call(JerseyInvocation.java:697)<br/>
+					org.glassfish.jersey.client.JerseyInvocation.lambda$runInScope$3(JerseyInvocation.java:691)<br/>
+					org.glassfish.jersey.internal.Errors.process(Errors.java:292)<br/>
+					org.glassfish.jersey.internal.Errors.process(Errors.java:274)<br/>
+					org.glassfish.jersey.internal.Errors.process(Errors.java:205)<br/>
+					org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:390)<br/>
+					org.glassfish.jersey.client.JerseyInvocation.runInScope(JerseyInvocation.java:691)<br/>
+					org.glassfish.jersey.client.JerseyInvocation.invoke(JerseyInvocation.java:674)<br/>
+					org.glassfish.jersey.client.JerseyInvocation$Builder.method(JerseyInvocation.java:422)<br/>
+					org.glassfish.jersey.client.JerseyInvocation$Builder.get(JerseyInvocation.java:318)<br/>
+					io.github.josecarlosbran.JBRestAPI.JBRestAPITest.testJakartaClient(JBRestAPITest.java:28)<br/>
+					java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)<br/>
+					java.base/java.lang.reflect.Method.invoke(Method.java:577)<br/>
+					org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)<br/>
+					org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)<br/>
+					org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)<br/>
+					org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)<br/>
+					org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)<br/>
+					org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)<br/>
+					org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)<br/>
+					org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)<br/>
+					java.base/java.util.ArrayList.forEach(ArrayList.java:1511)<br/>
+					org.testng.TestRunner.privateRun(TestRunner.java:848)<br/>
+					org.testng.TestRunner.run(TestRunner.java:621)<br/>
+					org.testng.SuiteRunner.runTest(SuiteRunner.java:443)<br/>
+					org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)<br/>
+					org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)<br/>
+					org.testng.SuiteRunner.run(SuiteRunner.java:336)<br/>
+					org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br/>
+					org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)<br/>
+					org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)<br/>
+					org.testng.TestNG.runSuitesLocally(TestNG.java:1200)<br/>
+					org.testng.TestNG.runSuites(TestNG.java:1114)<br/>
+					org.testng.TestNG.run(TestNG.java:1082)<br/>
+					com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>
+					com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)<br/>
+							<b>Caused by: </b> <a href="javascript:toggleElement('causedBy-536fb2e3-5253-4779-a463-c8dd39e8bc68','block')" title="Click to expand/collapse">javax.net.ssl.SSLHandshakeException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target</a><br/>
+			<div class="stackTrace" id="causedBy-536fb2e3-5253-4779-a463-c8dd39e8bc68">
+							java.base/sun.security.ssl.Alert.createSSLException(Alert.java:131)<br/>
+							java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:371)<br/>
+							java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:314)<br/>
+							java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:309)<br/>
+							java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.checkServerCerts(CertificateMessage.java:1351)<br/>
+							java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.onConsumeCertificate(CertificateMessage.java:1226)<br/>
+							java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.consume(CertificateMessage.java:1169)<br/>
+							java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:396)<br/>
+							java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:480)<br/>
+							java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:458)<br/>
+							java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:201)<br/>
+							java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)<br/>
+							java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1505)<br/>
+							java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1420)<br/>
+							java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:455)<br/>
+							java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:426)<br/>
+							java.base/sun.net.www.protocol.https.HttpsClient.afterConnect(HttpsClient.java:578)<br/>
+							java.base/sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:183)<br/>
+							java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1665)<br/>
+							java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1589)<br/>
+							java.base/java.net.HttpURLConnection.getResponseCode(HttpURLConnection.java:529)<br/>
+							java.base/sun.net.www.protocol.https.HttpsURLConnectionImpl.getResponseCode(HttpsURLConnectionImpl.java:308)<br/>
+							org.glassfish.jersey.client.internal.HttpUrlConnector._apply(HttpUrlConnector.java:415)<br/>
+							org.glassfish.jersey.client.internal.HttpUrlConnector.apply(HttpUrlConnector.java:273)<br/>
+							org.glassfish.jersey.client.ClientRuntime.invoke(ClientRuntime.java:300)<br/>
+							org.glassfish.jersey.client.JerseyInvocation.lambda$invoke$1(JerseyInvocation.java:675)<br/>
+							org.glassfish.jersey.client.JerseyInvocation.call(JerseyInvocation.java:697)<br/>
+							org.glassfish.jersey.client.JerseyInvocation.lambda$runInScope$3(JerseyInvocation.java:691)<br/>
+							org.glassfish.jersey.internal.Errors.process(Errors.java:292)<br/>
+							org.glassfish.jersey.internal.Errors.process(Errors.java:274)<br/>
+							org.glassfish.jersey.internal.Errors.process(Errors.java:205)<br/>
+							org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:390)<br/>
+							org.glassfish.jersey.client.JerseyInvocation.runInScope(JerseyInvocation.java:691)<br/>
+							org.glassfish.jersey.client.JerseyInvocation.invoke(JerseyInvocation.java:674)<br/>
+							org.glassfish.jersey.client.JerseyInvocation$Builder.method(JerseyInvocation.java:422)<br/>
+							org.glassfish.jersey.client.JerseyInvocation$Builder.get(JerseyInvocation.java:318)<br/>
+							io.github.josecarlosbran.JBRestAPI.JBRestAPITest.testJakartaClient(JBRestAPITest.java:28)<br/>
+							java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)<br/>
+							java.base/java.lang.reflect.Method.invoke(Method.java:577)<br/>
+							org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)<br/>
+							org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)<br/>
+							org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)<br/>
+							org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)<br/>
+							org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)<br/>
+							org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)<br/>
+							org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)<br/>
+							org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)<br/>
+							java.base/java.util.ArrayList.forEach(ArrayList.java:1511)<br/>
+							org.testng.TestRunner.privateRun(TestRunner.java:848)<br/>
+							org.testng.TestRunner.run(TestRunner.java:621)<br/>
+							org.testng.SuiteRunner.runTest(SuiteRunner.java:443)<br/>
+							org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)<br/>
+							org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)<br/>
+							org.testng.SuiteRunner.run(SuiteRunner.java:336)<br/>
+							org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br/>
+							org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)<br/>
+							org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)<br/>
+							org.testng.TestNG.runSuitesLocally(TestNG.java:1200)<br/>
+							org.testng.TestNG.runSuites(TestNG.java:1114)<br/>
+							org.testng.TestNG.run(TestNG.java:1082)<br/>
+							com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>
+							com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)<br/>
+						</div>
+					<b>Caused by: </b> <a href="javascript:toggleElement('causedBy-536fb2e3-5253-4779-a463-c8dd39e8bc68','block')" title="Click to expand/collapse">sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target</a><br/>
+			<div class="stackTrace" id="causedBy-536fb2e3-5253-4779-a463-c8dd39e8bc68">
+							java.base/sun.security.validator.PKIXValidator.doBuild(PKIXValidator.java:388)<br/>
+							java.base/sun.security.validator.PKIXValidator.engineValidate(PKIXValidator.java:271)<br/>
+							java.base/sun.security.validator.Validator.validate(Validator.java:256)<br/>
+							java.base/sun.security.ssl.X509TrustManagerImpl.checkTrusted(X509TrustManagerImpl.java:231)<br/>
+							java.base/sun.security.ssl.X509TrustManagerImpl.checkServerTrusted(X509TrustManagerImpl.java:132)<br/>
+							java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.checkServerCerts(CertificateMessage.java:1335)<br/>
+							java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.onConsumeCertificate(CertificateMessage.java:1226)<br/>
+							java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.consume(CertificateMessage.java:1169)<br/>
+							java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:396)<br/>
+							java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:480)<br/>
+							java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:458)<br/>
+							java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:201)<br/>
+							java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)<br/>
+							java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1505)<br/>
+							java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1420)<br/>
+							java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:455)<br/>
+							java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:426)<br/>
+							java.base/sun.net.www.protocol.https.HttpsClient.afterConnect(HttpsClient.java:578)<br/>
+							java.base/sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:183)<br/>
+							java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1665)<br/>
+							java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1589)<br/>
+							java.base/java.net.HttpURLConnection.getResponseCode(HttpURLConnection.java:529)<br/>
+							java.base/sun.net.www.protocol.https.HttpsURLConnectionImpl.getResponseCode(HttpsURLConnectionImpl.java:308)<br/>
+							org.glassfish.jersey.client.internal.HttpUrlConnector._apply(HttpUrlConnector.java:415)<br/>
+							org.glassfish.jersey.client.internal.HttpUrlConnector.apply(HttpUrlConnector.java:273)<br/>
+							org.glassfish.jersey.client.ClientRuntime.invoke(ClientRuntime.java:300)<br/>
+							org.glassfish.jersey.client.JerseyInvocation.lambda$invoke$1(JerseyInvocation.java:675)<br/>
+							org.glassfish.jersey.client.JerseyInvocation.call(JerseyInvocation.java:697)<br/>
+							org.glassfish.jersey.client.JerseyInvocation.lambda$runInScope$3(JerseyInvocation.java:691)<br/>
+							org.glassfish.jersey.internal.Errors.process(Errors.java:292)<br/>
+							org.glassfish.jersey.internal.Errors.process(Errors.java:274)<br/>
+							org.glassfish.jersey.internal.Errors.process(Errors.java:205)<br/>
+							org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:390)<br/>
+							org.glassfish.jersey.client.JerseyInvocation.runInScope(JerseyInvocation.java:691)<br/>
+							org.glassfish.jersey.client.JerseyInvocation.invoke(JerseyInvocation.java:674)<br/>
+							org.glassfish.jersey.client.JerseyInvocation$Builder.method(JerseyInvocation.java:422)<br/>
+							org.glassfish.jersey.client.JerseyInvocation$Builder.get(JerseyInvocation.java:318)<br/>
+							io.github.josecarlosbran.JBRestAPI.JBRestAPITest.testJakartaClient(JBRestAPITest.java:28)<br/>
+							java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)<br/>
+							java.base/java.lang.reflect.Method.invoke(Method.java:577)<br/>
+							org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)<br/>
+							org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)<br/>
+							org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)<br/>
+							org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)<br/>
+							org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)<br/>
+							org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)<br/>
+							org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)<br/>
+							org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)<br/>
+							java.base/java.util.ArrayList.forEach(ArrayList.java:1511)<br/>
+							org.testng.TestRunner.privateRun(TestRunner.java:848)<br/>
+							org.testng.TestRunner.run(TestRunner.java:621)<br/>
+							org.testng.SuiteRunner.runTest(SuiteRunner.java:443)<br/>
+							org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)<br/>
+							org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)<br/>
+							org.testng.SuiteRunner.run(SuiteRunner.java:336)<br/>
+							org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br/>
+							org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)<br/>
+							org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)<br/>
+							org.testng.TestNG.runSuitesLocally(TestNG.java:1200)<br/>
+							org.testng.TestNG.runSuites(TestNG.java:1114)<br/>
+							org.testng.TestNG.run(TestNG.java:1082)<br/>
+							com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>
+							com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)<br/>
+						</div>
+					<b>Caused by: </b> <a href="javascript:toggleElement('causedBy-536fb2e3-5253-4779-a463-c8dd39e8bc68','block')" title="Click to expand/collapse">sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target</a><br/>
+			<div class="stackTrace" id="causedBy-536fb2e3-5253-4779-a463-c8dd39e8bc68">
+							java.base/sun.security.provider.certpath.SunCertPathBuilder.build(SunCertPathBuilder.java:141)<br/>
+							java.base/sun.security.provider.certpath.SunCertPathBuilder.engineBuild(SunCertPathBuilder.java:126)<br/>
+							java.base/java.security.cert.CertPathBuilder.build(CertPathBuilder.java:297)<br/>
+							java.base/sun.security.validator.PKIXValidator.doBuild(PKIXValidator.java:383)<br/>
+							java.base/sun.security.validator.PKIXValidator.engineValidate(PKIXValidator.java:271)<br/>
+							java.base/sun.security.validator.Validator.validate(Validator.java:256)<br/>
+							java.base/sun.security.ssl.X509TrustManagerImpl.checkTrusted(X509TrustManagerImpl.java:231)<br/>
+							java.base/sun.security.ssl.X509TrustManagerImpl.checkServerTrusted(X509TrustManagerImpl.java:132)<br/>
+							java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.checkServerCerts(CertificateMessage.java:1335)<br/>
+							java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.onConsumeCertificate(CertificateMessage.java:1226)<br/>
+							java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.consume(CertificateMessage.java:1169)<br/>
+							java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:396)<br/>
+							java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:480)<br/>
+							java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:458)<br/>
+							java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:201)<br/>
+							java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)<br/>
+							java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1505)<br/>
+							java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1420)<br/>
+							java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:455)<br/>
+							java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:426)<br/>
+							java.base/sun.net.www.protocol.https.HttpsClient.afterConnect(HttpsClient.java:578)<br/>
+							java.base/sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:183)<br/>
+							java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1665)<br/>
+							java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1589)<br/>
+							java.base/java.net.HttpURLConnection.getResponseCode(HttpURLConnection.java:529)<br/>
+							java.base/sun.net.www.protocol.https.HttpsURLConnectionImpl.getResponseCode(HttpsURLConnectionImpl.java:308)<br/>
+							org.glassfish.jersey.client.internal.HttpUrlConnector._apply(HttpUrlConnector.java:415)<br/>
+							org.glassfish.jersey.client.internal.HttpUrlConnector.apply(HttpUrlConnector.java:273)<br/>
+							org.glassfish.jersey.client.ClientRuntime.invoke(ClientRuntime.java:300)<br/>
+							org.glassfish.jersey.client.JerseyInvocation.lambda$invoke$1(JerseyInvocation.java:675)<br/>
+							org.glassfish.jersey.client.JerseyInvocation.call(JerseyInvocation.java:697)<br/>
+							org.glassfish.jersey.client.JerseyInvocation.lambda$runInScope$3(JerseyInvocation.java:691)<br/>
+							org.glassfish.jersey.internal.Errors.process(Errors.java:292)<br/>
+							org.glassfish.jersey.internal.Errors.process(Errors.java:274)<br/>
+							org.glassfish.jersey.internal.Errors.process(Errors.java:205)<br/>
+							org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:390)<br/>
+							org.glassfish.jersey.client.JerseyInvocation.runInScope(JerseyInvocation.java:691)<br/>
+							org.glassfish.jersey.client.JerseyInvocation.invoke(JerseyInvocation.java:674)<br/>
+							org.glassfish.jersey.client.JerseyInvocation$Builder.method(JerseyInvocation.java:422)<br/>
+							org.glassfish.jersey.client.JerseyInvocation$Builder.get(JerseyInvocation.java:318)<br/>
+							io.github.josecarlosbran.JBRestAPI.JBRestAPITest.testJakartaClient(JBRestAPITest.java:28)<br/>
+							java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)<br/>
+							java.base/java.lang.reflect.Method.invoke(Method.java:577)<br/>
+							org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)<br/>
+							org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)<br/>
+							org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)<br/>
+							org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)<br/>
+							org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)<br/>
+							org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)<br/>
+							org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)<br/>
+							org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)<br/>
+							java.base/java.util.ArrayList.forEach(ArrayList.java:1511)<br/>
+							org.testng.TestRunner.privateRun(TestRunner.java:848)<br/>
+							org.testng.TestRunner.run(TestRunner.java:621)<br/>
+							org.testng.SuiteRunner.runTest(SuiteRunner.java:443)<br/>
+							org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)<br/>
+							org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)<br/>
+							org.testng.SuiteRunner.run(SuiteRunner.java:336)<br/>
+							org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br/>
+							org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)<br/>
+							org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)<br/>
+							org.testng.TestNG.runSuitesLocally(TestNG.java:1200)<br/>
+							org.testng.TestNG.runSuites(TestNG.java:1114)<br/>
+							org.testng.TestNG.run(TestNG.java:1082)<br/>
+							com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>
+							com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)<br/>
+						</div>
+				</div>
+		</td>
 	</div>
 </tr>
-					  
+						
+											<tr>
+	<td class="time">1693234983968</td>
+	<td class="header skipped" colspan="4" onClick="toggleElement('7151bc9b-b83c-48ba-a649-f609b93479a5','block');changeSingleIcon('span-7151bc9b-b83c-48ba-a649-f609b93479a5');" title="Click to expand/collapse" style="cursor: pointer;">
+	<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBRestAPI.JBRestAPITest</div>
+	<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-7151bc9b-b83c-48ba-a649-f609b93479a5' class="glyphicon glyphicon-menu-down"></span></div>
+	</td>
+	</tr>
+<tr>
+	<td class="time">1693234983968</td>
+	<td class="methodTest">
+		<span class="description"><b>Method: </b>testWorkAPI</span><br>
+			<span class="description"><b>Description: </b></span><br>
+							<span class="duration"><b>Duration: </b>0.000s</span><br>
+	</td>
+	<td class="result">
+		 							<i>Depends on method(s): </i>
+			<span class="dependency">io.github.josecarlosbran.JBRestAPI.JBRestAPITest.testJakartaClient</span>
+							<div class="stackTrace" id="7151bc9b-b83c-48ba-a649-f609b93479a5" style="display: block;">
+												==============================================================================================
+												Total Passed: 0(+0), Failures: 1(+1), Skips: 1(+1)
+												==============================================================================================
+												==============================================================================================
+												Total Passed: 0(+0), Failures: 2(+1), Skips: 2(+1)
+												==============================================================================================
+									<a href="javascript:toggleElement('exception-7151bc9b-b83c-48ba-a649-f609b93479a5','block')" title="Click to expand/collapse"><b>java.lang.Throwable: Method io.github.josecarlosbran.JBRestAPI.JBRestAPITest.testWorkAPI() on instance io.github.josecarlosbran.JBRestAPI.JBRestAPITest@14a2f921 depends on not successfully finished methods <br/>
+[io.github.josecarlosbran.JBRestAPI.JBRestAPITest.testJakartaClient() on instance io.github.josecarlosbran.JBRestAPI.JBRestAPITest@14a2f921]</b></a><br/>
+		<div class="stackTrace" id="exception-7151bc9b-b83c-48ba-a649-f609b93479a5">
+					org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:156)<br/>
+					org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)<br/>
+					org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)<br/>
+					java.base/java.util.ArrayList.forEach(ArrayList.java:1511)<br/>
+					org.testng.TestRunner.privateRun(TestRunner.java:848)<br/>
+					org.testng.TestRunner.run(TestRunner.java:621)<br/>
+					org.testng.SuiteRunner.runTest(SuiteRunner.java:443)<br/>
+					org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)<br/>
+					org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)<br/>
+					org.testng.SuiteRunner.run(SuiteRunner.java:336)<br/>
+					org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br/>
+					org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)<br/>
+					org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)<br/>
+					org.testng.TestNG.runSuitesLocally(TestNG.java:1200)<br/>
+					org.testng.TestNG.runSuites(TestNG.java:1114)<br/>
+					org.testng.TestNG.run(TestNG.java:1082)<br/>
+					com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>
+					com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)<br/>
+						</div>
+		</td>
+	</div>
+</tr>
+						
+			  
 	</tbody>
 	</table>
 </div>
