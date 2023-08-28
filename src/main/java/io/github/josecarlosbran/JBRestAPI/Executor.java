@@ -16,12 +16,12 @@
 
 package io.github.josecarlosbran.JBRestAPI;
 
-import io.github.josecarlosbran.JBRestAPI.Enumeraciones.contentType;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.Metodo;
+import io.github.josecarlosbran.JBRestAPI.Enumeraciones.contentType;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.requestCode;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.typeAutentication;
 
-class Executor extends Thread{
+class Executor extends Thread {
 
     private requestCode codigorequest;
     private String url;
@@ -33,32 +33,32 @@ class Executor extends Thread{
     private String respuesta;
 
 
-    public void run(){
+    public void run() {
 
         //Decide que tipo de metodo ejecuta
         //Log.d("Metodo que será ejecutado: ", ""+getMethod());
         //Metodo Get
-        Methods metodos=new Methods();
+        Methods metodos = new Methods();
 
-        if(this.getMethod() == Metodo.GET){
-            setRespuesta(metodos.Get(this.getUrl(),  this.getCredenciales(),
+        if (this.getMethod() == Metodo.GET) {
+            setRespuesta(metodos.Get(this.getUrl(), this.getCredenciales(),
                     this.getTypeautentication().getTipoAutenticacion(), this.getContenttype().getContentType()));
         }
 
         //Metodo Post
-        if(this.getMethod() == Metodo.POST){
+        if (this.getMethod() == Metodo.POST) {
             setRespuesta(metodos.Post(this.getUrl(), this.getData(), this.getCredenciales(),
                     this.getTypeautentication().getTipoAutenticacion(), this.getContenttype().getContentType()));
         }
 
         //Metodo Put
-        if(this.getMethod() == Metodo.PUT){
+        if (this.getMethod() == Metodo.PUT) {
             setRespuesta(metodos.Put(this.getUrl(), this.getData(), this.getCredenciales(),
                     this.getTypeautentication().getTipoAutenticacion(), this.getContenttype().getContentType()));
         }
 
         //Metodo Delete
-        if(this.getMethod() == Metodo.DELETE){
+        if (this.getMethod() == Metodo.DELETE) {
             setRespuesta(metodos.Delete(this.getUrl(), this.getData(), this.getCredenciales(),
                     this.getTypeautentication().getTipoAutenticacion(), this.getContenttype().getContentType()));
         }
@@ -102,6 +102,7 @@ class Executor extends Thread{
 
     /**
      * Obtiene las credenciales del usuario que consumira el RestAPI
+     *
      * @return Retorna un string con las credenciales del usuario que consumira el RestAPI
      */
     protected String getCredenciales() {
@@ -194,6 +195,7 @@ class Executor extends Thread{
 
     /**
      * Setea el codigo de respuesta que a envíado el RestAPI
+     *
      * @param codigorequest Codigorequest que respondio el RestAPI
      */
     protected void setCodigorequest(requestCode codigorequest) {

@@ -17,12 +17,12 @@ package io.github.josecarlosbran.JBRestAPI;
 
 
 import com.josebran.LogsJB.LogsJB;
-import io.github.josecarlosbran.JBRestAPI.Enumeraciones.contentType;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.Metodo;
+import io.github.josecarlosbran.JBRestAPI.Enumeraciones.contentType;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.requestCode;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.typeAutentication;
 
-public class RestApi{
+public class RestApi {
 
 
     private requestCode codigorespuesta;
@@ -35,7 +35,7 @@ public class RestApi{
      * @param AutenticationType Tipo de autenticación que soporta el restapi que se estara consumiendo.
      * @param ContentType Tipo de contenido que soporta el restapi que se estara consumiendo.
      */
-    public RestApi(typeAutentication AutenticationType, contentType ContentType){
+    public RestApi(typeAutentication AutenticationType, contentType ContentType) {
         this.setContenttype(ContentType);
         this.setTypeAutentication(AutenticationType);
     }
@@ -44,11 +44,10 @@ public class RestApi{
      * Constructor por default de clase RestApi, crea un objeto de la clase, configurada su contentType como tipo
      * JSON y el typeAutentication tipo BEARER, los cuales son los valores por default
      */
-    public RestApi(){
+    public RestApi() {
         this.setContenttype(contentType.JSON);
         this.setTypeAutentication(typeAutentication.BEARER);
     }
-
 
 
     /***
@@ -62,10 +61,10 @@ public class RestApi{
      * @param method Tipo de metodo, GET, POST, PUT, DELETE, ETC..
      * @return Retorna un string con la respuesta obtenida del RestAPI
      */
-    private String execute(String url, String data, String credenciales, typeAutentication typeautentication, contentType contenttype, Metodo method){
-        String respuesta=null;
-        try{
-            Executor execute=new Executor();
+    private String execute(String url, String data, String credenciales, typeAutentication typeautentication, contentType contenttype, Metodo method) {
+        String respuesta = null;
+        try {
+            Executor execute = new Executor();
             execute.setUrl(url);
             execute.setData(data);
             execute.setCredenciales(credenciales);
@@ -73,17 +72,17 @@ public class RestApi{
             execute.setContenttype(contenttype);
             execute.setMethod(method);
             execute.start();
-            while(execute.getState() !=Thread.State.TERMINATED){
+            while (execute.getState() != Thread.State.TERMINATED) {
                 //Thread.sleep(1000);
             }
-            respuesta=execute.getRespuesta();
+            respuesta = execute.getRespuesta();
             setCodigorespuesta(execute.getCodigorequest());
-        }catch (Exception e) {
-            LogsJB.fatal("Excepción disparada en el metodo execute, el cual llama la creación del hilo: "+ e.toString());
-            LogsJB.fatal("Tipo de Excepción : "+e.getClass());
-            LogsJB.fatal("Causa de la Excepción : "+e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+        } catch (Exception e) {
+            LogsJB.fatal("Excepción disparada en el metodo execute, el cual llama la creación del hilo: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
         }
         return respuesta;
 
@@ -97,9 +96,9 @@ public class RestApi{
      * @param credenciales Credenciales para autenticarse y poder consumir el endPoint
      * @return Retorna un string con la respuesta obtenida del RestAPI
      */
-    public String Get(String url,  String credenciales){
-        String respuesta=null;
-        respuesta=execute(url, "", credenciales, this.getTipeautentication(), this.getContenttype(), Metodo.GET);
+    public String Get(String url, String credenciales) {
+        String respuesta = null;
+        respuesta = execute(url, "", credenciales, this.getTipeautentication(), this.getContenttype(), Metodo.GET);
         return respuesta;
     }
 
@@ -112,9 +111,9 @@ public class RestApi{
      * @param credenciales Credenciales para autenticarse y poder consumir el endPoint
      * @return Retorna un string con la respuesta obtenida del RestAPI
      */
-    public String Post(String url, String data, String credenciales){
-        String respuesta=null;
-        respuesta=execute(url, data, credenciales, this.getTipeautentication(), this.getContenttype(), Metodo.POST);
+    public String Post(String url, String data, String credenciales) {
+        String respuesta = null;
+        respuesta = execute(url, data, credenciales, this.getTipeautentication(), this.getContenttype(), Metodo.POST);
         return respuesta;
     }
 
@@ -127,9 +126,9 @@ public class RestApi{
      * @param credenciales Credenciales para autenticarse y poder consumir el endPoint
      * @return Retorna un string con la respuesta obtenida del RestAPI
      */
-    public String Put(String url, String data, String credenciales){
-        String respuesta=null;
-        respuesta=execute(url, data, credenciales, this.getTipeautentication(), this.getContenttype(), Metodo.PUT);
+    public String Put(String url, String data, String credenciales) {
+        String respuesta = null;
+        respuesta = execute(url, data, credenciales, this.getTipeautentication(), this.getContenttype(), Metodo.PUT);
         return respuesta;
     }
 
@@ -142,12 +141,11 @@ public class RestApi{
      * @param credenciales Credenciales para autenticarse y poder consumir el endPoint
      * @return Retorna un string con la respuesta obtenida del RestAPI
      */
-    public String Delete(String url, String data, String credenciales){
-        String respuesta=null;
-        respuesta=execute(url, data, credenciales, this.getTipeautentication(), this.getContenttype(), Metodo.DELETE);
+    public String Delete(String url, String data, String credenciales) {
+        String respuesta = null;
+        respuesta = execute(url, data, credenciales, this.getTipeautentication(), this.getContenttype(), Metodo.DELETE);
         return respuesta;
     }
-
 
 
     /***
@@ -157,8 +155,10 @@ public class RestApi{
     public requestCode getCodigorespuesta() {
         return codigorespuesta;
     }
+
     /**
      * Setea el codigo de respuesta que a envíado el RestAPI
+     *
      * @param codigorespuesta Codigorequest que respondio el RestAPI
      */
     public void setCodigorespuesta(requestCode codigorespuesta) {

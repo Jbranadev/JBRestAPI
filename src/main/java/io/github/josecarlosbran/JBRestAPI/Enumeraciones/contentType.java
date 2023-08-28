@@ -314,14 +314,14 @@ public enum contentType {
     private String contenttype;
 
     private contentType(String s) {
-        this.contenttype=s;
+        this.contenttype = s;
     }
 
     /***
      * Obtiene el tipo de contenido que corresponde a la numeración.
      * @return Retorna un string con el tipo de contenido que corresponde a la numeración.
      */
-    public String getContentType(){
+    public String getContentType() {
         return contenttype;
     }
 }

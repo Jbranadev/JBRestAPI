@@ -103,20 +103,19 @@ public enum requestCode {
      * Esto podría indicar un problema con la solicitud o un problema en el código del lado del servidor.
      * Se puede encontrar información acerca del error en el cuerpo de respuesta.
      */
-    INTERNAL_SERVER_ERROR(500)
-    ;
+    INTERNAL_SERVER_ERROR(500);
 
     private int codigo;
 
     private requestCode(int i) {
-        this.codigo=i;
+        this.codigo = i;
     }
 
     /***
      * Obtiene el codigo de respuesta asociado a la numeración
      * @return Retorna el codigo de respuesta de la numeración.
      */
-    public int getCodigo(){
+    public int getCodigo() {
         return this.codigo;
     }
 

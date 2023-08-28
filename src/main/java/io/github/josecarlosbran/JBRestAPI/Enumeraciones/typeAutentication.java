@@ -27,10 +27,10 @@ public enum typeAutentication {
      */
     BASIC("Basic "),
     /**
-     *La autenticación Digest aplica una función hash al nombre de usuario y la contraseña antes
+     * La autenticación Digest aplica una función hash al nombre de usuario y la contraseña antes
      * de enviarlos a través de la red. Es un proceso de aplicación de hashing criptográfico MD5
      * con el uso de valores nonce para evitar ataques de repetición.
-     *
+     * <p>
      * Example: Authorization: Digest username="Admin", realm="admin@wso2.com",
      * nonce="dcd98b7102dd2f0e8b11d0f600bfb0c093", uri="/dir/index.html", qop=auth, nc=00000001, cnonce="0a4f113b",
      * response="6629fae49393a05397450978507c4ef1", opaque="5ccc069c403ebaf9f0171e9517f40e41"
@@ -52,15 +52,16 @@ public enum typeAutentication {
     private String tipoautenticacion;
 
     private typeAutentication(String s) {
-        this.tipoautenticacion=s;
+        this.tipoautenticacion = s;
 
     }
 
     /**
      * Permite obtener el tipo de autenticación correspondiente a la numeración seleccionada
+     *
      * @return
      */
-    public String getTipoAutenticacion(){
+    public String getTipoAutenticacion() {
         return tipoautenticacion;
     }
 
