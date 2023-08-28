@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="JBRestAPI"
-           tests="1"
+           tests="2"
            failures="0"
            errors="0"
-           skipped="1"
-           time="0.782">
+           skipped="0"
+           time="563.369">
   <properties />
   
-            <testcase name="testWorkAPI" time="0.0" classname="io.github.josecarlosbran.JBRestAPI.JBRestAPITest">
-          <skipped />
-    </testcase>
   
-  
+            <testcase name="testJakartaClientPost" time="250.215" classname="io.github.josecarlosbran.JBRestAPI.JBRestAPITest" />
+                <testcase name="testWorkAPIPost" time="313.154" classname="io.github.josecarlosbran.JBRestAPI.JBRestAPITest" />
+      
 </testsuite>
