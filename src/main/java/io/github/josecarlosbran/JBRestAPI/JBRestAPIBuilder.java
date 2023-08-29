@@ -10,7 +10,7 @@ import java.util.List;
 
 import static io.github.josecarlosbran.JBRestAPI.Methods.stringIsNullOrEmpty;
 
-class JBRestAPIBuilder {
+public class JBRestAPIBuilder {
 
     @Getter(AccessLevel.PROTECTED)
     private String url = null;

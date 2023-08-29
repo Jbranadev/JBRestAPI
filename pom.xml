@@ -6,7 +6,7 @@
 
     <groupId>io.github.josecarlosbran</groupId>
     <artifactId>JBRestAPI</artifactId>
-    <version>0.2.2</version>
+    <version>0.2.3</version>
 
 
     <name>${project.groupId}:${project.artifactId}</name>

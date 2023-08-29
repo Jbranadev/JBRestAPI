@@ -142,14 +142,14 @@ Maven
 <dependency>
     <groupId>io.github.josecarlosbran</groupId>
     <artifactId>JBRestAPI</artifactId>
-    <version>0.2.2</version>
+    <version>0.2.3</version>
 </dependency>
 ~~~
 
 Gradle
 
 ~~~
-implementation 'io.github.josecarlosbran:JBRestAPI:0.2.2'
+implementation 'io.github.josecarlosbran:JBRestAPI:0.2.3'
 ~~~
 
 Para mayor información sobre como descargar JBRestAPI desde otros

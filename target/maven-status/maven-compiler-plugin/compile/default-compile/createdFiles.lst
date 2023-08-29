@@ -1,7 +1,11 @@
+io\github\josecarlosbran\JBRestAPI\JBRestAPIBuilder.class
 io\github\josecarlosbran\JBRestAPI\Enumeraciones\requestCode.class
 io\github\josecarlosbran\JBRestAPI\Enumeraciones\typeAutentication.class
 io\github\josecarlosbran\JBRestAPI\RestApi.class
-io\github\josecarlosbran\JBRestAPI\Enumeraciones\metodo.class
 io\github\josecarlosbran\JBRestAPI\Methods.class
+io\github\josecarlosbran\JBRestAPI\ParametroOfRoute.class
 io\github\josecarlosbran\JBRestAPI\Enumeraciones\contentType.class
+io\github\josecarlosbran\JBRestAPI\Enumeraciones\Metodo.class
 io\github\josecarlosbran\JBRestAPI\Executor.class
+io\github\josecarlosbran\JBRestAPI\JBRestAPI.class
+io\github\josecarlosbran\JBRestAPI\ValorUndefined.class
