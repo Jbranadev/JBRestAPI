@@ -6,7 +6,7 @@
 
     <groupId>io.github.josecarlosbran</groupId>
     <artifactId>JBRestAPI</artifactId>
-    <version>0.2.1</version>
+    <version>0.2.2</version>
 
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -19,7 +19,6 @@
     <!-- FIXME change it to the project's website -->
     <url>https://github.com/JoseCarlosBran/JBRestAPI/blob/master/Readme.md</url>
 
-
     <licenses>
         <license>
             <name>The Apache License, Version 2.0</name>
@@ -30,7 +29,7 @@
     <developers>
         <developer>
             <name>Jose Carlos Bran</name>
-            <email>josecarlosbran16@gmail.com</email>
+            <email>jbranadev@gmail.com</email>
             <organization>JoseBran</organization>
         </developer>
     </developers>
@@ -45,8 +44,92 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- <gpg.skip>true</gpg.skip> -->
-
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- Dependencia Para enviar crear JSON -->
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>2.10.1</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- Dependencia para TestNG-->
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>7.8.0</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- Dependencia para ReporteTestNG-->
+            <dependency>
+                <groupId>com.github.sdrss</groupId>
+                <artifactId>reportng</artifactId>
+                <version>2.7.0</version>
+                <scope>test</scope>
+            </dependency>
+
+
+            <!-- Dependencia Log Interno -->
+            <dependency>
+                <groupId>io.github.josecarlosbran</groupId>
+                <artifactId>LogsJBSupport</artifactId>
+                <version>0.5.6</version>
+                <scope>compile</scope>
+            </dependency>
+            <!-- Dependencia Para Consumir Servicios Empresariales -->
+            <dependency>
+                <groupId>jakarta.ws.rs</groupId>
+                <artifactId>jakarta.ws.rs-api</artifactId>
+                <version>3.1.0</version>
+                <scope>compile</scope>
+            </dependency>
+            <!-- Dependencia Para Consumir Servicios Empresariales     -->
+            <dependency>
+                <groupId>org.glassfish.jersey.core</groupId>
+                <artifactId>jersey-client</artifactId>
+                <version>3.1.3</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jersey.inject</groupId>
+                <artifactId>jersey-hk2</artifactId>
+                <version>3.1.3</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.activation</groupId>
+                <artifactId>jakarta.activation-api</artifactId>
+                <version>2.1.2</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jersey.media</groupId>
+                <artifactId>jersey-media-moxy</artifactId>
+                <version>3.1.3</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jersey.media</groupId>
+                <artifactId>jersey-media-jaxb</artifactId>
+                <version>3.1.3</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <!-- Dependencia Para Lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.28</version>
+                <scope>compile</scope>
+            </dependency>
+        </dependencies>
+
+    </dependencyManagement>
 
     <dependencies>
 
@@ -54,16 +137,13 @@
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.10.1</version>
-            <scope>compile</scope>
+            <scope>test</scope>
         </dependency>
-
 
         <!-- Dependencia para TestNG-->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>7.8.0</version>
             <scope>test</scope>
         </dependency>
 
@@ -71,7 +151,6 @@
         <dependency>
             <groupId>com.github.sdrss</groupId>
             <artifactId>reportng</artifactId>
-            <version>2.7.0</version>
             <scope>test</scope>
         </dependency>
 
@@ -80,59 +159,47 @@
         <dependency>
             <groupId>io.github.josecarlosbran</groupId>
             <artifactId>LogsJBSupport</artifactId>
-            <version>0.5.6</version>
             <scope>compile</scope>
         </dependency>
         <!-- Dependencia Para Consumir Servicios Empresariales -->
         <dependency>
             <groupId>jakarta.ws.rs</groupId>
             <artifactId>jakarta.ws.rs-api</artifactId>
-            <version>3.1.0</version>
             <scope>compile</scope>
         </dependency>
-        <!-- Dependencia Para Consumir Servicios Empresariales
-
-        <dependency>
-            <groupId>org.glassfish.jersey.media</groupId>
-            <artifactId>jersey-media-json-binding</artifactId>
-            <version>3.0.2</version>
-        </dependency>
-
-        -->
+        <!-- Dependencia Para Consumir Servicios Empresariales     -->
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-client</artifactId>
-            <version>3.1.3</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.inject</groupId>
             <artifactId>jersey-hk2</artifactId>
-            <version>3.1.3</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>jakarta.activation</groupId>
             <artifactId>jakarta.activation-api</artifactId>
-            <version>2.1.2</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-moxy</artifactId>
-            <version>3.1.3</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-jaxb</artifactId>
-            <version>3.1.3</version>
+            <scope>compile</scope>
         </dependency>
-
 
         <!-- Dependencia Para Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.28</version>
+            <scope>compile</scope>
         </dependency>
-
     </dependencies>
 
     <distributionManagement>
@@ -145,7 +212,6 @@
             <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
-
 
     <build>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
@@ -200,7 +266,6 @@
                     <target>17</target>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -227,8 +292,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
@@ -240,7 +303,6 @@
                     <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
@@ -255,8 +317,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-
         </plugins>
     </build>
 </project>

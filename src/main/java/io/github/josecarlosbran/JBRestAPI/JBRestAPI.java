@@ -4,7 +4,6 @@ import jakarta.ws.rs.ProcessingException;
 import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.client.*;
 import jakarta.ws.rs.core.*;
-import jakarta.ws.rs.sse.SseEvent;
 import jakarta.ws.rs.sse.SseEventSource;
 import lombok.Getter;
 import lombok.ToString;

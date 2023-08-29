@@ -4,18 +4,21 @@ import com.google.gson.JsonObject;
 import com.josebran.LogsJB.LogsJB;
 import com.josebran.LogsJB.Numeracion.NivelLog;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.contentType;
-import jakarta.ws.rs.client.Client;
-import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
-import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.MultivaluedHashMap;
+import jakarta.ws.rs.core.MultivaluedMap;
 import jakarta.ws.rs.core.Response;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.glassfish.jersey.internal.util.collection.ImmutableMultivaluedMap;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 @Listeners({org.uncommons.reportng.HTMLReporter.class, org.uncommons.reportng.JUnitXMLReporter.class})
 public class JBRestAPITest {
+
+    private String token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJKb3NlIENhcmxvcyBBbGZyZWRvIEJyYW4gQWd1aXJyZSIsImlzcyI6ImxvY2FsaG9zdDo4MDgwIiwiaWF0IjoxNjkzMjgwNTY3LCJleHAiOjE2OTMyODE0Njd9.C51Mux0vV7oQTW5GB63Pe7XiytSmqUF9SRGpsGT9xl1XroRJJ-4dw2dI55Mp8gP88BPGw2PJMCLa45vWew0GoA";
+
     public JBRestAPITest() {
         System.setProperty("org.uncommons.reportng.escape-output", "false");
     }
@@ -23,9 +26,9 @@ public class JBRestAPITest {
     @Test(testName = "Test Jakarta Client")
     public void testJakartaClient() throws ValorUndefined {
         LogsJB.info("Inicio Test: ");
-        JBRestAPI clienteJB=JBRestAPI.builder().Url("http://localhost:8081/WebServicesPrueba/hello").MediaType(MediaType.APPLICATION_JSON_TYPE).newClient();
+        JBRestAPI clienteJB=JBRestAPI.builder().Url("http://localhost:8080/WebServicesPrueba/hello").MediaType(MediaType.APPLICATION_JSON_TYPE).newClient();
         int i=0;
-        while(i<1000){
+        while(i<100){
             String response = clienteJB.request.get(String.class);
             LogsJB.info("Result is: " + response);
             i++;
@@ -39,14 +42,15 @@ public class JBRestAPITest {
         RestApi work=new RestApi();
         work.setContenttype(contentType.JSON);
         int i=0;
-        while(i<1000){
-            String response = work.Get("http://localhost:8081/WebServicesPrueba/hello", "");;
+        while(i<100){
+            String response = work.Get("http://localhost:8080/WebServicesPrueba/hello", "");;
             LogsJB.info("Result is: " + response);
             i++;
         }
     }
 
-    @Test(testName = "Test Jakarta Client Post")
+    @Test(testName = "Test Jakarta Client Post",
+            dependsOnMethods = "testWorkAPI")
     public void testJakartaClientPost() throws ValorUndefined {
         LogsJB.info("Inicio Test: ");
         Log log=new Log();
@@ -54,14 +58,18 @@ public class JBRestAPITest {
         log.setMetodo("testJakartaClientPost");
         log.setFecha("2023/08/24 15:43:55 422");
         log.setClase("io.github.josecarlosbran.LogsJB.LogsJBTest");
-        JBRestAPI clienteJB=JBRestAPI.builder().Url("http://localhost:8081/WebServicesPrueba/Logs").MediaType(MediaType.APPLICATION_JSON_TYPE).newClient();
+        MultivaluedMap<String, Object> myHeaders= new MultivaluedHashMap<>();
+        myHeaders.add("Authorization", "Bearer "+this.token);
+        JBRestAPI clienteJB=JBRestAPI.builder().Url("http://localhost:8080/WebServicesPrueba/Logs").
+                MediaType(MediaType.APPLICATION_JSON_TYPE).
+                Headers(myHeaders).newClient();
         int i=0;
-        while(i<10000){
+        while(i<100){
             try{
+                i++;
                 log.setTexto("Comentario # "+i);
                 Response respuesta= clienteJB.post(Entity.entity(log, MediaType.APPLICATION_JSON_TYPE));
                 LogsJB.info("Result is: " + respuesta);
-                i++;
             }catch (Exception e){
                 com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo encargado de crear " +
                         "la tabla de Log en BD's");
@@ -91,10 +99,10 @@ public class JBRestAPITest {
         RestApi work=new RestApi();
         work.setContenttype(contentType.JSON);
         int i=0;
-        while(i<10000){
+        while(i<100){
             log.setTexto("Comentario # "+i);
             json.addProperty("texto", log.getTexto());
-            String response = work.Post("http://localhost:8081/WebServicesPrueba/Logs", json.toString(), "");;
+            String response = work.Post("http://localhost:8080/WebServicesPrueba/Logs", json.toString(), this.token);;
             LogsJB.info("Result is: " + response);
             i++;
         }

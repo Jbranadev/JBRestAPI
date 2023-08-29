@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="JBRestAPI"
-           tests="2"
+           tests="4"
            failures="0"
            errors="0"
            skipped="0"
-           time="563.369">
+           time="42.498">
   <properties />
   
   
-            <testcase name="testJakartaClientPost" time="250.215" classname="io.github.josecarlosbran.JBRestAPI.JBRestAPITest" />
-                <testcase name="testWorkAPIPost" time="313.154" classname="io.github.josecarlosbran.JBRestAPI.JBRestAPITest" />
+            <testcase name="testJakartaClient" time="0.947" classname="io.github.josecarlosbran.JBRestAPI.JBRestAPITest" />
+                <testcase name="testWorkAPI" time="1.660" classname="io.github.josecarlosbran.JBRestAPI.JBRestAPITest" />
+                <testcase name="testWorkAPIPost" time="21.268" classname="io.github.josecarlosbran.JBRestAPI.JBRestAPITest" />
+                <testcase name="testJakartaClientPost" time="18.623" classname="io.github.josecarlosbran.JBRestAPI.JBRestAPITest" />
       
 </testsuite>
