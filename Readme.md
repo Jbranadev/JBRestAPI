@@ -4,6 +4,13 @@ JBRestAPI es una librería java que permite el consumo de un RestAPI en segundo 
 Lo cual evita la interrupción del hilo principal, lo cual la hace una librería útil para aplicaciones android como para
 programas que desean tener un mejor rendimiento de manera fácil. Lo cual la hace una potente herramienta para programas
 empresariales y personales que exigen grandes niveles de rendimiento.
+
+
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.josecarlosbran/JBRestAPI?logo=apachemaven&logoColor=%23C71A36&color=blue&link=https%3A%2F%2Fcentral.sonatype.com%2Fsearch%3Fq%3D%26namespace%3Dio.github.josecarlosbran%26name%3DJBRestAPI)](https://central.sonatype.com/artifact/io.github.josecarlosbran/JBRestAPI)
+[![javadoc](https://javadoc.io/badge2/io.github.josecarlosbran/JBRestAPI/javadoc.svg)](https://javadoc.io/doc/io.github.josecarlosbran/JBRestAPI)
+[![License](https://img.shields.io/badge/Licence-Apache%202.0-blue.svg)](LICENSE.txt)
+
+
 * * *
 
 ## Estado del Proyecto :atom:
