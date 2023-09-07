@@ -34,3 +34,5 @@ bin/
 /JBRestAPI.iml
 
 
+/target/
+/test-output/

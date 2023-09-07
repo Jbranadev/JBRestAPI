@@ -494,7 +494,6 @@ public class JBRestAPI {
      * @return asynchronous uniform request invocation interface.
      */
     public AsyncInvoker async(){
-        this.request.rx();
         return this.request.async();
     }
 
